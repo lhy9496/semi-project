@@ -94,12 +94,12 @@
         <button type="button" class="account-button" onclick="location.href='enrollForm.me'" style="right: 60px;">회원가입</button>
         <!-- 로그인을 한 상태 -->
         <a href=""><button type="button" class="account-button" onclick="location.href='logout.me'" style="left: 60px;">로그아웃</button></a>
-        <a href="../userpage/usersample.jsp"><button type="button" class="account-button" onclick="location.href=''" style="right: 60px;">마이페이지</button></a>
+        <a href=""><button type="button" class="account-button" onclick="location.href=''" style="right: 60px;">마이페이지</button></a>
     </div>
     
     <div class="index-frame">
         <div class="logo-space">
-            <img src="../../resources/logo/psslogomainmenu.png" alt="로고 이미지">
+            <img src="resources/logo/psslogomainmenu.png" alt="로고 이미지">
         </div>
         <form action="search.me" method="GET">
             <div class="search-space">

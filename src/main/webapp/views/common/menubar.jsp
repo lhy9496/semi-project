@@ -127,7 +127,7 @@
 <body >
         <div id="menubar-header">
             <div class="loginout-space">
-                <img src="../../resources/icon/person_icon.png" alt="유저 아이콘">
+                <img src="/pss/resources/logo/person_icon.png" alt="유저 아이콘">
                 흑드라군
                 <button id="login" onclick="location.href='loginForm.me'">로그인</button>
                 <!-- <button id="logout" onclick="location.href='logout.me'">로그아웃</button> -->
@@ -136,7 +136,7 @@
                 <div class="logo-search-space">
                     <div class="logo-space">
                         <a href="${contextPath}">
-                            <img src="../../resources/logo/psslogomenubar.png" alt="로고">
+                            <img src="/pss/resources/logo/psslogomenubar.png" alt="로고">
                         </a>
                     </div>
                     <div class="search-space-out" >

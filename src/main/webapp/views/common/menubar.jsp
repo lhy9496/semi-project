@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,7 +72,8 @@
         font-size: 25px;
         font-weight: 500;
         width: 400px;
-        border: 0px;
+        border: none;
+        outline: none;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -127,10 +131,15 @@
 <body >
         <div id="menubar-header">
             <div class="loginout-space">
-                <img src="/pss/resources/logo/person_icon.png" alt="유저 아이콘">
-                흑드라군
-                <button id="login" onclick="location.href='loginForm.me'">로그인</button>
-                <!-- <button id="logout" onclick="location.href='logout.me'">로그아웃</button> -->
+            <c:choose>
+            	<c:when test="${empty loginUser }">
+                    <button id="login" onclick="location.href='${contextPath}/loginForm.me'">로그인</button>
+                </c:when>
+                <c:otherwise>
+                    <img src="/pss/resources/logo/person_icon.png" alt="유저 아이콘">${loginUser.userNickname}
+                    <button id="logout" onclick="location.href='logout.me'">로그아웃</button>
+                </c:otherwise>
+            </c:choose>
             </div>
             <div id="logo-search-container">
                 <div class="logo-search-space">
@@ -139,31 +148,46 @@
                             <img src="/pss/resources/logo/psslogomenubar.png" alt="로고">
                         </a>
                     </div>
-                    <div class="search-space-out" >
-                        <div class="search-space-in">
-                            <input type="text" class="search-input" placeholder="유저 닉네임">
-                            <button type="submit" class="search-button">검색</button>
-                        </div>
-                    </div>
+                    <form action="search.me" method="GET">
+	                    <div class="search-space-out" >
+	                        <div class="search-space-in">
+	                            <input type="text" class="search-input" name="userNickname" placeholder="유저 닉네임">
+	                            <button type="submit" class="search-button">검색</button>
+	                        </div>
+	                    </div>
+                    </form>
                 </div>
                 
             </div>
-            <div id="menubar-nav">
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../userpage/usersample.jsp">마이페이지</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../exercise/workoutview.jsp">운동기록</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../diet/dietsample.jsp">식단기록</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../board/boardsample.jsp">커뮤니티</a>
-                    </li>
-                    </ul>
-            </div>
+            <c:choose>
+            	<c:when test="${empty loginUser }">
+                    <div id="menubar-nav">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="../board/boardsample.jsp">커뮤니티</a>
+                            </li>
+                        </ul>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div id="menubar-nav">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="../userpage/usersample.jsp">마이페이지</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../exercise/workoutview.jsp">운동기록</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../diet/dietsample.jsp">식단기록</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../board/boardsample.jsp">커뮤니티</a>
+                            </li>
+                            </ul>
+                    </div>
+                </c:otherwise>
+            </c:choose>
         </div>
 </body>
 </html>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,7 +117,7 @@
     <form action="" id="login-form" method="POST">
         <div class="login-frame">
             <div class="logo-space">
-                <a href=""><img src="/pss/resources/logo/psslogologin.png" alt="로고 이미지"></a>
+                <a href="${contextPath}"><img src="/pss/resources/logo/psslogologin.png" alt="로고 이미지"></a>
             </div>
             <div class="input-background">
                 <div class="input-lineId">
@@ -143,7 +145,7 @@
                     <a href=""><button type="button" class="etc-button">ID/PW 찾기</button></a>
                 </div>
                 <div class="etc-space">
-                    <a href=""><button type="button" class="etc-button">회원가입</button></a>
+                    <a href="${contextPath}/enrollForm.me"><button type="button" class="etc-button">회원가입</button></a>
                 </div>
             </div>
         </div>

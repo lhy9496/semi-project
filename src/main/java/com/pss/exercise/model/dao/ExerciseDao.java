@@ -13,4 +13,10 @@ public class ExerciseDao {
 
 	}
 
+	public int insertWorkoutRecord(SqlSession sqlSession, String exName, String bodyPart, int exSet, int exWeight,
+			int exCount) {
+		return 0;
+		
+	}
+
 }

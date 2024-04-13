@@ -80,14 +80,14 @@
 
   <script>
     $(function () {
+     
       $('#enroll-btn').off('click').on('click', function () {
         let str = ``;
-
         $('.workout-list-item').each(function () {
           if ($(this).find('input[type=checkbox]').prop('checked')) {
             let exercise = $(this).find('.w_name').text();
             let bodyPart = $(this).find('.w_bodypart').text();
-
+            let setCount = 1;
             str += `<table class="check_workout_list">
 				                  <thead>
 				                    <tr>
@@ -106,8 +106,8 @@
 				                      <td class="td-25 txt-center">횟수</td>
 				                    </tr>
 				                    <tr>
-				                      <td class="txt-center">
-				                        <input class="bottom-border exSet" type="text" style="width: 50px;"> 
+				                      <td class="txt-center exSet">
+                                `+setCount+`
 				                      </td>
 				                      <td class="td-25 txt-center">
 				                        <input class="bottom-border exWeight" type="text" style="width: 50px;"> kg
@@ -121,8 +121,10 @@
 				                    </tr>
                           		  </tbody>
 				                </table>`;
+
           }
         });
+
 
         $('#checked_workout').html(str);
         bindSetButtons();
@@ -131,25 +133,30 @@
       });
       function bindSetButtons() {
         $(document).off('click', '.add-set-button').on('click', '.add-set-button', function () {
+          let prevCount = parseInt($(this).closest('table').find('.exSet').last().text()); // 이전 세트의 수 가져오기
+          let currentCount = prevCount + 1; // 현재 세트의 수 계산
           let tbody = $(this).closest('table').find('tbody');
           tbody.append(`<tr>
-                              <td class="txt-center">
-                                <input class="bottom-border" type="text" style="width: 50px;">
-                                </td>
-                              <td class="td-25 txt-center">
-                                <input class="bottom-border" type="text" style="width: 50px;"> kg
+                              <td class="txt-center exSet">
+                                `+currentCount+`
                               </td>
                               <td class="td-25 txt-center">
-                                <input class="bottom-border" type="text" style="width: 50px;"> 개
+                                <input class="bottom-border exWeight" type="text" style="width: 50px;"> kg
+                              </td>
+                              <td class="td-25 txt-center">
+                                <input class="bottom-border exCount" type="text" style="width: 50px;"> 개
                               </td>
                               <td class="td-25 txt-center">
                                 <button class="btn btn-danger delete-set-button">삭제</button>
                               </td>
                             </tr>`);
+
         });
 
         $(document).off('click', '.delete-set-button').on('click', '.delete-set-button', function () {
           $(this).closest('tr').remove();
+          let prevCount = parseInt($(this).closest('table').find('.exSet').last().text());
+          prevCount--;
         });
       }
 

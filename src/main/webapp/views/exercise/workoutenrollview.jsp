@@ -91,7 +91,7 @@
             str += `<table class="check_workout_list">
 				                  <thead>
 				                    <tr>
-				                      <th class="td-50 txt-center exName">`+ exercise + `</th>
+				                      <th class="td-50 txt-center exercise">`+ exercise + `</th>
 				                      <th class="td-25 txt-center bodyPart">`+ bodyPart + `</th>
 				                      <th class="td-25 txt-center" colspan="2">
 				                        <button class="btn btn-primary add-set-button">세트 추가</button>
@@ -106,9 +106,7 @@
 				                      <td class="td-25 txt-center">횟수</td>
 				                    </tr>
 				                    <tr>
-				                      <td class="txt-center exSet">
-                                `+setCount+`
-				                      </td>
+				                      <td class="txt-center exSet">`+setCount+`</td>
 				                      <td class="td-25 txt-center">
 				                        <input class="bottom-border exWeight" type="text" style="width: 50px;"> kg
 				                      </td>
@@ -137,9 +135,7 @@
           let currentCount = prevCount + 1; // 현재 세트의 수 계산
           let tbody = $(this).closest('table').find('tbody');
           tbody.append(`<tr>
-                              <td class="txt-center exSet">
-                                `+currentCount+`
-                              </td>
+                              <td class="txt-center exSet">`+currentCount+`</td>
                               <td class="td-25 txt-center">
                                 <input class="bottom-border exWeight" type="text" style="width: 50px;"> kg
                               </td>
@@ -155,15 +151,63 @@
 
         $(document).off('click', '.delete-set-button').on('click', '.delete-set-button', function () {
           $(this).closest('tr').remove();
-          let prevCount = parseInt($(this).closest('table').find('.exSet').last().text());
-          prevCount--;
         });
       }
 
       $('#btn-enroll-workout').on('click', function () {
+        let workoutRecord = [];
 
-      })
-    })
+        $(".check_workout_list").each(function() {
+          let exercise = $(this).find(".exercise").text();
+          let bodyPart = $(this).find(".bodyPart").text();
+          let exInfos = [];
+
+          $(this).find('tbody tr:gt(0)').each(function() {
+            let exSet = $(this).find('.exSet').text(); // exSet 추가
+            let exWeight = $(this).find('.exWeight').val();
+            let exCount = $(this).find('.exCount').val();
+        
+            let exInfo = {
+                exSet: exSet,
+                exWeight: exWeight,
+                exCount: exCount
+            };
+            exInfos.push(exInfo);
+          });
+
+          // console.log("exercise = " + exercise);
+          // console.log("bodyPart = " + bodyPart);
+          // console.log("exInfos =", JSON.stringify(exInfos));
+
+          workoutRecord.push({
+            exercise: exercise,
+            bodyPart: bodyPart,
+            exInfos: exInfos
+          });
+        });
+        // console.log(JSON.stringify(workoutRecord));
+        sendData(workoutRecord);
+      });
+
+      function sendData(workoutRecord) {
+        $.ajax({
+          url: 'insert.wo',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(workoutRecord),
+          success: function(res) {
+
+          },
+
+          error: function(res) {
+
+          }
+          
+        });
+      };
+    });
+
+
 
 
   </script>

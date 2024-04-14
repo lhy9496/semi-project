@@ -18,5 +18,13 @@ public class ExerciseServiceImpl implements ExerciseService{
 		return exList;
 	}
 	
+	@Override
+	public int insertWorkoutRecord(String exName, String bodyPart, int exSet, int exWeight, int exCount) {
+		// TODO Auto-generated method stub
+		SqlSession sqlSession = Template.getSqlSession();
+		return exerciseDao.insertWorkoutRecord(sqlSession, exName, bodyPart, exSet, exWeight, exCount);
+
+	}
+	
 
 }

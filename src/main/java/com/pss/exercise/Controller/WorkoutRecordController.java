@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.pss.exercise.model.vo.ExerciseInfo;
+import com.pss.exercise.model.vo.ExerciseRecord;
 import com.pss.exercise.model.vo.WorkoutRecord;
 import com.pss.exercise.service.ExerciseServiceImpl;
-import com.pss.member.model.vo.Member;
 
 /**
  * Servlet implementation class WorkoutRecordController
@@ -70,7 +70,8 @@ public class WorkoutRecordController extends HttpServlet {
                 exWeight = Integer.parseInt(info.getExWeight());
                 System.out.println("Count: " + info.getExCount());
                 exCount = Integer.parseInt(info.getExCount());
-                result = new ExerciseServiceImpl().insertWorkoutRecord(exName, bodyPart, exSet, exWeight, exCount);
+                ExerciseRecord exRecord = new ExerciseRecord(exName, exSet,exWeight, exCount);
+                result = new ExerciseServiceImpl().insertWorkoutRecord(exName, exRecord);
             }
 		}
 		

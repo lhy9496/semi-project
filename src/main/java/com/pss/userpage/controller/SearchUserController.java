@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pss.diet.model.vo.Diet;
+import com.pss.diet.model.vo.UserDietRecord;
 import com.pss.exercise.model.vo.Exercise;
 import com.pss.member.model.vo.Member;
 import com.pss.userpage.service.SearchUserServiceImpl;
@@ -31,7 +31,7 @@ public class SearchUserController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
 		String nickname = request.getParameter("nickname");
@@ -45,7 +45,7 @@ public class SearchUserController extends HttpServlet {
 			response.sendRedirect(request.getContextPath());
 		} else {
 			request.getSession().setAttribute("searchUser", (Member)list.get(0));
-			request.getSession().setAttribute("diet", (Diet)list.get(1));
+			request.getSession().setAttribute("diet", (UserDietRecord)list.get(1));
 			request.getSession().setAttribute("exercise", (Exercise)list.get(2));
 			request.getRequestDispatcher("WEB-INF/views/userpage/userpage.jsp").forward(request, response);
 		}

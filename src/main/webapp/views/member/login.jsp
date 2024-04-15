@@ -114,7 +114,7 @@
     </style>
 </head>
 <body>
-    <form action="" id="login-form" method="POST">
+    <form action="login.me" id="login-form" method="POST">
         <div class="login-frame">
             <div class="logo-space">
                 <a href="${contextPath}"><img src="/pss/resources/logo/psslogologin.png" alt="로고 이미지"></a>

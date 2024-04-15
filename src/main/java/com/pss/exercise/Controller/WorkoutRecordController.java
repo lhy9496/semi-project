@@ -2,6 +2,7 @@ package com.pss.exercise.Controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.pss.exercise.model.vo.ExerciseInfo;
-import com.pss.exercise.model.vo.ExerciseRecord;
 import com.pss.exercise.model.vo.WorkoutRecord;
 import com.pss.exercise.service.ExerciseServiceImpl;
 
@@ -47,33 +47,45 @@ public class WorkoutRecordController extends HttpServlet {
 		String jsonData = sb.toString();
 		
 //		int loginUserNo = ((Member)request.getAttribute("loginUser")).getUserNo();
-		String exName = "";
-		String bodyPart = "";
-		int exSet = 0;
-		int exWeight = 0;
-		int exCount = 0;
-		int result = 0;
+
+//		int exerciseNo = 0;
+//		int exSet = 0;
+//		int exWeight = 0;
+//		int exCount = 0;
+//		int result = 0;
 		
 		
 		Gson gson = new Gson();
 		WorkoutRecord[] workoutRecords = gson.fromJson(jsonData, WorkoutRecord[].class);
 		
 		for(WorkoutRecord record : workoutRecords) {
-			System.out.println("Exercise: " + record.getExercise());
-			exName = record.getExercise();
-            System.out.println("BodyPart: " + record.getBodyPart());
-            bodyPart = record.getBodyPart();
+
+			int exerciseNo = Integer.parseInt(record.getExerciseNo());
+			System.out.println(exerciseNo);
             for (ExerciseInfo info : record.getExInfos()) {
+               
+            	int exSet = Integer.parseInt(info.getExSet());
                 System.out.println("Set: " + info.getExSet());
-                exSet = Integer.parseInt(info.getExSet());
+                
+                int exWeight = Integer.parseInt(info.getExWeight());
                 System.out.println("Weight: " + info.getExWeight());
-                exWeight = Integer.parseInt(info.getExWeight());
+               
+                int exCount = Integer.parseInt(info.getExCount());
                 System.out.println("Count: " + info.getExCount());
-                exCount = Integer.parseInt(info.getExCount());
-                ExerciseRecord exRecord = new ExerciseRecord(exName, exSet,exWeight, exCount);
-                result = new ExerciseServiceImpl().insertWorkoutRecord(exName, exRecord);
+                
+                HashMap<String, Integer> map = new HashMap<>();
+                map.put("exerciseNo", exerciseNo);
+                map.put("exSet", exSet);
+                map.put("exWeight", exWeight);
+                map.put("exCount", exCount);
+                System.out.println(map);
+                
+                int result = new ExerciseServiceImpl().insertExerciseRecord(map);
+                       
             }
 		}
+		
+		new Gson().toJson("", response.getWriter());
 		
 //		System.out.println(jsonData);
 		

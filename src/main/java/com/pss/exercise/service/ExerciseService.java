@@ -1,6 +1,7 @@
 package com.pss.exercise.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.pss.exercise.model.vo.Exercise;
 import com.pss.exercise.model.vo.ExerciseRecord;
@@ -8,5 +9,5 @@ import com.pss.exercise.model.vo.ExerciseRecord;
 public interface ExerciseService {
 	ArrayList<Exercise> selectExerciseList();
 
-	int insertWorkoutRecord(String exName, ExerciseRecord exRecord);
+	int insertExerciseRecord(HashMap<String, Integer> map);
 }

@@ -19,6 +19,7 @@
 		<typeAlias type="com.pss.member.model.vo.UserPhysicalInfo" alias="UserPhysicalInfo" />
 		<typeAlias type="com.pss.diet.model.vo.UserDietRecord" alias="UserDietRecord" />
 		<typeAlias type="com.pss.exercise.model.vo.ExerciseRecord" alias="ExerciseRecord" />
+		<typeAlias type="com.pss.member.model.vo.UserPicture" alias="UserPicture" />
 	</typeAliases>
 	
 	<!-- environments: mybatis에서 연동할 DB정보들을 등록하는 영역 -->

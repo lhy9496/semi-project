@@ -11,12 +11,29 @@
 	</resultMap>
 
 	<select id="selectExerciseList" resultMap="exerciseResultSet">
-		SELECT EX_NAME,
+		SELECT EX_NO,
+			   EX_NAME,
 			   BPART_NAME
 		FROM EXERCISE
 		JOIN BODYPART USING (BPART_NO)
 		ORDER BY EX_NO
 	</select>
 
-
+	<insert id="insertExerciseRecord" parameterType="hashmap">
+		INSERT INTO EX_RECORD(
+			EXR_NO,
+			USER_NO,
+			EX_NO,
+			EXR_SET,
+			EXR_WEIGHT,
+			EXR_COUNT
+		) VALUES (
+			SEQ_EXRNO.NEXTVAL,
+			1,
+			${exerciseNo},
+			${exSet},
+			${exWeight},
+			${exCount}
+		)			
+	</insert>
 </mapper>

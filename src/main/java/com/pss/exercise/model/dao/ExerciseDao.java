@@ -1,6 +1,7 @@
 package com.pss.exercise.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -13,10 +14,9 @@ public class ExerciseDao {
 		return (ArrayList)sqlSession.selectList("exerciseMapper.selectExerciseList");
 
 	}
-	
-	public int insertWorkoutRecord(SqlSession sqlSession, ExerciseRecord exRecord) {
-		
-		return sqlSession.insert("exerciseRecordMapper", exRecord);
+
+	public int insertExerciseRecord(SqlSession sqlSession, HashMap<String, Integer> map) {
+		return sqlSession.insert("exerciseMapper.insertExerciseRecord", map);
 	}
 
 }

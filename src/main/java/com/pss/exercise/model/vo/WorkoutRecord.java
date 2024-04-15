@@ -5,7 +5,16 @@ import java.util.ArrayList;
 public class WorkoutRecord {
 	private String exercise;
 	private String bodyPart;
+	private String exerciseNo;
 	private ArrayList<ExerciseInfo> exInfos;
+	
+	public String getExerciseNo() {
+		return exerciseNo;
+	}
+	public void setExerciseNo(String exerciseNo) {
+		this.exerciseNo = exerciseNo;
+	}
+	
 	public String getExercise() {
 		return exercise;
 	}

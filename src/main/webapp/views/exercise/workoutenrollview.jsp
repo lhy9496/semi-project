@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <html lang="ko">
 
 <head>
@@ -28,7 +29,7 @@
         <c:when test="${not empty exList}">
           <c:forEach var="ex" items="${exList }">
             <div class="workout-list-item">
-              <div class="w_name">${ex.exerciseName }</div>
+              <div class="w_name" data-no="${ex.exerciseNo }">${ex.exerciseName }</div>
               <div class="w_bodypart">${ex.bodyPart }</div>
               <div class="w_checkbox">
                 <input type="checkbox" name="workout" class="workout_chkbox" style="zoom: 2.0;">
@@ -47,7 +48,7 @@
     </div>
 
     <div id="btn-area">
-      <button id="enroll-btn" data-toggle="modal" data-target="#myModal">입력</button>
+      <button id="enroll-info-btn" data-toggle="modal" data-target="#myModal">입력</button>
     </div>
   </div>
 
@@ -66,7 +67,6 @@
         <!-- Modal body -->
         <div class="modal-body">
           <div id="checked_workout">
-
           </div>
         </div>
 
@@ -81,17 +81,21 @@
   <script>
     $(function () {
      
-      $('#enroll-btn').off('click').on('click', function () {
+      $('#enroll-info-btn').off('click').on('click', function () {
         let str = ``;
         $('.workout-list-item').each(function () {
           if ($(this).find('input[type=checkbox]').prop('checked')) {
             let exercise = $(this).find('.w_name').text();
             let bodyPart = $(this).find('.w_bodypart').text();
+			      let exerciseNo = $(this).find('.w_name').data('no');
+			
+			      
+			
             let setCount = 1;
             str += `<table class="check_workout_list">
 				                  <thead>
 				                    <tr>
-				                      <th class="td-50 txt-center exercise">`+ exercise + `</th>
+				                      <th class="td-50 txt-center exercise">`+ exercise + `<input type="hidden" value="`+exerciseNo+`"></th>
 				                      <th class="td-25 txt-center bodyPart">`+ bodyPart + `</th>
 				                      <th class="td-25 txt-center" colspan="2">
 				                        <button class="btn btn-primary add-set-button">세트 추가</button>
@@ -127,7 +131,6 @@
         $('#checked_workout').html(str);
         bindSetButtons();
 
-
       });
       function bindSetButtons() {
         $(document).off('click', '.add-set-button').on('click', '.add-set-button', function () {
@@ -156,10 +159,11 @@
 
       $('#btn-enroll-workout').on('click', function () {
         let workoutRecord = [];
-
+        
         $(".check_workout_list").each(function() {
-          let exercise = $(this).find(".exercise").text();
-          let bodyPart = $(this).find(".bodyPart").text();
+          // let exercise = $(this).find(".exercise").text();
+          // let bodyPart = $(this).find(".bodyPart").text();
+          let exerciseNo = $(this).find("input[type=hidden]").val();
           let exInfos = [];
 
           $(this).find('tbody tr:gt(0)').each(function() {
@@ -175,17 +179,14 @@
             exInfos.push(exInfo);
           });
 
-          // console.log("exercise = " + exercise);
-          // console.log("bodyPart = " + bodyPart);
-          // console.log("exInfos =", JSON.stringify(exInfos));
-
           workoutRecord.push({
-            exercise: exercise,
-            bodyPart: bodyPart,
+            // exercise: exercise,
+            exerciseNo : exerciseNo,
+            // bodyPart: bodyPart,
             exInfos: exInfos
           });
         });
-        // console.log(JSON.stringify(workoutRecord));
+        console.log(JSON.stringify(workoutRecord));
         sendData(workoutRecord);
       });
 
@@ -196,11 +197,12 @@
           contentType: 'application/json',
           data: JSON.stringify(workoutRecord),
           success: function(res) {
-
+            alert("성공적으로 운동을 기록하셨습니다.");
+            location.href="${contextPath}/info.wo"
           },
 
-          error: function(res) {
-
+          error: function() {
+            console.log("운동 기록에 실패하였습니다.");
           }
           
         });

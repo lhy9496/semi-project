@@ -1,6 +1,7 @@
 package com.pss.exercise.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -21,11 +22,15 @@ public class ExerciseServiceImpl implements ExerciseService{
 	}
 	
 	@Override
-	public int insertWorkoutRecord(String exName, ExerciseRecord exRecord) {
+	public int insertExerciseRecord(HashMap<String, Integer> map) {
 		SqlSession sqlSession = Template.getSqlSession();
-		exerciseDao.insertWorkoutRecord(sqlSession, exRecord);
-		return 0;
-	}
-	
-
+		int result = exerciseDao.insertExerciseRecord(sqlSession, map);
+		if(result > 0 ) {
+			
+			sqlSession.commit();
+		} else {
+			sqlSession.rollback();
+		}
+		return result;
+	}	
 }

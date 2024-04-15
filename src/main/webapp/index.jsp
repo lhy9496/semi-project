@@ -21,12 +21,12 @@
         background-color: rgb(225, 15, 26);
     }
     .account-space{
-        width: 420px;
+        width: 575px;
         height: 145px;
         position: relative;
         margin-left: auto;
         margin-right: 0px;
-    }
+    }        
     .account-button{
         width: 135px;
         height: 45px;
@@ -91,19 +91,20 @@
 </head>
 <body>
     <div class="account-space">
-        
-        <c:choose>
-            <c:when test="${empty loginUser }">
-                <!-- 로그인을 안한 상태 -->
+    <c:choose>
+        <c:when test="${empty loginUser }">
+            <!-- 로그인을 안한 상태 -->
                 <button type="button" class="account-button" onclick="location.href='loginForm.me'" style="left: 60px;">로그인</button>
-                <button type="button" class="account-button" onclick="location.href='enrollForm.me'" style="right: 60px;">회원가입</button>
-            </c:when>
-            <c:otherwise>
+                <button type="button" class="account-button" onclick="location.href='enrollForm.me'" style="left: 220px;">회원가입</button>
+                <button type="button" class="account-button" onclick="location.href=''" style="right: 60px;">커뮤니티</button>
+        </c:when>
+        <c:otherwise>
                 <!-- 로그인을 한 상태 -->
-                <a href=""><button type="button" class="account-button" onclick="location.href='logout.me'" style="left: 60px;">로그아웃</button></a>
-                <a href=""><button type="button" class="account-button" onclick="location.href=''" style="right: 60px;">마이페이지</button></a>
-            </c:otherwise>
-        </c:choose>
+                <button type="button" class="account-button" onclick="location.href='logout.me'" style="left: 60px;">로그아웃</button>
+                <button type="button" class="account-button" onclick="location.href=''" style="left: 220px;">마이페이지</button>
+                <button type="button" class="account-button" onclick="location.href=''" style="right: 60px;">커뮤니티</button>
+        </c:otherwise>
+    </c:choose>
     </div>
     <div class="index-frame">
         <div class="logo-space">

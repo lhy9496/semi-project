@@ -170,7 +170,7 @@
                     <img src="/pss/resources/logo/calendar_icon.png" alt="달력 이미지">
                 </div>
                 <div class="input-space">
-                    <input type="text" class="input-space" name="age" placeholder="나이" maxlength="3">
+                    <input type="text" class="input-space" name="age" placeholder="나이(숫자 입력)" maxlength="3">
                 </div>
             </div>
             <div class="gender-line">
@@ -261,7 +261,6 @@
                 //         emailInput.readOnly = true;
                 //         checkId.style.display = "none";
                 //         resetId.style.display = "block";
-                //         enroll_button.disabled = false;
                 //     },
                 //     error: function(){
                 //         // 이미 존재하는 아이디입니다.
@@ -272,8 +271,6 @@
                 emailInput.readOnly = true;
                 checkId.style.display = "none";
                 resetId.style.display = "block";
-                enroll_button.disabled = false;
-                enroll_button.style.cursor = "pointer"
             }
         }
         resetId.onclick = function(){
@@ -281,7 +278,6 @@
             emailInput.value = ""
             resetId.style.display = "none";
             checkId.style.display = "block";
-            enroll_button.disabled = true;
         }
     </script>
 </body>

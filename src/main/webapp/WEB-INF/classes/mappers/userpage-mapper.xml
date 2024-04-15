@@ -45,6 +45,14 @@
 		<result column="EXR_WEIGHT" property="exRecordWeight"/>
 		<result column="EXR_COUNT" property="exRecordCount"/>
 	</resultMap>
+	
+	<resultMap id="UserExerciseRecordResultSet" type="UserPicture">
+		<result column="PIC_NO" property="picNo"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
+	</resultMap>
 
 	<select id="SearchUserInfo" parameterType="UserInfo" >
  		SELECT USER_NO,
@@ -100,6 +108,23 @@
 		WHERE NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
+ 	
+ 	<select id="SearchUserPicture" parameterType="UserPicture" >
+ 		SELECT PIC_NO,
+ 				USER_NO,
+ 				ORIGIN_NAME,
+ 				CHANGE_NAME,
+ 				FILE_PATH,
+ 		FROM MEMBER
+ 		JOIN EX_RECORD USING (USER_NO)
+		WHERE NICKNAME = #{nickname}
+		AND STATUS = 'Y'
+ 	</select>
+ 	
+
+
+
+
   
   
 </mapper>

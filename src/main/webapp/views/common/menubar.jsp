@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
+<%
+    String alertMsg = (String)session.getAttribute("alertMsg");
+%>
    
 <!DOCTYPE html>
 <html>
@@ -128,7 +131,13 @@
 </style>
 </head>
 
-<body >
+<body>
+    <% if(alertMsg != null){ %>
+		<script>
+			alert("<%=alertMsg%>")
+		</script>
+		<% session.removeAttribute("alertMsg"); %>
+	<% } %>
         <div id="menubar-header">
             <div class="loginout-space">
             <c:choose>
@@ -137,7 +146,7 @@
                 </c:when>
                 <c:otherwise>
                     <img src="/pss/resources/logo/person_icon.png" alt="유저 아이콘">${loginUser.userNickname}
-                    <button id="logout" onclick="location.href='logout.me'">로그아웃</button>
+                    <button id="logout" onclick="location.href='${contextPath}/logout.me'">로그아웃</button>
                 </c:otherwise>
             </c:choose>
             </div>
@@ -173,7 +182,7 @@
                     <div id="menubar-nav">
                         <ul class="nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="../userpage/usersample.jsp">마이페이지</a>
+                                <a class="nav-link" href="${contextPath}/userPage.me">마이페이지</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="../exercise/workoutview.jsp">운동기록</a>

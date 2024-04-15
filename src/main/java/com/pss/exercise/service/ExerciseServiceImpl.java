@@ -32,5 +32,10 @@ public class ExerciseServiceImpl implements ExerciseService{
 			sqlSession.rollback();
 		}
 		return result;
+	}
+
+	public ArrayList<ExerciseRecord> selectExerciseRecordList() {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 }

@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
+<%
+    String alertMsg = (String)session.getAttribute("alertMsg");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,6 +42,14 @@
         border-radius: 5px;
         box-shadow: 0px 3px 5px 0px rgb(157, 1, 1);
         position: absolute;
+        top: 50px;
+    }
+    .login-account-space{
+        width: 250px;
+        height: 40px;
+        font-size: 25px;
+        position: absolute;
+        left: 60px;
         top: 50px;
     }
     .index-frame{
@@ -90,22 +102,35 @@
     </style>
 </head>
 <body>
-    <div class="account-space">
+    <% if(alertMsg != null){ %>
+		<script>
+			alert("<%=alertMsg%>")
+		</script>
+		<% session.removeAttribute("alertMsg"); %>
+	<% } %>
+    
     <c:choose>
         <c:when test="${empty loginUser }">
             <!-- 로그인을 안한 상태 -->
+            <div class="account-space">
                 <button type="button" class="account-button" onclick="location.href='loginForm.me'" style="left: 60px;">로그인</button>
                 <button type="button" class="account-button" onclick="location.href='enrollForm.me'" style="left: 220px;">회원가입</button>
                 <button type="button" class="account-button" onclick="location.href=''" style="right: 60px;">커뮤니티</button>
+            </div>
         </c:when>
         <c:otherwise>
+            <div class="login-account-space">
+                <img src="/pss/resources/logo/person_icon.png" alt="유저 아이콘">${loginUser.userNickname}
+            </div>
                 <!-- 로그인을 한 상태 -->
+            <div class="account-space">    
                 <button type="button" class="account-button" onclick="location.href='logout.me'" style="left: 60px;">로그아웃</button>
                 <button type="button" class="account-button" onclick="location.href=''" style="left: 220px;">마이페이지</button>
                 <button type="button" class="account-button" onclick="location.href=''" style="right: 60px;">커뮤니티</button>
+            </div>
         </c:otherwise>
     </c:choose>
-    </div>
+    
     <div class="index-frame">
         <div class="logo-space">
             <img src="resources/logo/psslogomainmenu.png" alt="로고 이미지">

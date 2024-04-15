@@ -6,22 +6,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.pss.member.model.vo.Member;
 import com.pss.member.service.MemberServiceImpl;
 
 /**
- * Servlet implementation class MemberLoginController
+ * Servlet implementation class MemberEmailCheckController
  */
-@WebServlet("/login.me")
-public class MemberLoginController extends HttpServlet {
+@WebServlet("/idCheck.me")
+public class AjaxCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberLoginController() {
+    public AjaxCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +28,14 @@ public class MemberLoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		String checkId = request.getParameter("checkId");
 		
-		Member m = new Member();
+		int count = new MemberServiceImpl().idCheck(checkId);
 		
-		m.setUserEmail(request.getParameter("userEmail"));
-		m.setUserPwd(request.getParameter("userPwd"));
-		
-		Member loginUser = new MemberServiceImpl().loginMember(m);
-		
-		if (loginUser == null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "이메일이나 비밀번호가 올바르지 않습니다.");
-			response.sendRedirect(request.getContextPath() + "/loginForm.me");
+		if (count > 0) {
+			response.getWriter().print("NNNNN");
 		} else {
-			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", loginUser.getUserNickname() + "님 환영합니다.");
-			request.getSession().setAttribute("loginUser", loginUser);
-			response.sendRedirect(request.getContextPath());
+			response.getWriter().print("NNNNY");
 		}
 	}
 

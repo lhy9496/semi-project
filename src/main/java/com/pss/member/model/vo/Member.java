@@ -10,6 +10,7 @@ public class Member {
 	private String userPwd;
 	private String gender;
 	private int age;
+	private int userPoint;
 	private Date enrollDate;
 	private Date modifyDate;
 	private String status;
@@ -29,7 +30,7 @@ public class Member {
 	}
 
 	public Member(int userNo, String userName, String userNickname, String userEmail, String userPwd, String gender,
-			int age, Date enrollDate, Date modifyDate, String status) {
+			int age, int userPoint, Date enrollDate, Date modifyDate, String status) {
 		super();
 		this.userNo = userNo;
 		this.userName = userName;
@@ -38,6 +39,7 @@ public class Member {
 		this.userPwd = userPwd;
 		this.gender = gender;
 		this.age = age;
+		this.userPoint = userPoint;
 		this.enrollDate = enrollDate;
 		this.modifyDate = modifyDate;
 		this.status = status;
@@ -99,6 +101,14 @@ public class Member {
 		this.age = age;
 	}
 
+	public int getUserPoint() {
+		return userPoint;
+	}
+
+	public void setUserPoint(int userPoint) {
+		this.userPoint = userPoint;
+	}
+
 	public Date getEnrollDate() {
 		return enrollDate;
 	}
@@ -126,13 +136,8 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [userNo=" + userNo + ", userName=" + userName + ", userNickname=" + userNickname + ", userEmail="
-				+ userEmail + ", userPwd=" + userPwd + ", gender=" + gender + ", age=" + age + ", enrollDate="
-				+ enrollDate + ", modifyDate=" + modifyDate + ", status=" + status + "]";
+				+ userEmail + ", userPwd=" + userPwd + ", gender=" + gender + ", age=" + age + ", userPoint="
+				+ userPoint + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", status=" + status + "]";
 	}
-
-	
-	
-	
-	
 	
 }

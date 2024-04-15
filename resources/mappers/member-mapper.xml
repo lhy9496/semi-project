@@ -5,6 +5,17 @@
 
 <mapper namespace="memberMapper">
 	<resultMap type="Member" id="memberResultSet">
+		<result column="USER_NO" property="userNo"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="USER_NICKNAME" property="userNickname"/>
+		<result column="USER_EMAIL" property="userEmail"/>
+		<result column="USER_PWD" property="userPwd"/>
+		<result column="GENDER" property="gender"/>
+		<result column="AGE" property="age"/>
+		<result column="USER_POINT" property="userPoint"/>
+		<result column="ENROLL_DATE" property="enrollDate"/>
+		<result column="MODIFY_DATE" property="modifyDate"/>
+		<result column="STATUS" property="status"/>
 	</resultMap>
 	<insert id="insertMember" parameterType="Member">
 		INSERT
@@ -20,7 +31,7 @@
 		)
 		VALUES
 		(
-		SEQ_MN.NEXTVAL,
+		SEQ_UNO.NEXTVAL,
 		#{userName},
 		#{userNickname},
 		#{userEmail},
@@ -30,7 +41,7 @@
 		)
 	</insert>
 	
-	<select id="loginMember">
+	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 		SELECT USER_NO,
 				USER_NAME,
 				USER_NICKNAME,
@@ -46,5 +57,10 @@
 		WHERE USER_EMAIL = #{userEmail}
 		AND USER_PWD = #{userPwd}
 		AND STATUS = 'Y'
+	</select>
+	<select id="idCheck" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE USER_EMAIL = #{checkId}
 	</select>
 </mapper>

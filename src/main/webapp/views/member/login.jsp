@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
+<%
+    String alertMsg = (String)session.getAttribute("alertMsg");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,9 +114,18 @@
             font-size: 16px;
             font-weight: 600;
         }
+        .etc-button:hover{
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
+    <% if(alertMsg != null){ %>
+		<script>
+			alert("<%=alertMsg%>")
+		</script>
+		<% session.removeAttribute("alertMsg"); %>
+	<% } %>
     <form action="login.me" id="login-form" method="POST">
         <div class="login-frame">
             <div class="logo-space">
@@ -125,7 +137,7 @@
                         <img src="/pss/resources/logo/person_icon.png" alt="인물 이미지">
                     </div>
                     <div class="input-space">
-                        <input type="text" name="userId" id="email" class="input-space" placeholder="이메일" required>
+                        <input type="text" name="userEmail" id="email" class="input-space" placeholder="이메일" required>
                     </div>
                 </div>
                 <div class="input-linePwd">

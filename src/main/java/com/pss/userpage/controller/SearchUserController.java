@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pss.diet.model.vo.UserDietRecord;
 import com.pss.exercise.model.vo.Exercise;
+import com.pss.exercise.model.vo.ExerciseRecord;
 import com.pss.member.model.vo.Member;
+import com.pss.member.model.vo.UserInfo;
+import com.pss.member.model.vo.UserPhysicalInfo;
 import com.pss.userpage.service.SearchUserServiceImpl;
 
 /**
@@ -40,14 +43,20 @@ public class SearchUserController extends HttpServlet {
 		
 		list = new SearchUserServiceImpl().searchUser(nickname);
 		
-		if ((Member)list.get(0) == null) {
-			request.setAttribute("errorMsg", "존재하지 않는 유저입니다.");
+		if ((UserInfo)list.get(0) == null) {
+			request.setAttribute("alertMsg", "존재하지 않는 유저입니다.");
 			response.sendRedirect(request.getContextPath());
+			
+			request.getRequestDispatcher(request.getContextPath()).forward(request, response);
+			
 		} else {
-			request.getSession().setAttribute("searchUser", (Member)list.get(0));
-			request.getSession().setAttribute("diet", (UserDietRecord)list.get(1));
-			request.getSession().setAttribute("exercise", (Exercise)list.get(2));
-			request.getRequestDispatcher("WEB-INF/views/userpage/userpage.jsp").forward(request, response);
+			request.setAttribute("UserInfo", (UserInfo)list.get(0));
+			request.setAttribute("UserPhysicalInfo", (UserPhysicalInfo)list.get(1));
+			request.setAttribute("dietRecord", (UserDietRecord)list.get(2));
+			request.setAttribute("exerciseRecord", (ExerciseRecord)list.get(3));
+			
+			request.getRequestDispatcher("/views/userpage/userpage.jsp").forward(request, response);
+			
 		}
 	}
 

@@ -19,4 +19,11 @@ public class MemberDao {
 		
 		return sqlSession.selectOne("memberMapper.loginMember", m);
 	}
+	
+	public int idCheck(SqlSession sqlSession, String checkId) {
+		
+		int result = sqlSession.selectOne("memberMapper.idCheck", checkId);
+		
+		return result;
+	}
 }

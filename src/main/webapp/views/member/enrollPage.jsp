@@ -2,11 +2,26 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
+<%
+    String alertMsg = (String)session.getAttribute("alertMsg");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <style>
     .signup-frame{
         width: 720px;
@@ -47,11 +62,10 @@
         margin-top: 55px;
     }
     .icon-space{
-        width: 40px;
+        width: 80px;
         align-content: center;
         padding-left: 20px;
-        padding-right: 20px;
-        padding: auto;
+        padding-right: 0px;
     }
     .input-space{
         display: flex;
@@ -82,14 +96,14 @@
     .btn{
         display: none;
     }
-    .subit-space{
+    .submit-space{
         width: 450px;
         height: 64px;
         margin-top: 64px;
         margin-left: auto;
         margin-right: auto;
     }
-    .subit-button{
+    .submit-button{
         width: 450px;
         height: 64px;
         border-radius: 10px;
@@ -109,6 +123,12 @@
 </style>
 </head>
 <body>
+    <% if(alertMsg != null){ %>
+		<script>
+			alert("<%=alertMsg%>")
+		</script>
+		<% session.removeAttribute("alertMsg"); %>
+	<% } %>
     <form action="insert.me" id="enroll-form" method="POST">
         <div class="signup-frame">
             <!-- 로고 -->
@@ -170,25 +190,25 @@
                     <img src="/pss/resources/logo/calendar_icon.png" alt="달력 이미지">
                 </div>
                 <div class="input-space">
-                    <input type="text" class="input-space" name="age" placeholder="나이(숫자 입력)" maxlength="3">
+                    <input type="text" pattern="\d*" class="input-space" name="age" placeholder="나이(숫자 입력)" maxlength="3">
                 </div>
             </div>
             <div class="gender-line">
                 <div class="gender-space">
                     <button type="button" class="gender-button" id="MArea" onclick="genderSelect(M), genderColor(MArea, FArea)">
-                        <input type="radio" class="btn" id="M" name="gender" required>남자
+                        <input type="radio" class="btn" id="M" name="gender" value="M" required>남자
                     </button>
                 </div>
                 <div class="gender-space">
                     <button type="button" class="gender-button" id="FArea" onclick="genderSelect(F), genderColor(FArea, MArea)">
-                        <input type="radio" class="btn" id="F" name="gender" required>여자
+                        <input type="radio" class="btn" id="F" name="gender" value="F" required>여자
                     </button>
                 </div>
             </div>
 
             <!-- 가입신청 -->
-            <div class="subit-space">
-                <button type="submit" class="subit-button"><b>가입신청</b></button>
+            <div class="submit-space">
+                <button type="submit" class="submit-button" id="enroll-button" onclick="return chkPwd();" disabled><b>가입신청</b></button>
             </div>
         </div>
     </form>
@@ -210,6 +230,7 @@
         const pwdMsg = document.getElementById("pwdMsg");
         const pwdChk = document.getElementById("pwdChk");
         const pwdResult = document.getElementById("pwdResult");
+        const enroll_button = document.querySelector("#enroll-button");
         
         const pwdNotice = function() {
             pwdChk.value = "";
@@ -239,38 +260,60 @@
             }
         }
 
+        function chkPwd(){
+            if (pwd.value !== pwdChk.value){
+                alert("비밀번호가 일치하지 않습니다.");
+                return false;
+            }
+        }
+
         // 이메일 중복 확인 ajax
         const checkId = document.querySelector("#checkId");
         const resetId = document.querySelector("#resetId");
         const emailInput = document.querySelector("#email");
-        const enroll_button = document.querySelector("#enroll-button");
+        const regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
+
+        //이메일 정규식
+
 
         checkId.onclick = function(){
 
-            if(emailInput.value != null){
+            if(emailInput.value != "" && regex.test(emailInput.value)){
 
             	//ajax용 코드
-                // $.ajax({
-                //     type : "GET",
-                //     url : "idCheck.me",
-                //     data: {
-                //         checkId : emailInput.value
-                //     },
-                //     success: function(){
-                //         // 사용가능한 이메일입니다.
-                //         emailInput.readOnly = true;
-                //         checkId.style.display = "none";
-                //         resetId.style.display = "block";
-                //     },
-                //     error: function(){
-                //         // 이미 존재하는 아이디입니다.
-                //         emailInput.value = ""
-                //     }
-                // })
+                $.ajax({
+                    type : "GET",
+                    url : "idCheck.me",
+                    data: {
+                        checkId : emailInput.value
+                    },
+                    success: function(result){
+                        // 사용가능한 이메일입니다.
+                        if(result === "NNNNY"){
+                            alert("사용가능한 이메일입니다.")
+                            emailInput.setAttribute("readonly", true);
+                            checkId.style.display = "none";
+                            resetId.style.display = "block";
+                            enroll_button.removeAttribute("disabled");
+                        }else{
+                            // 이미 존재하는 이메일입니다.
+                            alert("이미 존재하는 이메일입니다. 다시 입력해주세요.")
+                            emailInput.focus();
+                            emailInput.value = ""
+                        }
+                        
+                    },
+                    error: function(err){
+                        console.log("실패 : ", err)
+                    }
+                })
                 // 기능 확인용 코드
-                emailInput.readOnly = true;
-                checkId.style.display = "none";
-                resetId.style.display = "block";
+                // emailInput.readOnly = true;
+                // checkId.style.display = "none";
+                // resetId.style.display = "block";
+            } else{
+                alert("올바른 형식의 이메일이 아닙니다.")
+                emailInput.focus();
             }
         }
         resetId.onclick = function(){
@@ -278,6 +321,7 @@
             emailInput.value = ""
             resetId.style.display = "none";
             checkId.style.display = "block";
+            enroll_button.setAttribute("disabled", true);
         }
     </script>
 </body>

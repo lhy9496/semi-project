@@ -37,4 +37,14 @@ public class MemberServiceImpl implements MemberService{
 		
 		return loginUser;
 	}
+	
+	@Override
+	public int idCheck(String checkId) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = mDao.idCheck(sqlSession, checkId);
+		sqlSession.close();
+		
+		return result;
+	}
 }

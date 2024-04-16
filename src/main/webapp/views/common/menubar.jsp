@@ -28,7 +28,12 @@
         top: 0px;
         z-index: 10;
     }
-    .loginout-space{
+    #menubar-header #menubar-space{
+        width: 100%;
+        height: 250px;
+        position: absolute;
+    }
+    #menubar-header .loginout-space{
         margin-top: 20px;
         margin-left: 30px;
         margin-right: 30px;
@@ -36,7 +41,7 @@
         font-size: 25px;
         text-align: right;
     }
-    #login, #logout{
+    #menubar-header #login, #logout{
         background-color: black;
         color: white;
         width: 85px;
@@ -45,22 +50,22 @@
         border-radius: 5px;
         font-size: 15px;
     }
-    .logo-search-space{
+    #menubar-header .logo-search-space{
         width: 1100px;
         height: 125px;
         display: flex;
         margin: 0 auto;
     }
-    .logo-space{
+    #menubar-header .logo-space{
         width: 240px;
         height: 100%;
         text-align: center;
     }
-    .search-space-out{
+    #menubar-header .search-space-out{
         width: 860px;
         margin: 0 auto;
     }
-    .search-space-in{
+    #menubar-header .search-space-in{
         width: 620px;
         height: 60px;
         border-radius: 15px;
@@ -70,7 +75,7 @@
         background-color: white;
         position: relative;
     }
-    .search-input{
+    #menubar-header .search-input{
         text-align: center;
         font-size: 25px;
         font-weight: 500;
@@ -82,7 +87,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
-    .search-button{
+    #menubar-header .search-button{
         width: 120px;
         height: 40px;
         font-size: 20px;
@@ -96,34 +101,34 @@
         right: 15px;
         top: 10px;
     }
-    #menubar-nav{
+    #menubar-header #menubar-nav{
         width: 100%;
         margin: 0 auto;
-    }
-    #menubar-nav ul, #menubar-nav ul li, #menubar-nav ul li a{
         height: 60px;
         text-align: center;
     }
-
-    #menubar-nav ul {
+    #menubar-header #menubar-nav ul {
+        height: 60px;
+        text-align: center;
         min-width: 300px;
         margin-left: 50px;
         flex-wrap: nowrap;
     }
-
-    #menubar-nav ul li{
+    #menubar-header #menubar-nav ul li{
+        height: 60px;
+        text-align: center;
         min-width: 100px;
         margin-right: 60px;
-        /* white-space: nowrap; */
     }
-
-    #menubar-nav ul li a {
+    #menubar-header #menubar-nav ul li a{
+        height: 60px;
+        text-align: center;
         min-width: 100px;
         font-size: 24px;
         white-space: nowrap;
         color: white;
     }
-    #menubar-nav ul li a:hover{
+    #menubar-header #menubar-nav ul li a:hover{
         scale: 1.1;
         font-weight: bold;
     }
@@ -198,5 +203,6 @@
                 </c:otherwise>
             </c:choose>
         </div>
+        <div id="menubar-space"></div>
 </body>
 </html>

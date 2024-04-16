@@ -7,6 +7,7 @@ public class ExerciseRecord {
 	private int exRecordNo;
 	private String exRecordUser;
 	private String exName;
+	private String exBodyPartName;
 	private Date exRecordDate;
 	private int exRecordSet;
 	private int exRecordWeight;
@@ -32,6 +33,19 @@ public class ExerciseRecord {
 	public ExerciseRecord(String exName, int exRecordSet, int exRecordWeight, int exRecordCount) {
 		super();
 		this.exName = exName;
+		this.exRecordSet = exRecordSet;
+		this.exRecordWeight = exRecordWeight;
+		this.exRecordCount = exRecordCount;
+	}
+	
+	
+
+	public ExerciseRecord(String exName, String exBodyPartName, Date exRecordDate, int exRecordSet, int exRecordWeight,
+			int exRecordCount) {
+		super();
+		this.exName = exName;
+		this.exBodyPartName = exBodyPartName;
+		this.exRecordDate = exRecordDate;
 		this.exRecordSet = exRecordSet;
 		this.exRecordWeight = exRecordWeight;
 		this.exRecordCount = exRecordCount;
@@ -93,12 +107,22 @@ public class ExerciseRecord {
 		this.exRecordCount = exRecordCount;
 	}
 
+	public String getExBodyPartName() {
+		return exBodyPartName;
+	}
+
+	public void setExBodyPartName(String exBodyPartName) {
+		this.exBodyPartName = exBodyPartName;
+	}
+
 	@Override
 	public String toString() {
 		return "ExerciseRecord [exRecordNo=" + exRecordNo + ", exRecordUser=" + exRecordUser + ", exName=" + exName
-				+ ", exRecordDate=" + exRecordDate + ", exRecordSet=" + exRecordSet + ", exRecordWeight="
-				+ exRecordWeight + ", exRecordCount=" + exRecordCount + "]";
+				+ ", exBodyPartName=" + exBodyPartName + ", exRecordDate=" + exRecordDate + ", exRecordSet="
+				+ exRecordSet + ", exRecordWeight=" + exRecordWeight + ", exRecordCount=" + exRecordCount + "]";
 	}
+	
+	
 	
 	
 	

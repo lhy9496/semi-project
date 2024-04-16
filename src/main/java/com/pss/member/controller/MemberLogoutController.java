@@ -30,6 +30,8 @@ public class MemberLogoutController extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
+		session.setAttribute("alertMsg", "로그아웃되었습니다.");
+		
 		response.sendRedirect(request.getContextPath());
 	}
 

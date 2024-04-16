@@ -34,8 +34,10 @@ public class ExerciseServiceImpl implements ExerciseService{
 		return result;
 	}
 
+	@Override
 	public ArrayList<ExerciseRecord> selectExerciseRecordList() {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession sqlSession = Template.getSqlSession();
+		ArrayList<ExerciseRecord> list = exerciseDao.selectExerciseRecordList(sqlSession);
+		return list;
 	}	
 }

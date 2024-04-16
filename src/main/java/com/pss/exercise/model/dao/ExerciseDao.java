@@ -19,4 +19,8 @@ public class ExerciseDao {
 		return sqlSession.insert("exerciseMapper.insertExerciseRecord", map);
 	}
 
+	public ArrayList<ExerciseRecord> selectExerciseRecordList(SqlSession sqlSession) {
+		return (ArrayList)sqlSession.selectList("exerciseMapper.selectExerciseRecordList");
+	}
+
 }

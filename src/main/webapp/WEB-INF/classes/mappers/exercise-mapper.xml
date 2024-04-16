@@ -47,6 +47,9 @@
 		)			
 	</insert>
 	
+<<<<<<< HEAD
+	
+=======
 	<select id="SearchUserExerciseRecord" parameterType="ExerciseRecord" >
  		SELECT EXR_NO,
  				USER_NO,
@@ -60,4 +63,5 @@
 		WHERE NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
+>>>>>>> f56bda4bcf4d4e6fa40ffa0f682a0e336fe64a05
 </mapper>

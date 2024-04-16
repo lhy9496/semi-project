@@ -47,6 +47,7 @@
 		)			
 	</insert>
 	
+
 	<select id="SearchUserExerciseRecord" parameterType="ExerciseRecord" >
  		SELECT EXR_NO,
  				USER_NO,
@@ -60,4 +61,5 @@
 		WHERE NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
+
 </mapper>

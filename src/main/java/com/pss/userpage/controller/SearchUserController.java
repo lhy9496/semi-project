@@ -2,6 +2,7 @@ package com.pss.userpage.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pss.diet.model.vo.UserDietRecord;
-import com.pss.exercise.model.vo.Exercise;
 import com.pss.exercise.model.vo.ExerciseRecord;
 import com.pss.member.model.vo.Member;
 import com.pss.member.model.vo.UserPhysicalInfo;
@@ -39,22 +39,16 @@ public class SearchUserController extends HttpServlet {
 		
 		String nickname = request.getParameter("nickname");
 		
-		ArrayList<Object> list = new ArrayList<>();
+		HashMap SearchUserTotalInfoMap = new SearchUserServiceImpl().getSearchUserTotalInfo(nickname);
 		
-		list = new SearchUserServiceImpl().searchUser(nickname);
-		
-		if ((Member)list.get(0) == null) {
+		if (SearchUserTotalInfoMap.get("SearchUserInfo") == null) {
 			request.setAttribute("alertMsg", "존재하지 않는 유저입니다.");
 			response.sendRedirect(request.getContextPath());
 			
 			request.getRequestDispatcher(request.getContextPath()).forward(request, response);
 			
 		} else {
-			request.setAttribute("SearchUserInfo", (Member)list.get(0));
-			request.setAttribute("SearchUserPhysicalInfo", (UserPhysicalInfo)list.get(1));
-			request.setAttribute("SearchUserPicture", (UserPicture)list.get(2));
-			request.setAttribute("SearchUserdietRecord", (ArrayList<UserDietRecord>)list.get(3));
-			request.setAttribute("SearchUserExerciseRecord", (ArrayList<ExerciseRecord>)list.get(4));
+			request.setAttribute("SearchUserTotalInfo", SearchUserTotalInfoMap);
 			
 			request.getRequestDispatcher("/views/userpage/userpage.jsp").forward(request, response);
 			
@@ -65,7 +59,6 @@ public class SearchUserController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

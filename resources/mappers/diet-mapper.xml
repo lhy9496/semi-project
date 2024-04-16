@@ -22,7 +22,7 @@
 		<result column="FAT" property="fat"/>
 	</resultMap>
   	
-  	<select id="SearchUserDietRecord" parameterType="String" resultMap="">
+  	<select id="SearchUserDietRecord" parameterType="String" resultMap="UserDietRecordResultSet">
  		SELECT MR_NO,
  				USER_NO,
  				FOOD_NO,

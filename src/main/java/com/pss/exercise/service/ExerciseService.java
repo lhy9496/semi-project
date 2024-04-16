@@ -10,4 +10,6 @@ public interface ExerciseService {
 	ArrayList<Exercise> selectExerciseList();
 
 	int insertExerciseRecord(HashMap<String, Integer> map);
+	
+	 ArrayList<ExerciseRecord> selectExerciseRecordList();
 }

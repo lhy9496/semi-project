@@ -21,7 +21,7 @@
  				WHEN_EAT_DATE
  		FROM MEMBER
  		JOIN MEAL_RECORD USING (USER_NO)
-		WHERE NICKNAME = #{nickname}
+		WHERE USER_NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
  	

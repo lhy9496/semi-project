@@ -9,6 +9,16 @@
 		<result column="bpart_name" property="bodyPart"/>
 		<result column="ex_name" property="exerciseName"/>
 	</resultMap>
+	
+	<resultMap id="UserExerciseRecordResultSet" type="ExerciseRecord">
+		<result column="EXR_NO" property="exRecordNo"/>
+		<result column="USER_NO" property="exRecordUser"/>
+		<result column="EX_NO" property="exName"/>
+		<result column="EXR_DATE" property="exRecordDate"/>
+		<result column="EXR_SET" property="exRecordSet"/>
+		<result column="EXR_WEIGHT" property="exRecordWeight"/>
+		<result column="EXR_COUNT" property="exRecordCount"/>
+	</resultMap>
 
 	<select id="selectExerciseList" resultMap="exerciseResultSet">
 		SELECT EX_NO,
@@ -36,4 +46,18 @@
 			${exCount}
 		)			
 	</insert>
+	
+	<select id="SearchUserExerciseRecord" parameterType="ExerciseRecord" >
+ 		SELECT EXR_NO,
+ 				USER_NO,
+ 				EX_NO,
+ 				EXR_DATE,
+ 				EXR_SET,
+ 				EXR_WEIGHT,
+ 				EXR_COUNT
+ 		FROM MEMBER
+ 		JOIN EX_RECORD USING (USER_NO)
+		WHERE NICKNAME = #{nickname}
+		AND STATUS = 'Y'
+ 	</select>
 </mapper>

@@ -1,4 +1,4 @@
-package com.pss.diet;
+package com.pss.diet.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BoardSampleServlet
+ * Servlet implementation class DietSampleController
  */
-@WebServlet("/DietSampleServlet")
-public class DietSampleServlet extends HttpServlet {
+@WebServlet("/test.fo")
+public class DietSampleController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DietSampleServlet() {
+    public DietSampleController() {
         super();
         // TODO Auto-generated constructor stub
     }

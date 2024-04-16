@@ -36,10 +36,10 @@ public class MemberInsertController extends HttpServlet {
 		String userPwd = request.getParameter("userPwd");
 		String userName = request.getParameter("userName");
 		String userNickname = request.getParameter("userNickname");
-		String age = request.getParameter("age");
+		int age = Integer.parseInt(request.getParameter("age"));
 		String gender = request.getParameter("gender");
 		
-		Member m = new Member(userName, userNickname, userEmail, userPwd, gender, 0);
+		Member m = new Member(userName, userNickname, userEmail, userPwd, gender, age);
 		
 		System.out.println(m);
 		

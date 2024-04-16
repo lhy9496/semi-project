@@ -13,7 +13,9 @@
 	<resultMap id="UserExerciseRecordResultSet" type="ExerciseRecord">
 		<result column="EXR_NO" property="exRecordNo"/>
 		<result column="USER_NO" property="exRecordUser"/>
+		<result column="USER_EMAIL" property="exRecordUser"/>
 		<result column="EX_NO" property="exName"/>
+		<result column="EX_NAME" property="exName"/>
 		<result column="EXR_DATE" property="exRecordDate"/>
 		<result column="EXR_SET" property="exRecordSet"/>
 		<result column="EXR_WEIGHT" property="exRecordWeight"/>
@@ -60,4 +62,19 @@
 		WHERE USER_NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
+ 	
+ 	<select id="selectExerciseRecordList" resultMap="UserExerciseRecordResultSet">
+ 		SELECT EXR_NO,
+ 				USER_EMAIL,
+ 				EX_NAME,
+ 				EXR_DATE,
+ 				EXR_SET,
+ 				EXR_WEIGHT,
+ 				EXR_COUNT
+ 		FROM EX_RECORD 
+ 		JOIN MEMBER USING (USER_NO)
+ 		JOIN EXERCISE USING (EX_NO)
+ 		WHERE USER_NO = 1
+ 	</select>
+
 </mapper>

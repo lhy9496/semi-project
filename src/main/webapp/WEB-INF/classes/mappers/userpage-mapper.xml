@@ -5,7 +5,7 @@
   
 <mapper namespace="userpageMapper">
 
-	<resultMap id="userInfoResultSet" type="UserInfo">
+	<resultMap id="userInfoResultSet" type="Member">
 		<result column="USER_NO" property="userNo"/>
 		<result column="USER_NAME" property="userName"/>
 		<result column="USER_NICKNAME" property="userNickname"/>
@@ -54,7 +54,7 @@
 		<result column="FILE_PATH" property="filePath"/>
 	</resultMap>
 
-	<select id="SearchUserInfo" parameterType="UserInfo" >
+	<select id="SearchUserInfo" parameterType="Member" >
  		SELECT USER_NO,
  				USER_NAME,
  				USER_NICKNAME,

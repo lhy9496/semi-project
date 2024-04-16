@@ -20,6 +20,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
+    ul, ol, li{
+        margin: 0px;
+        padding: 0px;
+    }
     #menubar-header {
         width: 100%;
         height: 250px;
@@ -30,8 +34,8 @@
     }
     #menubar-header #menubar-space{
         width: 100%;
-        height: 250px;
-        position: absolute;
+        height: max-content;
+        margin-top: 250px;
     }
     #menubar-header .loginout-space{
         margin-top: 20px;

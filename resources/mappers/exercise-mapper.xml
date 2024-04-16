@@ -16,6 +16,7 @@
 		<result column="USER_EMAIL" property="exRecordUser"/>
 		<result column="EX_NO" property="exName"/>
 		<result column="EX_NAME" property="exName"/>
+		<result column="BPART_NAME" property="exBodyPartName"/>
 		<result column="EXR_DATE" property="exRecordDate"/>
 		<result column="EXR_SET" property="exRecordSet"/>
 		<result column="EXR_WEIGHT" property="exRecordWeight"/>
@@ -67,6 +68,7 @@
  		SELECT EXR_NO,
  				USER_EMAIL,
  				EX_NAME,
+ 				BPART_NAME,
  				EXR_DATE,
  				EXR_SET,
  				EXR_WEIGHT,
@@ -74,7 +76,9 @@
  		FROM EX_RECORD 
  		JOIN MEMBER USING (USER_NO)
  		JOIN EXERCISE USING (EX_NO)
+ 		JOIN BODYPART USING (BPART_NO)
  		WHERE USER_NO = 1
+ 		ORDER BY EX_NAME, EXR_SET 
  	</select>
 
 </mapper>

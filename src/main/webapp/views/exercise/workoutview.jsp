@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <html lang="ko">
- 
+
 <head>
     <meta charset="UTF-8">
     <title>PhysicalS - 운동기록</title>
@@ -34,7 +34,7 @@
 
 <body>
     <c:import url="../../views/common/menubar.jsp" />
-    
+
     <div class="content-container">
         <div class="left-container">
 
@@ -52,80 +52,70 @@
             </div>
 
             <div id="workout-container">
-                <div class="workout-info">
-                    <div class="workout">
-                        <div class="workout-name">벤치프레스</div>
-                        <div class="workout-bodypart">가슴</div>
-                    </div>
-                    <table class="workout-record">
-                        <thead>
-                            <tr>
-                                <td>세트</td>
-                                <td>중량</td>
-                                <td>횟수</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>50kg</td>
-                                <td>10</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>50kg</td>
-                                <td>10</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>50kg</td>
-                                <td>10</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="workout-info">
-                    <div class="workout">
-                        <div class="workout-name">벤치프레스</div>
-                        <div class="workout-bodypart">가슴</div>
-                    </div>
-                    <table class="workout-record">
-                        <thead>
-                            <tr>
-                                <td>세트</td>
-                                <td>중량</td>
-                                <td>횟수</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>50kg</td>
-                                <td>10</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>50kg</td>
-                                <td>10</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>50kg</td>
-                                <td>10</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                
-            </div>
-            
+                <c:forEach var="exercise" items="${list}" varStatus="loop">
+                    <c:if test="${loop.first || !exercise.exName.equals(list[loop.index - 1].exName)}">
+                        <!-- 처음으로 나타나는 운동명이거나, 이전 운동명과 다른 경우에만 출력 -->
+                        <div class="workout-info">
+                            <div class="workout">
+                                <div class="workout-name">${exercise.exName}</div>
+                                <div class="workout-bodypart">${exercise.exBodyPartName}</div>
+                            </div>
+                            <table class="workout-record">
+                                <thead>
+                                    <tr>
+                                        <td>세트</td>
+                                        <td>중량</td>
+                                        <td>횟수</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                    </c:if>
+                                <tr>
+                                    <td>${exercise.exRecordSet}</td>
+                                    <td>${exercise.exRecordWeight}</td>
+                                    <td>${exercise.exRecordCount}</td>
+                                </tr>
+                    <c:if test="${loop.last || !exercise.exName.equals(list[loop.index + 1].exName)}">
+                        <!-- 마지막으로 나타나는 운동명이거나, 다음 운동명과 다른 경우에만 tbody를 닫음 -->
+                                </tbody>
+                                </table>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            <!-- <c:forEach var="exercise" items="${list }">
+                	<div class="workout-info">
+                	
+                		<div class="workout">
+	                        <div class="workout-name">${exercise.exName }</div>
+	                        <div class="workout-bodypart">${exercise.exBodyPartName }</div>
+                    	</div>
+	                    <table class="workout-record">
+	                        <thead>
+	                            <tr>
+	                                <td>세트</td>
+	                                <td>중량</td>
+	                                <td>횟수</td>
+	                            </tr>
+	                        </thead>
+	                        <tbody>  
+	                        	
+	                            <tr>
+	                                <td>${exercise.exRecordSet }</td>
+	                                <td>${exercise.exRecordWeight }</td>
+	                                <td>${exercise.exRecordCount }</td>
+	                            </tr>	  
+	                                         
+	                        </tbody>
+	                    </table>
+                	</div>
+				</c:forEach> -->
         </div>
 
-        <div class="right-container">
-            <div id='calendar'></div>
-        </div>
+    </div>
+
+    <div class="right-container">
+        <div id='calendar'></div>
+    </div>
     </div>
     <script>
         $(function () {

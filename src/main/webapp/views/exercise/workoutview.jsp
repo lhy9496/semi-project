@@ -29,8 +29,19 @@
                     let clickedDate = info.dateStr;
                     console.log("clickedDate = " + clickedDate);
                     $.ajax({
+                        url: 'cinfo.wo',
+                        data: {
+                        	clickedDate: clickedDate
+                        },
+                        success: function(res) {
+                        	console.log(res);
+                        },
                         
+                        error: function() {
+                        	
+                        }
                     })
+                    
                 }
             });
             calendar.render();

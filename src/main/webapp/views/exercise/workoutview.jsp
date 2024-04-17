@@ -20,10 +20,18 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
+            let calendarEl = document.getElementById('calendar');
+            let calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                height: "100%"
+                height: "100%",
+                selectable: true,
+                dateClick: function(info) {
+                    let clickedDate = info.dateStr;
+                    console.log("clickedDate = " + clickedDate);
+                    $.ajax({
+                        
+                    })
+                }
             });
             calendar.render();
         });
@@ -82,35 +90,7 @@
                         </div>
                     </c:if>
                 </c:forEach>
-            <!-- <c:forEach var="exercise" items="${list }">
-                	<div class="workout-info">
-                	
-                		<div class="workout">
-	                        <div class="workout-name">${exercise.exName }</div>
-	                        <div class="workout-bodypart">${exercise.exBodyPartName }</div>
-                    	</div>
-	                    <table class="workout-record">
-	                        <thead>
-	                            <tr>
-	                                <td>세트</td>
-	                                <td>중량</td>
-	                                <td>횟수</td>
-	                            </tr>
-	                        </thead>
-	                        <tbody>  
-	                        	
-	                            <tr>
-	                                <td>${exercise.exRecordSet }</td>
-	                                <td>${exercise.exRecordWeight }</td>
-	                                <td>${exercise.exRecordCount }</td>
-	                            </tr>	  
-	                                         
-	                        </tbody>
-	                    </table>
-                	</div>
-				</c:forEach> -->
-        </div>
-
+            </div>
     </div>
 
     <div class="right-container">

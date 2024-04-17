@@ -10,9 +10,9 @@ import com.pss.userpage.model.dao.SearchUserDao;
 public class SearchUserServiceImpl implements SearchUserService {
 
 	@Override
-	public HashMap getSearchUserTotalInfo(String nickname) {
+	public HashMap<String, Object> getSearchUserTotalInfo(String nickname) {
 		SqlSession sqlSession = Template.getSqlSession();
-		HashMap SearchUserTotalInfoMap = new HashMap();
+		HashMap<String, Object> SearchUserTotalInfoMap = new HashMap<>();
 		SearchUserDao searchUserDao = new SearchUserDao();
 		SearchUserTotalInfoMap.put("SearchUserInfo", searchUserDao.getSearchUserInfo(sqlSession, nickname));
 		SearchUserTotalInfoMap.put("SearchUserPhysicalInfo", searchUserDao.getSearchUserPhysicalInfo(sqlSession, nickname));

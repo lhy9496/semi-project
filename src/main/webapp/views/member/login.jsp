@@ -127,6 +127,7 @@
 		<% session.removeAttribute("alertMsg"); %>
 	<% } %>
     <form action="login.me" id="login-form" method="POST">
+        <input type="hidden" name="redirectUrl" value="">
         <div class="login-frame">
             <div class="logo-space">
                 <a href="${contextPath}"><img src="/pss/resources/logo/psslogologin.png" alt="로고 이미지"></a>
@@ -161,6 +162,12 @@
                 </div>
             </div>
         </div>
-    </form>
+    </form> 
+    <script>
+        window.onload = function(){
+            console.log("실행 : "  + new URL(location.href).searchParams.get("redirectUrl"))
+            document.querySelector("#login-form input[name=redirectUrl]").value = new URL(location.href).searchParams.get("redirectUrl");
+        }
+    </script>
 </body>
 </html>

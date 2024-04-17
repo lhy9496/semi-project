@@ -28,7 +28,7 @@ public class MemberLogoutController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		session.invalidate();
+		session.removeAttribute("loginUser");
 		
 		session.setAttribute("alertMsg", "로그아웃되었습니다.");
 		

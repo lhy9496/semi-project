@@ -50,7 +50,7 @@
 		)			
 	</insert>
 	
-	<select id="SearchUserExerciseRecord" parameterType="String" resultMap="UserExerciseRecordResultSet">
+	<select id="SearchUserExerciseRecord" parameterType="ExerciseRecord" >
  		SELECT EXR_NO,
  				USER_NO,
  				EX_NO,
@@ -60,7 +60,7 @@
  				EXR_COUNT
  		FROM MEMBER
  		JOIN EX_RECORD USING (USER_NO)
-		WHERE USER_NICKNAME = #{nickname}
+		WHERE NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
  	

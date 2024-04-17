@@ -32,12 +32,16 @@
         top: 0px;
         z-index: 10;
     }
+<<<<<<< HEAD
     #menubar-header #menubar-space{
         width: 100%;
         height: max-content;
         margin-top: 250px;
     }
     #menubar-header .loginout-space{
+=======
+    .loginout-space{
+>>>>>>> parent of 3fed1da (Merge branch 'main' of https://github.com/lhy9496/semi-project into odg)
         margin-top: 20px;
         margin-left: 30px;
         margin-right: 30px;
@@ -45,7 +49,7 @@
         font-size: 25px;
         text-align: right;
     }
-    #menubar-header #login, #logout{
+    #login, #logout{
         background-color: black;
         color: white;
         width: 85px;
@@ -54,22 +58,22 @@
         border-radius: 5px;
         font-size: 15px;
     }
-    #menubar-header .logo-search-space{
+    .logo-search-space{
         width: 1100px;
         height: 125px;
         display: flex;
         margin: 0 auto;
     }
-    #menubar-header .logo-space{
+    .logo-space{
         width: 240px;
         height: 100%;
         text-align: center;
     }
-    #menubar-header .search-space-out{
+    .search-space-out{
         width: 860px;
         margin: 0 auto;
     }
-    #menubar-header .search-space-in{
+    .search-space-in{
         width: 620px;
         height: 60px;
         border-radius: 15px;
@@ -79,7 +83,7 @@
         background-color: white;
         position: relative;
     }
-    #menubar-header .search-input{
+    .search-input{
         text-align: center;
         font-size: 25px;
         font-weight: 500;
@@ -91,7 +95,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
-    #menubar-header .search-button{
+    .search-button{
         width: 120px;
         height: 40px;
         font-size: 20px;
@@ -105,34 +109,34 @@
         right: 15px;
         top: 10px;
     }
-    #menubar-header #menubar-nav{
+    #menubar-nav{
         width: 100%;
         margin: 0 auto;
+    }
+    #menubar-nav ul, #menubar-nav ul li, #menubar-nav ul li a{
         height: 60px;
         text-align: center;
     }
-    #menubar-header #menubar-nav ul {
-        height: 60px;
-        text-align: center;
+
+    #menubar-nav ul {
         min-width: 300px;
         margin-left: 50px;
         flex-wrap: nowrap;
     }
-    #menubar-header #menubar-nav ul li{
-        height: 60px;
-        text-align: center;
+
+    #menubar-nav ul li{
         min-width: 100px;
         margin-right: 60px;
+        /* white-space: nowrap; */
     }
-    #menubar-header #menubar-nav ul li a{
-        height: 60px;
-        text-align: center;
+
+    #menubar-nav ul li a {
         min-width: 100px;
         font-size: 24px;
         white-space: nowrap;
         color: white;
     }
-    #menubar-header #menubar-nav ul li a:hover{
+    #menubar-nav ul li a:hover{
         scale: 1.1;
         font-weight: bold;
     }
@@ -207,6 +211,5 @@
                 </c:otherwise>
             </c:choose>
         </div>
-        <div id="menubar-space"></div>
 </body>
 </html>

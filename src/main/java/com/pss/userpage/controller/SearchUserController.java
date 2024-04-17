@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.pss.diet.model.vo.UserDietRecord;
 import com.pss.exercise.model.vo.ExerciseRecord;
 import com.pss.member.model.vo.Member;
-import com.pss.member.model.vo.UserInfo;
 import com.pss.member.model.vo.UserPhysicalInfo;
+import com.pss.member.model.vo.UserPicture;
 import com.pss.userpage.service.SearchUserServiceImpl;
 
 /**
@@ -41,27 +41,14 @@ public class SearchUserController extends HttpServlet {
 		
 		HashMap SearchUserTotalInfoMap = new SearchUserServiceImpl().getSearchUserTotalInfo(nickname);
 		
-<<<<<<< HEAD
 		if (SearchUserTotalInfoMap.get("SearchUserInfo") == null) {
-=======
-		list = new SearchUserServiceImpl().searchUser(nickname);
-		
-		if ((UserInfo)list.get(0) == null) {
->>>>>>> parent of 3fed1da (Merge branch 'main' of https://github.com/lhy9496/semi-project into odg)
 			request.setAttribute("alertMsg", "존재하지 않는 유저입니다.");
 			response.sendRedirect(request.getContextPath());
 			
 			request.getRequestDispatcher(request.getContextPath()).forward(request, response);
 			
 		} else {
-<<<<<<< HEAD
 			request.setAttribute("SearchUserTotalInfo", SearchUserTotalInfoMap);
-=======
-			request.setAttribute("UserInfo", (UserInfo)list.get(0));
-			request.setAttribute("UserPhysicalInfo", (UserPhysicalInfo)list.get(1));
-			request.setAttribute("dietRecord", (UserDietRecord)list.get(2));
-			request.setAttribute("exerciseRecord", (ExerciseRecord)list.get(3));
->>>>>>> parent of 3fed1da (Merge branch 'main' of https://github.com/lhy9496/semi-project into odg)
 			
 			request.getRequestDispatcher("/views/userpage/userpage.jsp").forward(request, response);
 			

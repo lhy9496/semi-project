@@ -53,8 +53,8 @@
 
             <div id="workout-container">
                 <c:forEach var="exercise" items="${list}" varStatus="loop">
-                    <c:if test="${loop.first || !exercise.exName.equals(list[loop.index - 1].exName)}">
-                        <!-- 처음으로 나타나는 운동명이거나, 이전 운동명과 다른 경우에만 출력 -->
+                    <c:if test="${!exercise.exName.equals(list[loop.index - 1].exName)}">
+                        <!-- 이전 운동명과 다른 경우에만 출력 -->
                         <div class="workout-info">
                             <div class="workout">
                                 <div class="workout-name">${exercise.exName}</div>
@@ -75,8 +75,8 @@
                                     <td>${exercise.exRecordWeight}</td>
                                     <td>${exercise.exRecordCount}</td>
                                 </tr>
-                    <c:if test="${loop.last || !exercise.exName.equals(list[loop.index + 1].exName)}">
-                        <!-- 마지막으로 나타나는 운동명이거나, 다음 운동명과 다른 경우에만 tbody를 닫음 -->
+                    <c:if test="${!exercise.exName.equals(list[loop.index + 1].exName)}">
+                        <!-- 다음 운동명과 다른 경우에만 tbody를 닫음 -->
                                 </tbody>
                                 </table>
                         </div>

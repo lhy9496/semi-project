@@ -12,17 +12,12 @@
 		<result column="FOOD_COUNT" property="foodCount"/>
 		<result column="WHEN_EAT_DATE" property="whenEatDate"/>
 	</resultMap>
-	
-	<resultMap id="FoodResultSet" type="Food">
-		<result column="FOOD_NO" property="foodNo"/>
-		<result column="FOOD_NAME" property="foodName"/>
-		<result column="FOOD_KCAL" property="foodKcal"/>
-		<result column="CARB" property="carb"/>
-		<result column="PROTEIN" property="protein"/>
-		<result column="FAT" property="fat"/>
-	</resultMap>
   	
+<<<<<<< HEAD
   	<select id="SearchUserDietRecord" parameterType="String" resultMap="UserDietRecordResultSet">
+=======
+  	<select id="SearchUserDietRecord" parameterType="UserDietRecord" >
+>>>>>>> parent of 3fed1da (Merge branch 'main' of https://github.com/lhy9496/semi-project into odg)
  		SELECT MR_NO,
  				USER_NO,
  				FOOD_NO,
@@ -30,7 +25,7 @@
  				WHEN_EAT_DATE
  		FROM MEMBER
  		JOIN MEAL_RECORD USING (USER_NO)
-		WHERE USER_NICKNAME = #{nickname}
+		WHERE NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
  	

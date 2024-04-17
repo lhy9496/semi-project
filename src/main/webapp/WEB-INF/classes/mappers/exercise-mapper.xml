@@ -50,7 +50,7 @@
 		)			
 	</insert>
 	
-	<select id="SearchUserExerciseRecord" parameterType="String" resultMap="UserExerciseRecordResultSet">
+	<select id="SearchUserExerciseRecord" parameterType="ExerciseRecord" >
  		SELECT EXR_NO,
  				USER_NO,
  				EX_NO,
@@ -60,7 +60,7 @@
  				EXR_COUNT
  		FROM MEMBER
  		JOIN EX_RECORD USING (USER_NO)
-		WHERE USER_NICKNAME = #{nickname}
+		WHERE NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
  	
@@ -78,6 +78,7 @@
  		JOIN EXERCISE USING (EX_NO)
  		JOIN BODYPART USING (BPART_NO)
  		WHERE USER_NO = 1
+ 			AND TO_CHAR(EXR_DATE,'yyyymmdd') = TO_CHAR(SYSDATE,'yyyymmdd')
  		ORDER BY EX_NAME, EXR_SET 
  	</select>
 

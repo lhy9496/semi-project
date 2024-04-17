@@ -20,10 +20,18 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
+            let calendarEl = document.getElementById('calendar');
+            let calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                height: "100%"
+                height: "100%",
+                selectable: true,
+                dateClick: function(info) {
+                    let clickedDate = info.dateStr;
+                    console.log("clickedDate = " + clickedDate);
+                    $.ajax({
+                        
+                    })
+                }
             });
             calendar.render();
         });
@@ -53,8 +61,8 @@
 
             <div id="workout-container">
                 <c:forEach var="exercise" items="${list}" varStatus="loop">
-                    <c:if test="${loop.first || !exercise.exName.equals(list[loop.index - 1].exName)}">
-                        <!-- 처음으로 나타나는 운동명이거나, 이전 운동명과 다른 경우에만 출력 -->
+                    <c:if test="${!exercise.exName.equals(list[loop.index - 1].exName)}">
+                        <!-- 이전 운동명과 다른 경우에만 출력 -->
                         <div class="workout-info">
                             <div class="workout">
                                 <div class="workout-name">${exercise.exName}</div>
@@ -75,42 +83,14 @@
                                     <td>${exercise.exRecordWeight}</td>
                                     <td>${exercise.exRecordCount}</td>
                                 </tr>
-                    <c:if test="${loop.last || !exercise.exName.equals(list[loop.index + 1].exName)}">
-                        <!-- 마지막으로 나타나는 운동명이거나, 다음 운동명과 다른 경우에만 tbody를 닫음 -->
+                    <c:if test="${!exercise.exName.equals(list[loop.index + 1].exName)}">
+                        <!-- 다음 운동명과 다른 경우에만 tbody를 닫음 -->
                                 </tbody>
                                 </table>
                         </div>
                     </c:if>
                 </c:forEach>
-            <!-- <c:forEach var="exercise" items="${list }">
-                	<div class="workout-info">
-                	
-                		<div class="workout">
-	                        <div class="workout-name">${exercise.exName }</div>
-	                        <div class="workout-bodypart">${exercise.exBodyPartName }</div>
-                    	</div>
-	                    <table class="workout-record">
-	                        <thead>
-	                            <tr>
-	                                <td>세트</td>
-	                                <td>중량</td>
-	                                <td>횟수</td>
-	                            </tr>
-	                        </thead>
-	                        <tbody>  
-	                        	
-	                            <tr>
-	                                <td>${exercise.exRecordSet }</td>
-	                                <td>${exercise.exRecordWeight }</td>
-	                                <td>${exercise.exRecordCount }</td>
-	                            </tr>	  
-	                                         
-	                        </tbody>
-	                    </table>
-                	</div>
-				</c:forEach> -->
-        </div>
-
+            </div>
     </div>
 
     <div class="right-container">

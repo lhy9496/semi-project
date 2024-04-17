@@ -12,16 +12,16 @@ import com.pss.member.model.vo.Member;
 import com.pss.member.service.MemberServiceImpl;
 
 /**
- * Servlet implementation class MemberInsertController
+ * Servlet implementation class FindPwdController
  */
-@WebServlet("/insert.me")
-public class MemberInsertController extends HttpServlet {
+@WebServlet("/findPwd.me")
+public class FindPwdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberInsertController() {
+    public FindPwdController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,30 +33,26 @@ public class MemberInsertController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String userEmail = request.getParameter("userEmail");
-		String userPwd = request.getParameter("userPwd");
 		String userName = request.getParameter("userName");
 		String userNickname = request.getParameter("userNickname");
-		String age = request.getParameter("age");
-		String gender = request.getParameter("gender");
 		
-		Member m = new Member(userName, userNickname, userEmail, userPwd, gender, 0);
+		Member m = new Member();
 		
-		System.out.println(m);
+		m.setUserEmail(userEmail);
+		m.setUserName(userName);
+		m.setUserNickname(userNickname);
 		
-		int result = new MemberServiceImpl().insertMember(m);
+		Member findPwd = new MemberServiceImpl().findPwd(m);
 		
-		if (result > 0) {
+		if(findPwd == null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "성공적으로 회원가입이 되었습니다.");
-			
-			response.sendRedirect(request.getContextPath());
+			session.setAttribute("alertMsg", "입력하신 정보에 해당하는 계정이 없습니다.");
+			response.sendRedirect(request.getContextPath() + "/findForm.me");
 		} else {
 			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "회원가입에 실패하였습니다.");
-			
-			response.sendRedirect(request.getContextPath() + "/enrollForm.me");
+			session.setAttribute("alertMsg", "해당 계정의 비밀번호는 " + findPwd.getUserPwd() + "입니다.");
+			response.sendRedirect(request.getContextPath() + "/loginForm.me");
 		}
-		
 	}
 
 	/**

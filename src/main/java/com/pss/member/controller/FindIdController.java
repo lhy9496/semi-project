@@ -12,16 +12,16 @@ import com.pss.member.model.vo.Member;
 import com.pss.member.service.MemberServiceImpl;
 
 /**
- * Servlet implementation class MemberInsertController
+ * Servlet implementation class FindIdController
  */
-@WebServlet("/insert.me")
-public class MemberInsertController extends HttpServlet {
+@WebServlet("/findId.me")
+public class FindIdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberInsertController() {
+    public FindIdController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,31 +32,25 @@ public class MemberInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String userEmail = request.getParameter("userEmail");
-		String userPwd = request.getParameter("userPwd");
 		String userName = request.getParameter("userName");
 		String userNickname = request.getParameter("userNickname");
-		String age = request.getParameter("age");
-		String gender = request.getParameter("gender");
 		
-		Member m = new Member(userName, userNickname, userEmail, userPwd, gender, 0);
+		Member m = new Member();
 		
-		System.out.println(m);
+		m.setUserName(userName);
+		m.setUserNickname(userNickname);
 		
-		int result = new MemberServiceImpl().insertMember(m);
+		Member findId = new MemberServiceImpl().findId(m);
 		
-		if (result > 0) {
+		if(findId == null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "성공적으로 회원가입이 되었습니다.");
-			
-			response.sendRedirect(request.getContextPath());
+			session.setAttribute("alertMsg", "입력하신 정보에 해당하는 계정이 없습니다.");
+			response.sendRedirect(request.getContextPath() + "/findForm.me");
 		} else {
 			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "회원가입에 실패하였습니다.");
-			
-			response.sendRedirect(request.getContextPath() + "/enrollForm.me");
+			session.setAttribute("alertMsg", "해당 계정의 이메일은 " + findId.getUserEmail() + "입니다.");
+			response.sendRedirect(request.getContextPath() + "/loginForm.me");
 		}
-		
 	}
 
 	/**

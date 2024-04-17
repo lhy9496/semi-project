@@ -207,6 +207,5 @@
                 </c:otherwise>
             </c:choose>
         </div>
-        <div id="menubar-space"></div>
 </body>
 </html>

@@ -155,4 +155,5 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse,windows,macos,java
 .classpath
+.project
 src/main/webapp/WEB-INF/classes/

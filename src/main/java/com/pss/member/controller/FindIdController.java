@@ -12,16 +12,16 @@ import com.pss.member.model.vo.Member;
 import com.pss.member.service.MemberServiceImpl;
 
 /**
- * Servlet implementation class MemberLoginController
+ * Servlet implementation class FindIdController
  */
-@WebServlet("/login.me")
-public class MemberLoginController extends HttpServlet {
+@WebServlet("/findId.me")
+public class FindIdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberLoginController() {
+    public FindIdController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,27 +32,24 @@ public class MemberLoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
+		String userName = request.getParameter("userName");
+		String userNickname = request.getParameter("userNickname");
+		
 		Member m = new Member();
 		
-		m.setUserEmail(request.getParameter("userEmail"));
-		m.setUserPwd(request.getParameter("userPwd"));
-		Member loginUser = new MemberServiceImpl().loginMember(m);
+		m.setUserName(userName);
+		m.setUserNickname(userNickname);
 		
-		if (loginUser == null) {
+		Member findId = new MemberServiceImpl().findId(m);
+		
+		if(findId == null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "이메일이나 비밀번호가 올바르지 않습니다.");
-			response.sendRedirect(request.getContextPath() + "/loginForm.me");
+			session.setAttribute("alertMsg", "입력하신 정보에 해당하는 계정이 없습니다.");
+			response.sendRedirect(request.getContextPath() + "/findForm.me");
 		} else {
 			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", loginUser.getUserNickname() + "님 환영합니다.");
-			request.getSession().setAttribute("loginUser", loginUser);
-			String redirectUrl = (String)session.getAttribute("redirect");
-			System.out.println(redirectUrl);
-			if (redirectUrl == null) {
-			response.sendRedirect(request.getContextPath());
-			} else {
-				response.sendRedirect(redirectUrl);
-			}
+			session.setAttribute("alertMsg", "해당 계정의 이메일은 " + findId.getUserEmail() + "입니다.");
+			response.sendRedirect(request.getContextPath() + "/loginForm.me");
 		}
 	}
 

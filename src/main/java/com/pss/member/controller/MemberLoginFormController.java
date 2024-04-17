@@ -26,6 +26,7 @@ public class MemberLoginFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String redirectUrl = request.getParameter("redirectUrl");
 		request.getRequestDispatcher("views/member/login.jsp").forward(request, response);
 	}
 

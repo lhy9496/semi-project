@@ -151,7 +151,7 @@
             <div class="loginout-space">
             <c:choose>
             	<c:when test="${empty loginUser }">
-                    <button id="login" onclick="location.href='${contextPath}/loginForm.me'">로그인</button>
+                    <button id="login" onclick="location.href='${contextPath}/loginForm.me?redirectUrl=' + window.location.href">로그인</button>
                 </c:when>
                 <c:otherwise>
                     <img src="/pss/resources/logo/person_icon.png" alt="유저 아이콘">${loginUser.userNickname}

@@ -62,7 +62,7 @@ Servers/
 
 # Uncomment this line if you wish to ignore the project description file.
 # Typically, this file would be tracked if it contains build/dependency configurations:
-#.project
+.project
 
 ### Eclipse Patch ###
 # Spring Boot Tooling
@@ -155,5 +155,4 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse,windows,macos,java
 .classpath
-.project
 src/main/webapp/WEB-INF/classes/

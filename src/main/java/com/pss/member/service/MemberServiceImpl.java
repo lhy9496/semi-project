@@ -47,4 +47,27 @@ public class MemberServiceImpl implements MemberService{
 		
 		return result;
 	}
+	
+	@Override
+	public Member findId(Member m) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		Member findId = mDao.findId(sqlSession, m);
+		
+		sqlSession.close();
+		
+		return findId;
+	}
+	@Override
+	public Member findPwd(Member m) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		Member findPwd = mDao.findPwd(sqlSession, m);
+		
+		sqlSession.close();
+		
+		return findPwd;
+	}
+	
+	
 }

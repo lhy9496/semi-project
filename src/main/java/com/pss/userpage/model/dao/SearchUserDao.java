@@ -6,22 +6,16 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.pss.diet.model.vo.UserDietRecord;
+import com.pss.exercise.model.vo.ExerciseRecord;
+import com.pss.member.model.vo.Member;
+import com.pss.member.model.vo.UserPhysicalInfo;
+import com.pss.member.model.vo.UserPicture;
+
 public class SearchUserDao {
-<<<<<<< HEAD
 
 	public Member getSearchUserInfo(SqlSession sqlSession, String nickname) {
 		return sqlSession.selectOne("member-mapper.SearchUserInfo", nickname);
-=======
-	
-	public static ArrayList searchUser(SqlSession sqlSession, String nickname) {
-		ArrayList<Object> list = new ArrayList<>();
-		list.add(sqlSession.selectOne("member-mapper.SearchUserInfo", nickname));
-		list.add(sqlSession.selectOne("member-mapper.SearchUserPhysicalInfo", nickname));
-		list.add(sqlSession.selectOne("member-mapper.SearchUserPicture", nickname));
-		list.add(sqlSession.selectOne("diet-mapper.SearchUserDietRecord", nickname));
-		list.add(sqlSession.selectOne("exercise-mapper.SearchUserExerciseRecord", nickname));
-		return list;
->>>>>>> parent of 3fed1da (Merge branch 'main' of https://github.com/lhy9496/semi-project into odg)
 	}
 
 	public UserPhysicalInfo getSearchUserPhysicalInfo(SqlSession sqlSession, String nickname) {

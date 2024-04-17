@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class MemberLoginForm
+ * Servlet implementation class FindFormController
  */
-@WebServlet("/loginForm.me")
-public class MemberLoginFormController extends HttpServlet {
+@WebServlet("/findForm.me")
+public class FindFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberLoginFormController() {
+    public FindFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,11 +27,7 @@ public class MemberLoginFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		if((String)session.getAttribute("redirect") == null) {
-			session.setAttribute("redirect", request.getParameter("redirectUrl"));
-		}
-		request.getRequestDispatcher("views/member/login.jsp").forward(request, response);
+		request.getRequestDispatcher("views/member/findIdPwd.jsp").forward(request, response);
 	}
 
 	/**

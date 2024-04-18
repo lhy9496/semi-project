@@ -46,8 +46,7 @@ public class MemberLoginController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", loginUser.getUserNickname() + "님 환영합니다.");
 			request.getSession().setAttribute("loginUser", loginUser);
-			String redirectUrl = (String)session.getAttribute("redirect");
-			System.out.println(redirectUrl);
+			String redirectUrl = (String)session.getAttribute("redirectUrl");
 			if (redirectUrl == null) {
 			response.sendRedirect(request.getContextPath());
 			} else {

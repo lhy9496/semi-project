@@ -123,4 +123,20 @@
 		WHERE NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
+ 	
+ 	<select id="findId" parameterType="Member" resultMap="memberResultSet">
+ 		SELECT USER_EMAIL
+ 		FROM MEMBER
+ 		WHERE USER_NAME = #{userName}
+ 		AND USER_NICKNAME = #{userNickname}
+ 		AND STATUS = 'Y'
+ 	</select>
+ 	<select id="findPwd" parameterType="Member" resultMap="memberResultSet">
+ 		SELECT USER_PWD
+ 		FROM MEMBER
+ 		WHERE USER_EMAIL = #{userEmail}
+ 		AND USER_NAME = #{userName}
+ 		AND USER_NICKNAME = #{userNickname}
+ 		AND STATUS = 'Y'
+ 	</select>
 </mapper>

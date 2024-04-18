@@ -11,31 +11,25 @@
                 padding: 30px;
                 background: rgb(157, 001, 001);
                 margin-top: 30px;
-            }
-            li {
-                list-style: none;
+                border-radius: 10px;
             }
             li a {
                 text-decoration: none;
                 color: rgb(146, 146, 146);
             }
             #nav {
-                width: 100%;
                 padding: 20px 0px;
             }
             #nav>ul {
                 display: flex;
-                width: 100%;
             }
-            #nav>ul>li {
-                width: 10%;
-                position: relative;
-            }
+            
             #nav li a {
                 font-weight: bolder;
                 background: rgb(224, 223, 223);
                 padding: 5px 15px;
                 border-radius: 3px;
+                
             }
             #title {
                 width: 100%;
@@ -62,8 +56,8 @@
             }
 
             #board-enroll-area {
-                margin: 50px;
-                margin-top: 300px;
+                margin: 300px auto;
+                width: 955px;
             }
         </style>
     </head>
@@ -72,6 +66,7 @@
         <%@ include file="../common/menubar.jsp" %>
 
             <div id="board-enroll-area">
+                <form action="">
                 <div class="outer">
                     <div style="font-size: xx-large; font-weight: bold; color: white;">커뮤니티 글쓰기</div>
                     <div align="right">
@@ -79,17 +74,17 @@
                             style="width: 90px; height: 30px; margin: auto; cursor: pointer;">등록</button>
                     </div>
                 </div>
-                <form action="">
+                
                     <input type="hidden" name="userNo" value="">
                     <div id="nav" class="bo">
-                        <ul>
+                        <ul style="gap: 10px; list-style: none;">
                             <li><a href="#" onclick="">자유</a></li>
                             <li><a href="#">헬창</a></li>
                             <li><a href="#">헬린이</a></li>
                             <li><a href="#">Q / A</a></li>
                         </ul>
                     </div>
-                </form>
+                
                 <div>
                     <div>
                         <input id="title" type="text" name="title" placeholder="제목을 입력하세요." required>

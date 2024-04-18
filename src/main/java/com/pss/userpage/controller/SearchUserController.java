@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pss.diet.model.vo.UserDietRecord;
+import com.pss.exercise.model.vo.ExerciseRecord;
+import com.pss.member.model.vo.Member;
+import com.pss.member.model.vo.UserPhysicalInfo;
+import com.pss.member.model.vo.UserPicture;
 import com.pss.userpage.service.SearchUserServiceImpl;
 
 /**
@@ -40,7 +45,9 @@ public class SearchUserController extends HttpServlet {
 			request.setAttribute("alertMsg", "존재하지 않는 유저입니다.");
 			response.sendRedirect(request.getContextPath());
 		} else {
-			request.setAttribute("searchUserTotalInfoMap", searchUserTotalInfoMap);
+
+			request.setAttribute("SearchUserTotalInfoMap", searchUserTotalInfoMap);
+
 			
 			request.getRequestDispatcher("/views/userpage/userpage.jsp").forward(request, response);
 			

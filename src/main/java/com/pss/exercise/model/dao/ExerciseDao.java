@@ -23,4 +23,8 @@ public class ExerciseDao {
 		return (ArrayList)sqlSession.selectList("exerciseMapper.selectExerciseRecordList");
 	}
 
+	public ArrayList<ExerciseRecord> selectClickedDateWorkoutList(SqlSession sqlSession, String clickedDate) {
+		return (ArrayList)sqlSession.selectList("exerciseMapper.selectClickedDateWorkoutList",clickedDate);
+	}
+
 }

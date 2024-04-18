@@ -81,5 +81,23 @@
  			AND TO_CHAR(EXR_DATE,'yyyymmdd') = TO_CHAR(SYSDATE,'yyyymmdd')
  		ORDER BY EX_NAME, EXR_SET 
  	</select>
+ 	
+ 	<select id="selectClickedDateWorkoutList" resultMap="UserExerciseRecordResultSet">
+ 		SELECT EXR_NO,
+ 				USER_EMAIL,
+ 				EX_NAME,
+ 				BPART_NAME,
+ 				EXR_DATE,
+ 				EXR_SET,
+ 				EXR_WEIGHT,
+ 				EXR_COUNT
+ 		FROM EX_RECORD 
+ 		JOIN MEMBER USING (USER_NO)
+ 		JOIN EXERCISE USING (EX_NO)
+ 		JOIN BODYPART USING (BPART_NO)
+ 		WHERE USER_NO = 1
+ 			AND TO_CHAR(EXR_DATE,'yyyy-mm-dd') = #{clickedDate}
+ 		ORDER BY EX_NAME, EXR_SET
+ 	</select>
 
 </mapper>

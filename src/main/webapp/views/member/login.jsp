@@ -155,7 +155,7 @@
             </div>
             <div class="etc-line">
                 <div class="etc-space">
-                    <a href=""><button type="button" class="etc-button">ID/PW 찾기</button></a>
+                    <a href="findForm.me"><button type="button" class="etc-button">이메일/PW 찾기</button></a>
                 </div>
                 <div class="etc-space">
                     <a href="${contextPath}/enrollForm.me"><button type="button" class="etc-button">회원가입</button></a>

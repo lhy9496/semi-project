@@ -18,6 +18,7 @@ public class ExerciseServiceImpl implements ExerciseService{
 	public ArrayList<Exercise> selectExerciseList() {
 		SqlSession sqlSession = Template.getSqlSession();
 		ArrayList<Exercise> exList = exerciseDao.selectExerciseList(sqlSession);
+		sqlSession.close();
 		return exList;
 	}
 	
@@ -31,6 +32,7 @@ public class ExerciseServiceImpl implements ExerciseService{
 		} else {
 			sqlSession.rollback();
 		}
+		sqlSession.close();
 		return result;
 	}
 
@@ -38,6 +40,16 @@ public class ExerciseServiceImpl implements ExerciseService{
 	public ArrayList<ExerciseRecord> selectExerciseRecordList() {
 		SqlSession sqlSession = Template.getSqlSession();
 		ArrayList<ExerciseRecord> list = exerciseDao.selectExerciseRecordList(sqlSession);
+		return list;
+	}
+
+	@Override
+	public ArrayList<ExerciseRecord> selectClickedDateWorkoutList(String clickedDate) {
+		SqlSession sqlSession = Template.getSqlSession();
+		ArrayList<ExerciseRecord> list = exerciseDao.selectClickedDateWorkoutList(sqlSession, clickedDate);
+		
+		
+		sqlSession.close();
 		return list;
 	}	
 }

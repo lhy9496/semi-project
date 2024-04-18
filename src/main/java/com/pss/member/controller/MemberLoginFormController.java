@@ -28,8 +28,8 @@ public class MemberLoginFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if((String)session.getAttribute("redirect") == null) {
-			session.setAttribute("redirect", request.getParameter("redirectUrl"));
+		if((String)session.getAttribute("redirectUrl") == null) {
+			session.setAttribute("redirectUrl", request.getParameter("redirectUrl"));
 		}
 		request.getRequestDispatcher("views/member/login.jsp").forward(request, response);
 	}

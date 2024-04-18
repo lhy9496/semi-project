@@ -36,18 +36,22 @@ public class MemberLoginController extends HttpServlet {
 		
 		m.setUserEmail(request.getParameter("userEmail"));
 		m.setUserPwd(request.getParameter("userPwd"));
-		
+		String redirect = request.getParameter("redirectUrl");
 		Member loginUser = new MemberServiceImpl().loginMember(m);
 		
 		if (loginUser == null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "이메일이나 비밀번호가 올바르지 않습니다.");
-			response.sendRedirect(request.getContextPath() + "/loginForm.me");
+			response.sendRedirect(request.getContextPath() + "/loginForm.me?redirect=" + request.getParameter("redirectUrl"));
 		} else {
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", loginUser.getUserNickname() + "님 환영합니다.");
 			request.getSession().setAttribute("loginUser", loginUser);
+			if (redirect == "") {
 			response.sendRedirect(request.getContextPath());
+			} else {
+				response.sendRedirect(redirect);
+			}
 		}
 	}
 

@@ -95,11 +95,11 @@
  				MODIFY_DATE,
  				STATUS
  		FROM MEMBER
-		WHERE USER_NICKNAME = #{nickname}
+		WHERE NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
  	
- 	<select id="SearchUserPhysicalInfo" parameterType="String" resultMap="UserPhysicalInfoResultSet">
+ 	<select id="SearchUserPhysicalInfo" parameterType="String" resultMap="UserPhysicalInfo">
  		SELECT PINFO_NO,
  				USER_NO,
  				MEM_HEIGHT,
@@ -108,11 +108,11 @@
  				MEM_BFP
  		FROM MEMBER
  		JOIN MEM_PHYSICAL_INFO USING (USER_NO)
-		WHERE USER_NICKNAME = #{nickname}
+		WHERE NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
  	
- 	<select id="SearchUserPicture" parameterType="String" resultMap="UserPictureResultSet">
+ 	<select id="SearchUserPicture" parameterType="String" resultMap="UserPicture">
  		SELECT PIC_NO,
  				USER_NO,
  				ORIGIN_NAME,
@@ -120,7 +120,7 @@
  				FILE_PATH,
  		FROM MEMBER
  		JOIN EX_RECORD USING (USER_NO)
-		WHERE USER_NICKNAME = #{nickname}
+		WHERE NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
 </mapper>

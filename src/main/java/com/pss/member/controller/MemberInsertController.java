@@ -49,7 +49,13 @@ public class MemberInsertController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "성공적으로 회원가입이 되었습니다.");
 			
+			String redirectUrl = (String)session.getAttribute("redirectUrl");
+			if (redirectUrl == null) {
 			response.sendRedirect(request.getContextPath());
+			} else {
+				response.sendRedirect(redirectUrl);
+			}
+			
 		} else {
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "회원가입에 실패하였습니다.");

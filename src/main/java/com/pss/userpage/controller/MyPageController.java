@@ -1,23 +1,27 @@
-package com.pss.board.controller;
+package com.pss.userpage.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pss.userpage.service.SearchUserServiceImpl;
+
 /**
- * Servlet implementation class BoardSampleServlet
+ * Servlet implementation class MyPageController
  */
-@WebServlet("/BoardSampleServlet")
-public class BoardSampleServlet extends HttpServlet {
+@WebServlet("/menuToUserPage.me")
+public class MyPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardSampleServlet() {
+    public MyPageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +30,22 @@ public class BoardSampleServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("UTF-8");
+		
+		String nickname = (String)(request.getSession().getAttribute("userNickname"));
+		
+		HashMap<String, Object> searchUserTotalInfoMap = new SearchUserServiceImpl().getSearchUserTotalInfo(nickname);
+		
+		if (searchUserTotalInfoMap.get("SearchUserInfo") == null) {
+			request.setAttribute("alertMsg", "존재하지 않는 유저입니다.");
+			response.sendRedirect(request.getContextPath());
+		} else {
+
+			request.setAttribute("SearchUserTotalInfoMap", searchUserTotalInfoMap);
+
+			request.getRequestDispatcher("/views/userpage/userpage.jsp").forward(request, response);
+			
+		}
 	}
 
 	/**

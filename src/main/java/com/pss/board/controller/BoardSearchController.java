@@ -2,6 +2,7 @@ package com.pss.board.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,22 +11,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pss.board.model.vo.Board;
+import com.pss.board.service.BoardService;
 import com.pss.board.service.BoardServiceImpl;
 import com.pss.common.mybatis_template.Pagination;
 import com.pss.common.vo.PageInfo;
 
 
 /**
- * Servlet implementation class BoardListController
+ * Servlet implementation class BoardSearchController
  */
-@WebServlet("/list.bo")
-public class BoardListController extends HttpServlet {
+@WebServlet("/search.bo")
+public class BoardSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListController() {
+    public BoardSearchController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,19 +36,26 @@ public class BoardListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//----------- 페이징처리---------------------------
-		int listCount = new BoardServiceImpl().selectListCount(); //현재 총 게시글 수 
-		int currentPage = Integer.parseInt(request.getParameter("cpage"));
+		String condition = request.getParameter("condition"); // writer || title || content
+		String keyword = request.getParameter("keyword"); //사용자가 입력한 키워드값
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		HashMap<String, String> map = new HashMap<>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
 		
-		ArrayList<Board> list = new BoardServiceImpl().selectList(pi);
+		BoardService bService = new BoardServiceImpl();
+		int searchCount = bService.selectSearchCount(map);
+		int currentPage = Integer.parseInt(request.getParameter("cpage")); //페이지정보
+		
+		PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, 10 , 5);
+		ArrayList<Board> list = bService.selectSearchList(map, pi);
 		
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
+		request.setAttribute("condition", condition);
+		request.setAttribute("keyword", keyword);
 		
 		request.getRequestDispatcher("WEB-INF/views/board/boardListView.jsp").forward(request, response);
-		
 	}
 
 	/**
@@ -56,4 +65,5 @@ public class BoardListController extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

@@ -127,7 +127,7 @@
 		<% session.removeAttribute("alertMsg"); %>
 	<% } %>
     <form action="login.me" id="login-form" method="POST">
-        <input type="hidden" name="redirectUrl" value="">
+        <input type="hidden" name="redirectLastPage" value="">
         <div class="login-frame">
             <div class="logo-space">
                 <a href="${contextPath}"><img src="/pss/resources/logo/psslogologin.png" alt="로고 이미지"></a>
@@ -153,21 +153,18 @@
                     <button type="submit" class="subit-button"><b>로그인</b></button>
                 </div>
             </div>
-            <div class="etc-line">
-                <div class="etc-space">
-                    <a href="findForm.me"><button type="button" class="etc-button">이메일/PW 찾기</button></a>
-                </div>
-                <div class="etc-space">
-                    <a href="${contextPath}/enrollForm.me"><button type="button" class="etc-button">회원가입</button></a>
-                </div>
-            </div>
         </div>
     </form> 
-    <script>
-        window.onload = function(){
-            console.log("실행 : "  + new URL(location.href).searchParams.get("redirectUrl"))
-            document.querySelector("#login-form input[name=redirectUrl]").value = new URL(location.href).searchParams.get("redirectUrl");
-        }
-    </script>
+    <div>
+        <div class="etc-line">
+            <div class="etc-space">
+                <a href="findForm.me"><button type="button" class="etc-button">이메일/PW 찾기</button></a>
+            </div>
+            <div class="etc-space">
+                <a href="enrollForm.me"><button type="button" class="etc-button">회원가입</button></a>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>

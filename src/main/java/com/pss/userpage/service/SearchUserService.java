@@ -4,6 +4,6 @@ import java.util.HashMap;
 
 public interface SearchUserService {
 	
-	public abstract HashMap getSearchUserTotalInfo(String nickname);
+	public abstract HashMap<String, Object> getSearchUserTotalInfo(String nickname);
 
 }

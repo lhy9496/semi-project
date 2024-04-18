@@ -12,12 +12,8 @@
 		<result column="FOOD_COUNT" property="foodCount"/>
 		<result column="WHEN_EAT_DATE" property="whenEatDate"/>
 	</resultMap>
-  	
-<<<<<<< HEAD
+	
   	<select id="SearchUserDietRecord" parameterType="String" resultMap="UserDietRecordResultSet">
-=======
-  	<select id="SearchUserDietRecord" parameterType="UserDietRecord" >
->>>>>>> parent of 3fed1da (Merge branch 'main' of https://github.com/lhy9496/semi-project into odg)
  		SELECT MR_NO,
  				USER_NO,
  				FOOD_NO,

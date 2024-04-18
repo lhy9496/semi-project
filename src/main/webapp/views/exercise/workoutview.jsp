@@ -19,33 +19,87 @@
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     <script>
+    
         document.addEventListener('DOMContentLoaded', function () {
             let calendarEl = document.getElementById('calendar');
             let calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 height: "100%",
                 selectable: true,
-                dateClick: function(info) {
+                dateClick: function (info) {
                     let clickedDate = info.dateStr;
-                    console.log("clickedDate = " + clickedDate);
                     $.ajax({
                         url: 'cinfo.wo',
                         data: {
-                        	clickedDate: clickedDate
+                            clickedDate: clickedDate
                         },
-                        success: function(res) {
-                        	console.log(res);
+                        success: function (res) {
+                            let exerciseRecordList = exerciseRecordFormat(res);
+
+                            $("#workout-container").empty();
+                            for (let key in exerciseRecordList){
+                                
+                                let str = `<div class="workout-info">`;
+
+                                let recodeList = exerciseRecordList[key]
+                                recodeList.forEach(function (exercise, index) {
+                                    if (index === 0) {
+                                        str += `      
+                                            <div class="workout">
+                                                <div class="workout-name">`+exercise.exName+`</div>
+                                                <div class="workout-bodypart">`+exercise.exBodyPartName+`</div>
+                                            </div>
+                                            <table class="workout-record">
+                                                <thead>
+                                                    <tr><td>세트</td><td>중량</td><td>횟수</td></tr>
+                                                </thead>`
+                                    }
+
+                                    str += `<tbody>
+                                                <tr>
+                                                    <td>`+exercise.exRecordSet+`</td>
+                                                    <td>`+exercise.exRecordWeight+`</td>
+                                                    <td>`+exercise.exRecordCount+`</td>
+                                                </tr>
+                                            </tbody>`
+
+                                    if (index === recodeList.length - 1) {
+                                        str += `</table>`;
+                                    }
+                                });
+
+                                str += `</div>`;
+                                $("#workout-container").append(str);
+                            }
+                          
                         },
-                        
-                        error: function() {
-                        	
+                        error: function () {
+                            console.log("조회실패");
                         }
                     })
+
                     
                 }
             });
             calendar.render();
+
         });
+
+
+        function exerciseRecordFormat(list) {
+            let exerciseRecordList = {};
+            for (let recode of list) {
+                if (exerciseRecordList[recode.exName]) {
+                    exerciseRecordList[recode.exName].push(recode);
+                } else {
+                    exerciseRecordList[recode.exName] = [recode];
+                }
+            }
+
+            console.log(exerciseRecordList)
+
+            return exerciseRecordList;
+        }
     </script>
 
     <link rel="stylesheet" href="resources/css/calendar.css">
@@ -89,24 +143,24 @@
                                 </thead>
                                 <tbody>
                     </c:if>
-                                <tr>
-                                    <td>${exercise.exRecordSet}</td>
-                                    <td>${exercise.exRecordWeight}</td>
-                                    <td>${exercise.exRecordCount}</td>
-                                </tr>
+                                    <tr>
+                                        <td>${exercise.exRecordSet}</td>
+                                        <td>${exercise.exRecordWeight}</td>
+                                        <td>${exercise.exRecordCount}</td>
+                                    </tr>
                     <c:if test="${!exercise.exName.equals(list[loop.index + 1].exName)}">
                         <!-- 다음 운동명과 다른 경우에만 tbody를 닫음 -->
-                                </tbody>
-                                </table>
-                        </div>
-                    </c:if>
-                </c:forEach>
+                        		</tbody>
+                        	</table>
+            		    </div>
+            		</c:if>
+            </c:forEach>
             </div>
-    </div>
+        </div>
 
-    <div class="right-container">
-        <div id='calendar'></div>
-    </div>
+        <div class="right-container">
+            <div id='calendar'></div>
+        </div>
     </div>
     <script>
         $(function () {

@@ -11,7 +11,7 @@
                     #db{
                         max-width: 900px;
                         margin: 0px auto;
-                        padding-top: 50px;
+                        padding-top: 300px;
                     }
                     #db #area1 {
 
@@ -20,7 +20,7 @@
                         text-align: left;
                         font-size: small;
                         border-radius: 5px 5px 0px 0px;
-                        margin-top: 30px;
+                        margin-top: -1px;
                         padding: 30px;
                     }
 
@@ -37,7 +37,7 @@
                     #db .date1 {
                         height: auto;
                         width: 100%;
-                        background: white;
+                        background: rgb(250, 243, 243);
                         border-radius: 0px 0px 5px 5px;
                         box-sizing: border-box;
 
@@ -102,7 +102,7 @@
                                             <th>&lt;&gt;</th>
                                             <th></th>
                                             <th></th>
-                                            <th width="650">&lt;&gt;</th>
+                                            <th width="550px">&lt;&gt;</th>
                                         </tr>
                                         <tr>
                                             <th colspan="7" style="text-align: right;">
@@ -149,7 +149,7 @@
                                             <textarea id="con" name="con" rows="10" placeholder="내용을 입력하세요."
                                                 required></textarea>
 
-                                            <div style="width: 10px; background: white;"></div>
+                                            <div style="width: 10px; background: rgb(250, 243, 243);"></div>
 
                                             <div class="bt" style="margin: auto; ">
                                                 <button onclick=""
@@ -177,6 +177,7 @@
                         </div>
                         
                     </form>
+                    
                     <!--  <script>
                         window.onload = function () {
                             selectReplyList();
@@ -232,6 +233,7 @@
                         }
                     </script>-->
                 </div>
+                
             </body>
 
             </html>

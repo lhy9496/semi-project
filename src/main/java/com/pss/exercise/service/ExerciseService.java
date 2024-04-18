@@ -12,4 +12,6 @@ public interface ExerciseService {
 	int insertExerciseRecord(HashMap<String, Integer> map);
 	
 	 ArrayList<ExerciseRecord> selectExerciseRecordList();
+
+	ArrayList<ExerciseRecord> selectClickedDateWorkoutList(String clickedDate);
 }

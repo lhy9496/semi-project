@@ -31,7 +31,7 @@ public class SearchUserDao {
 	}
 
 	public List<ExerciseRecord> getSearchUserExerciseRecord(SqlSession sqlSession, String nickname) {
-		return sqlSession.selectList("exercise-mapper.SearchUserExerciseRecord", nickname);
+		return sqlSession.selectList("exercise-mapper.selectExerciseRecordList", nickname);
 	}
 	
 	

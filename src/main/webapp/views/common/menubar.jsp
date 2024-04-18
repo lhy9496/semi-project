@@ -4,6 +4,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
 <%
     String alertMsg = (String)session.getAttribute("alertMsg");
+    String redirectUrl = (String)session.getAttribute("redirectUrl");
 %>
    
 <!DOCTYPE html>
@@ -32,16 +33,12 @@
         top: 0px;
         z-index: 10;
     }
-<<<<<<< HEAD
     #menubar-header #menubar-space{
         width: 100%;
         height: max-content;
         margin-top: 250px;
     }
     #menubar-header .loginout-space{
-=======
-    .loginout-space{
->>>>>>> parent of 3fed1da (Merge branch 'main' of https://github.com/lhy9496/semi-project into odg)
         margin-top: 20px;
         margin-left: 30px;
         margin-right: 30px;
@@ -151,6 +148,9 @@
 		</script>
 		<% session.removeAttribute("alertMsg"); %>
 	<% } %>
+    <% if(redirectUrl != null){ %>
+        <% session.removeAttribute("redirectUrl"); %>
+    <% }%>
         <div id="menubar-header">
             <div class="loginout-space">
             <c:choose>

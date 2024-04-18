@@ -8,9 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pss.board.model.vo.Attachment;
 import com.pss.board.model.vo.Board;
-import com.pss.board.service.BoardService;
+import com.pss.board.service.BoardServiceImpl;
 
 /**
  * Servlet implementation class BoardDetailController
@@ -33,19 +32,15 @@ public class BoardDetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int boardNo = Integer.parseInt(request.getParameter("bno"));
 	
-		BoardService bService = new BoardService();
-		//조회수 1 증가시키고 디테일페이지에 보여줄 board객체
-		Board b = bService.increaseCount(boardNo);
+		Board b = new BoardServiceImpl().increaseCount(boardNo);
 		
 		if (b != null) {
-			Attachment at = bService.selectAttachment(boardNo);
+			request.setAttribute("b", b);
 			
-			request.setAttribute("board", b);
-			request.setAttribute("attachment", at);
-			request.getRequestDispatcher("views/board/boardDetailView.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/views/board/boardDetailView.jsp").forward(request, response);
 		} else {
-			request.setAttribute("errorMsg", "게시글 조회 실패");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			request.setAttribute("errorMsg", "상세조회 실패");
+			request.getRequestDispatcher("WEB-INF/views/common/errorPage.jsp").forward(request, response);
 		}
 	
 	}

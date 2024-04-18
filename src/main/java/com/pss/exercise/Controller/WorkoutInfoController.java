@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pss.exercise.model.vo.ExerciseRecord;
 import com.pss.exercise.service.ExerciseServiceImpl;
+import com.pss.member.model.vo.Member;
 
 /**
  * Servlet implementation class WorkoutInfoController
@@ -33,6 +34,7 @@ public class WorkoutInfoController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<ExerciseRecord> list = new ExerciseServiceImpl().selectExerciseRecordList();
 		System.out.println(list);
+		
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/exercise/workoutview.jsp").forward(request, response);
 	}

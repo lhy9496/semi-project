@@ -1,7 +1,6 @@
 package com.pss.userpage.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -39,16 +38,16 @@ public class SearchUserController extends HttpServlet {
 		
 		String nickname = request.getParameter("nickname");
 		
-		HashMap SearchUserTotalInfoMap = new SearchUserServiceImpl().getSearchUserTotalInfo(nickname);
+		HashMap<String, Object> searchUserTotalInfoMap = new SearchUserServiceImpl().getSearchUserTotalInfo(nickname);
 		
-		if (SearchUserTotalInfoMap.get("SearchUserInfo") == null) {
+
+		if (searchUserTotalInfoMap.get("SearchUserInfo") == null) {
 			request.setAttribute("alertMsg", "존재하지 않는 유저입니다.");
 			response.sendRedirect(request.getContextPath());
-			
-			request.getRequestDispatcher(request.getContextPath()).forward(request, response);
-			
 		} else {
-			request.setAttribute("SearchUserTotalInfo", SearchUserTotalInfoMap);
+
+			request.setAttribute("SearchUserTotalInfoMap", searchUserTotalInfoMap);
+
 			
 			request.getRequestDispatcher("/views/userpage/userpage.jsp").forward(request, response);
 			

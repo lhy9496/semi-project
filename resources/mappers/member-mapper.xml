@@ -82,7 +82,7 @@
 		WHERE USER_EMAIL = #{checkId}
 	</select>
 	
-	<select id="SearchUserInfo" parameterType="Member" >
+	<select id="SearchUserInfo" parameterType="String" resultMap="memberResultSet">
  		SELECT USER_NO,
  				USER_NAME,
  				USER_NICKNAME,
@@ -99,7 +99,7 @@
 		AND STATUS = 'Y'
  	</select>
  	
- 	<select id="SearchUserPhysicalInfo" parameterType="UserPhysicalInfo" >
+ 	<select id="SearchUserPhysicalInfo" parameterType="String" resultMap="UserPhysicalInfo">
  		SELECT PINFO_NO,
  				USER_NO,
  				MEM_HEIGHT,
@@ -112,7 +112,7 @@
 		AND STATUS = 'Y'
  	</select>
  	
- 	<select id="SearchUserPicture" parameterType="UserPicture" >
+ 	<select id="SearchUserPicture" parameterType="String" resultMap="UserPicture">
  		SELECT PIC_NO,
  				USER_NO,
  				ORIGIN_NAME,

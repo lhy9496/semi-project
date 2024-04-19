@@ -10,13 +10,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
-	HashMap<String, Object> searchUserTotalInfoMap = (HashMap<String, Object>)request.getAttribute("SearchUserTotalInfoMap");
+	HashMap<String, Object> searchUserTotalInfoMap = (HashMap<String, Object>)request.getAttribute("searchUserTotalInfoMap");
 
-	Member member = (Member)(searchUserTotalInfoMap.get("SearchUserInfo"));
-	UserPhysicalInfo userPhysicalInfo = (UserPhysicalInfo)(searchUserTotalInfoMap.get("SearchUserPhysicalInfo"));
-	UserPicture userPicture = (UserPicture)(searchUserTotalInfoMap.get("SearchUserPicture"));
-	ArrayList<UserDietRecord> userdietRecord = (ArrayList<UserDietRecord>)(searchUserTotalInfoMap.get("SearchUserdietRecord"));
-	ArrayList<ExerciseRecord> exerciseRecord = (ArrayList<ExerciseRecord>)(searchUserTotalInfoMap.get("SearchUserExerciseRecord"));
+	Member member = (Member)(searchUserTotalInfoMap.get("searchUserInfo"));
+	UserPhysicalInfo userPhysicalInfo = (UserPhysicalInfo)(searchUserTotalInfoMap.get("searchUserPhysicalInfo"));
+	UserPicture userPicture = (UserPicture)(searchUserTotalInfoMap.get("searchUserPicture"));
+	ArrayList<UserDietRecord> userdietRecord = (ArrayList<UserDietRecord>)(searchUserTotalInfoMap.get("searchUserdietRecord"));
+	ArrayList<ExerciseRecord> exerciseRecord = (ArrayList<ExerciseRecord>)(searchUserTotalInfoMap.get("searchUserExerciseRecord"));
 %>
  
 <!DOCTYPE html>

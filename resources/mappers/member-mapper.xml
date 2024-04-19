@@ -81,7 +81,11 @@
 		FROM MEMBER
 		WHERE USER_EMAIL = #{checkId}
 	</select>
-	
+	<select id="nicknameCheck" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE USER_NICKNAME = #{checkNickname}
+	</select>
 	<select id="SearchUserInfo" parameterType="String" resultMap="memberResultSet">
  		SELECT USER_NO,
  				USER_NAME,

@@ -274,7 +274,7 @@
                                 <div class="left-flex-box box" style="width: 100%; height: 100%;">
                                     <div class="box flex-box" style="width: 20%; height: 100%;">
                                         <div style="color: white;">
-                                            <h1>날짜~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</h1>
+                                            <h1>날짜</h1>
                                             총 2000Kcal 섭취
                                         </div>
                                     </div>

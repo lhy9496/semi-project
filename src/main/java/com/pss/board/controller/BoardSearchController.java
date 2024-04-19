@@ -55,7 +55,7 @@ public class BoardSearchController extends HttpServlet {
 		request.setAttribute("condition", condition);
 		request.setAttribute("keyword", keyword);
 		
-		request.getRequestDispatcher("WEB-INF/views/board/boardListView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/board/boardListView.jsp").forward(request, response);
 	}
 
 	/**

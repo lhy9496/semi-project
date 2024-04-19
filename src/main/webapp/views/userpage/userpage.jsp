@@ -265,8 +265,9 @@
                 <div id="fuck"></div>
                 <script>
                     const sibal = document.getElementById("fuck");
-                    sibal.innerHTML = 
-                    `
+                    for (let i = 1; i <= 10; i++) {
+                        sibal.innerHTML += 
+                        `
                     <div class="wrap" style="height: 150px;">
                     <div class="box stat row-flex-box">
                         <div class="box leftro" style="width: 95%; height:100%; background: black;">
@@ -307,6 +308,8 @@
                     </div>
                 </div>
                     `
+                    }
+                    
                 </script>
 
                 <div class="wrap" style="height: 150px;">

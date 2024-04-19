@@ -58,7 +58,18 @@
 		#{age}
 		)
 	</insert>
-	
+	<insert id="">
+		INSERT INTO MEM_PHYSICAL_INFO (
+                        PINFO_NO,
+                        USER_NO,
+                        MEM_HEIGHT,
+                        MEM_WEIGHT,
+                        MEM_SMM,
+                        MEM_BFP)
+            VALUES (
+                
+            );
+	</insert>
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 		SELECT USER_NO,
 				USER_NAME,
@@ -81,7 +92,11 @@
 		FROM MEMBER
 		WHERE USER_EMAIL = #{checkId}
 	</select>
-	
+	<select id="nicknameCheck" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE USER_NICKNAME = #{checkNickname}
+	</select>
 	<select id="SearchUserInfo" parameterType="String" resultMap="memberResultSet">
  		SELECT USER_NO,
  				USER_NAME,

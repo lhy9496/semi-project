@@ -32,7 +32,9 @@ public class WorkoutInfoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<ExerciseRecord> list = new ExerciseServiceImpl().selectExerciseRecordList();
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+		
+		ArrayList<ExerciseRecord> list = new ExerciseServiceImpl().selectExerciseRecordList(userNo);
 		System.out.println(list);
 		
 		request.setAttribute("list", list);

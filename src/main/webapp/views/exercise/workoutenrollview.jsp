@@ -24,6 +24,8 @@
 
     <h2 align="center" style="font-size: 50px; margin: 20px;">운동을 선택해주세요</h2>
 
+
+    <!-- 운동DB에 저장된 운동목록을 보여주는 부분-->
     <div id="workout-list-area">
       <c:choose>
         <c:when test="${not empty exList}">
@@ -37,18 +39,18 @@
             </div>
           </c:forEach>
         </c:when>
+
         <c:otherwise>
           <div>
             등록된 운동이 없습니다.
           </div>
         </c:otherwise>
-
       </c:choose>
 
     </div>
 
     <div id="btn-area">
-      <button id="enroll-info-btn" data-toggle="modal" data-target="#myModal">입력</button>
+      <button id="enroll-info-btn" data-toggle="modal" data-target="#myModal">운동기록하기</button>
     </div>
   </div>
 
@@ -88,9 +90,7 @@
             let exercise = $(this).find('.w_name').text();
             let bodyPart = $(this).find('.w_bodypart').text();
 			      let exerciseNo = $(this).find('.w_name').data('no');
-			
-			      
-			
+            
             let setCount = 1;
             str += `<table class="check_workout_list">
 				                  <thead>
@@ -129,10 +129,10 @@
 
 
         $('#checked_workout').html(str);
-        bindSetButtons();
+        addWorkoutSet();
 
       });
-      function bindSetButtons() {
+      function addWorkoutSet() {
         $(document).off('click', '.add-set-button').on('click', '.add-set-button', function () {
           let prevCount = parseInt($(this).closest('table').find('.exSet').last().text()); // 이전 세트의 수 가져오기
           let currentCount = prevCount + 1; // 현재 세트의 수 계산
@@ -167,7 +167,7 @@
           let exInfos = [];
 
           $(this).find('tbody tr:gt(0)').each(function() {
-            let exSet = $(this).find('.exSet').text(); // exSet 추가
+            let exSet = $(this).find('.exSet').text(); 
             let exWeight = $(this).find('.exWeight').val();
             let exCount = $(this).find('.exCount').val();
         
@@ -180,17 +180,15 @@
           });
 
           workoutRecord.push({
-            // exercise: exercise,
             exerciseNo : exerciseNo,
-            // bodyPart: bodyPart,
             exInfos: exInfos
           });
         });
-        console.log(JSON.stringify(workoutRecord));
-        sendData(workoutRecord);
+
+        sendWorkoutInfo(workoutRecord);
       });
 
-      function sendData(workoutRecord) {
+      function sendWorkoutInfo(workoutRecord) {
         $.ajax({
           url: 'insert.wo',
           type: 'POST',
@@ -208,10 +206,7 @@
         });
       };
     });
-
-
-
-
+    
   </script>
 
 </body>

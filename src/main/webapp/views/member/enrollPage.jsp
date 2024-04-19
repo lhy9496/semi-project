@@ -120,6 +120,9 @@
         border: 0px;
         border-radius: 10px;
     }
+    .checkbox{
+        display: none;
+    }
 </style>
 </head>
 <body>
@@ -146,7 +149,7 @@
                 <div style="margin: auto;">
                     <button type="button" id="checkId" style="display: block;">중복확인</button>
                     <button type="button" id="resetId" style="display: none;">다시입력</button>
-                    <input type="checkbox" name="checkboxId" class="checkbox" style="display: none;">
+                    <input type="checkbox" id="checkboxId" class="checkbox">
                 </div>
             </div>
             <div class="middle-line">
@@ -166,7 +169,7 @@
                     <input type="password" name="userPwdCheck" id="pwdChk" class="input-space" placeholder="비밀번호 확인" onkeyup="pwdCheck(pwdResult)" required>
                 </div>
                 <div style="margin: auto; font-size: 13px;" id="pwdResult"></div>
-                <input type="checkbox" name="checkboxPwd" class="checkbox" style="display: none;">
+                <input type="checkbox" id="checkboxPwd" class="checkbox">
             </div>
 
             
@@ -184,12 +187,12 @@
                     <img src="/pss/resources/logo/person_icon.png" alt="인물 이미지">
                 </div>
                 <div class="input-space">
-                    <input type="text" class="input-space" name="userNickname" placeholder="닉네임" required>
+                    <input type="text" class="input-space" name="userNickname" id="Nickname" placeholder="닉네임" required>
                 </div>
                 <div style="margin: auto;">
                     <button type="button" id="checkNickname" style="display: block;">중복확인</button>
                     <button type="button" id="resetNickname" style="display: none;">다시입력</button>
-                    <input type="checkbox" name="checkboxNickname" class="checkbox" style="display: none;">
+                    <input type="checkbox" id="checkboxNickname" class="checkbox">
                 </div>
             </div>
             <div class="middle-line2">
@@ -197,25 +200,26 @@
                     <img src="/pss/resources/logo/calendar_icon.png" alt="달력 이미지">
                 </div>
                 <div class="input-space">
-                    <input type="text" pattern="\d*" class="input-space" name="age" placeholder="나이(숫자 입력)" maxlength="3">
+                    <input type="number" min="0" max="150" class="input-space" name="age" placeholder="나이(숫자 입력)" required>
                 </div>
             </div>
             <div class="gender-line">
                 <div class="gender-space">
                     <button type="button" class="gender-button" id="MArea" onclick="genderSelect(M), genderColor(MArea, FArea)">
-                        <input type="radio" class="btn" id="M" name="gender" value="M" required>남자
+                        <input type="radio" class="btn" id="M" name="gender" value="M">남자
                     </button>
                 </div>
                 <div class="gender-space">
                     <button type="button" class="gender-button" id="FArea" onclick="genderSelect(F), genderColor(FArea, MArea)">
-                        <input type="radio" class="btn" id="F" name="gender" value="F" required>여자
+                        <input type="radio" class="btn" id="F" name="gender" value="F">여자
                     </button>
                 </div>
+                <input type="checkbox" id="checkboxGender" class="checkbox">
             </div>
 
             <!-- 가입신청 -->
             <div class="submit-space">
-                <button type="submit" class="submit-button" id="enroll-button" disabled><b>가입신청</b></button>
+                <button type="submit" class="submit-button" id="enroll-button" onclick="return allchecked();"><b>가입신청</b></button>
             </div>
         </div>
     </form>
@@ -225,6 +229,8 @@
         // 성별 선택 스크립트
         function genderSelect(gender){
             gender.checked = true;
+            const checkboxGender = document.querySelector("#checkboxGender");
+            checkboxGender.checked = true;
         }
         function genderColor(genArea1, genArea2){
             genArea1.style.background = "rgb(224, 15, 26)";
@@ -360,7 +366,7 @@
                 }
             })
         } else{
-            alert("올바른 형식의 이메일이 아닙니다.")
+            alert("닉네임을 입력해주세요.")
             nicknameInput.focus();
         }
         }
@@ -372,13 +378,32 @@
             checkboxNickname.checked = false;
         }
 
-        const enroll_button = document.querySelector("#enroll-button");
-
-        if(checkboxId.checked && checkboxPwd.checked && checkboxNickname.checked){
-        enroll_button.removeAttribute("disabled");
-        } else{
-        enroll_button.setAttribute("disabled", true);
+        function allchecked(){
+            const gender = document.querySelector("input[name=gender]");
+            if (checkboxId.checked != true){
+                console.log("아이디 중복 미체크");
+                alert("아이디 중복을 확인하지 않으셨습니다.");
+                emailInput.focus()
+                return false;
+            } else if (checkboxPwd.checked != true){
+                console.log("비밀번호 불일치");
+                alert("비밀번호가 일치하지 않습니다.");
+                return false;
+                pwd.focus();
+            } else if (checkboxNickname.checked != true){
+                console.log("닉네임 중복 미체크");
+                alert("닉네임 중복을 확인하지 않으셨습니다.");
+                return false;
+                nicknameInput.focus();
+            } else if (checkboxGender.checked != true){
+                console.log("성별 미선택");
+                alert("성별을 선택해주세요.");
+                return false;
+            } else {
+                return true;
+            }
         }
+        
     </script>
 </body>
 </html>

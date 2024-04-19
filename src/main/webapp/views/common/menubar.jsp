@@ -186,7 +186,7 @@
                     <div id="menubar-nav">
                         <ul class="nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="../board/boardsample.jsp">커뮤니티</a>
+                                <a class="nav-link" href="">커뮤니티</a>
                             </li>
                         </ul>
                     </div>
@@ -195,16 +195,16 @@
                     <div id="menubar-nav">
                         <ul class="nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="/menuToUserPage.me">마이페이지</a>
+                                <a class="nav-link" href="menuToUserPage.me">마이페이지</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../exercise/workoutview.jsp">운동기록</a>
+                                <a class="nav-link" href="wo">운동기록</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../diet/dietsample.jsp">식단기록</a>
+                                <a class="nav-link" href="">식단기록</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../board/boardsample.jsp">커뮤니티</a>
+                                <a class="nav-link" href="">커뮤니티</a>
                             </li>
                             </ul>
                     </div>

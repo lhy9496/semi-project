@@ -15,14 +15,14 @@
 	Member member = (Member)(searchUserTotalInfoMap.get("searchUserInfo"));
 	UserPhysicalInfo userPhysicalInfo = (UserPhysicalInfo)(searchUserTotalInfoMap.get("searchUserPhysicalInfo"));
 	UserPicture userPicture = (UserPicture)(searchUserTotalInfoMap.get("searchUserPicture"));
-	ArrayList<UserDietRecord> userdietRecord = (ArrayList<UserDietRecord>)(searchUserTotalInfoMap.get("searchUserdietRecord"));
-	ArrayList<ExerciseRecord> exerciseRecord = (ArrayList<ExerciseRecord>)(searchUserTotalInfoMap.get("searchUserExerciseRecord"));
+	ArrayList<UserDietRecord> userdietRecordList = (ArrayList<UserDietRecord>)(searchUserTotalInfoMap.get("searchUserdietRecord"));
+	ArrayList<ExerciseRecord> exerciseRecordList = (ArrayList<ExerciseRecord>)(searchUserTotalInfoMap.get("searchUserExerciseRecord"));
 %>
  
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"> 
 <title>Physical S</title>
 <style>
     *{
@@ -263,10 +263,11 @@
                 </div>
                 
                 <div id="totalUserInfoBox"></div>
-                <script>
-                    const sibal = document.getElementById("totalUserInfoBox");
+                <script> 
+
+                    const htmls = document.getElementById("totalUserInfoBox");
                     for (let i = 1; i <= 10; i++) {
-                        sibal.innerHTML += 
+                        htmls.innerHTML += 
                         `
                     <div class="wrap" style="height: 150px;">
                         <div class="box stat row-flex-box">
@@ -274,7 +275,7 @@
                                 <div class="left-flex-box box" style="width: 100%; height: 100%;">
                                     <div class="box flex-box" style="width: 20%; height: 100%;">
                                         <div style="color: white;">
-                                            <h1>날짜~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</h1>
+                                            <h1>날짜</h1>
                                             총 2000Kcal 섭취
                                         </div>
                                     </div>

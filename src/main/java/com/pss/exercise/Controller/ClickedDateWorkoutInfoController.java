@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
+import com.google.gson.Gson; 
 import com.pss.exercise.model.vo.ExerciseRecord;
 import com.pss.exercise.service.ExerciseServiceImpl;
 import com.pss.member.model.vo.Member;

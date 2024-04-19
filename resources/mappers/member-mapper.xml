@@ -7,7 +7,7 @@
 	<resultMap type="Member" id="memberResultSet">
 		<result column="USER_NO" property="userNo"/>
 		<result column="USER_NAME" property="userName"/>
-		<result column="USER_NICKNAME" property="userNickname"/>
+		<result column="USER_NICKNAME" property="userNickname"/>	
 		<result column="USER_EMAIL" property="userEmail"/>
 		<result column="USER_PWD" property="userPwd"/>
 		<result column="GENDER" property="gender"/>
@@ -58,7 +58,15 @@
 		#{age}
 		)
 	</insert>
-	
+	<insert id="insertMemberInfo" parameterType="UserPhysicalInfo">
+		INSERT INTO MEM_PHYSICAL_INFO (
+                        PINFO_NO,
+                        USER_NO
+        )VALUES (
+                SEQ_UPINO.NEXTVAL,
+                SEQ_UNO.CURRVAL
+        )
+	</insert>
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 		SELECT USER_NO,
 				USER_NAME,
@@ -81,7 +89,11 @@
 		FROM MEMBER
 		WHERE USER_EMAIL = #{checkId}
 	</select>
-	
+	<select id="nicknameCheck" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE USER_NICKNAME = #{checkNickname}
+	</select>
 	<select id="SearchUserInfo" parameterType="String" resultMap="memberResultSet">
  		SELECT USER_NO,
  				USER_NAME,
@@ -95,7 +107,7 @@
  				MODIFY_DATE,
  				STATUS
  		FROM MEMBER
-		WHERE NICKNAME = #{nickname}
+		WHERE USER_NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
  	
@@ -108,7 +120,7 @@
  				MEM_BFP
  		FROM MEMBER
  		JOIN MEM_PHYSICAL_INFO USING (USER_NO)
-		WHERE NICKNAME = #{nickname}
+		WHERE USER_NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
  	
@@ -117,10 +129,10 @@
  				USER_NO,
  				ORIGIN_NAME,
  				CHANGE_NAME,
- 				FILE_PATH,
+ 				FILE_PATH
  		FROM MEMBER
- 		JOIN EX_RECORD USING (USER_NO)
-		WHERE NICKNAME = #{nickname}
+ 		JOIN USER_PIC USING (USER_NO)
+		WHERE USER_NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
  	

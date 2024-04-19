@@ -1,7 +1,5 @@
 package com.pss.userpage.model.dao;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,25 +13,23 @@ import com.pss.member.model.vo.UserPicture;
 public class SearchUserDao {
 
 	public Member getSearchUserInfo(SqlSession sqlSession, String nickname) {
-		return sqlSession.selectOne("member-mapper.SearchUserInfo", nickname);
+		return sqlSession.selectOne("memberMapper.SearchUserInfo", nickname);
 	}
 
 	public UserPhysicalInfo getSearchUserPhysicalInfo(SqlSession sqlSession, String nickname) {
-		return sqlSession.selectOne("member-mapper.SearchUserPhysicalInfo", nickname);
+		return sqlSession.selectOne("memberMapper.SearchUserPhysicalInfo", nickname);
 	}
 
 	public UserPicture getSearchUserPicture(SqlSession sqlSession, String nickname) {
-		return sqlSession.selectOne("member-mapper.SearchUserPicture", nickname);
+		return sqlSession.selectOne("memberMapper.SearchUserPicture", nickname);
 	}
 
 	public List<UserDietRecord> getSearchUserdietRecord(SqlSession sqlSession, String nickname) {
-		return sqlSession.selectList("diet-mapper.SearchUserDietRecord", nickname);
+		return sqlSession.selectList("dietMapper.SearchUserDietRecord", nickname);
 	}
 
 	public List<ExerciseRecord> getSearchUserExerciseRecord(SqlSession sqlSession, String nickname) {
-		return sqlSession.selectList("exercise-mapper.selectExerciseRecordList", nickname);
+		return sqlSession.selectList("exerciseMapper.SearchUserExerciseRecord", nickname);
 	}
-	
-	
 
 }

@@ -48,5 +48,6 @@
 		<mapper resource="/mappers/member-mapper.xml" />
 		<!-- <mapper resource="/mappers/userpage-mapper.xml" />-->
 		<mapper resource="/mappers/exercise-mapper.xml" />
+		<mapper resource="/mappers/diet-mapper.xml" />
 	</mappers>
 </configuration>  

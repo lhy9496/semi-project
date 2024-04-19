@@ -37,8 +37,6 @@ public class ClickedDateWorkoutInfoController extends HttpServlet {
 		String clickedDate = request.getParameter("clickedDate");
 		// 이 날짜로 해당 날짜의 운동기록 불러오기
 		ArrayList<ExerciseRecord> list = new ExerciseServiceImpl().selectClickedDateWorkoutList(clickedDate);
-		System.out.println(clickedDate);
-		System.out.println(list);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(list,response.getWriter());

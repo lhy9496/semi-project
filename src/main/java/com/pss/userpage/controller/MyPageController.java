@@ -1,7 +1,7 @@
-package com.pss.exercise.Controller;
+package com.pss.userpage.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pss.exercise.model.vo.ExerciseRecord;
-import com.pss.exercise.service.ExerciseServiceImpl;
-import com.pss.member.model.vo.Member;
+import com.pss.userpage.service.SearchUserServiceImpl;
 
 /**
- * Servlet implementation class WorkoutInfoController
+ * Servlet implementation class MyPageController
  */
-@WebServlet("/info.wo")
-public class WorkoutInfoController extends HttpServlet {
+@WebServlet("/menuToUserPage.me")
+public class MyPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WorkoutInfoController() {
+    public MyPageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +30,22 @@ public class WorkoutInfoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<ExerciseRecord> list = new ExerciseServiceImpl().selectExerciseRecordList();
-		System.out.println(list);
+		request.setCharacterEncoding("UTF-8");
 		
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/exercise/workoutview.jsp").forward(request, response);
+		String nickname = (String)(request.getSession().getAttribute("userNickname"));
+		
+		HashMap<String, Object> searchUserTotalInfoMap = new SearchUserServiceImpl().getSearchUserTotalInfo(nickname);
+		
+		if (searchUserTotalInfoMap.get("SearchUserInfo") == null) {
+			request.setAttribute("alertMsg", "페이지를 가져오는데 실패하였습니다.");
+			response.sendRedirect(request.getContextPath());
+		} else {
+
+			request.setAttribute("SearchUserTotalInfoMap", searchUserTotalInfoMap);
+
+			request.getRequestDispatcher("/views/userpage/userpage.jsp").forward(request, response);
+			
+		}
 	}
 
 	/**

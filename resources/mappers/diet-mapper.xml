@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="DietMapper">
+  <mapper namespace="dietMapper">
   
   	<resultMap id="UserDietRecordResultSet" type="UserDietRecord">
 		<result column="MR_NO" property="mrNo"/>
@@ -13,7 +13,7 @@
 		<result column="WHEN_EAT_DATE" property="whenEatDate"/>
 	</resultMap>
 	
-  	<select id="SearchUserDietRecord" parameterType="String" resultMap="UserDietRecordResultSet">
+  	<select id="SearchUserDietRecord" parameterType="string" resultMap="UserDietRecordResultSet">
  		SELECT MR_NO,
  				USER_NO,
  				FOOD_NO,

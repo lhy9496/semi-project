@@ -262,6 +262,53 @@
                     <div class="box stat">그래프</div>
                 </div>
                 
+                <div id="fuck"></div>
+                <script>
+                    const sibal = document.getElementById("fuck");
+                    sibal.innerHTML = 
+                    `
+                    <div class="wrap" style="height: 150px;">
+                    <div class="box stat row-flex-box">
+                        <div class="box leftro" style="width: 95%; height:100%; background: black;">
+                            <div class="left-flex-box box" style="width: 100%; height: 100%;">
+                                <div class="box flex-box" style="width: 20%; height: 100%;">
+                                    <div style="color: white;">
+                                        <h1>날짜~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</h1>
+                                        총 2000Kcal 섭취
+                                    </div>
+                                </div>
+                                <div class="box downbox" style="width: 15%; height: 100%;">
+                                    <div style="color: white; width: 80%; height: 80%;">
+                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+                                    </div>
+                                    <div style="color: white; height: 20%;">벤치프레스</div>
+                                </div>
+                                <div class="box downbox" style="width: 15%; height: 100%;">
+                                    <div style="color: white; width: 80%; height: 80%;">
+                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+                                    </div>
+                                    <div style="color: white; height: 20%;">벤치프레스</div>
+                                </div>
+                                <div class="box downbox" style="width: 15%; height: 100%;">
+                                    <div style="color: white; width: 80%; height: 80%;">
+                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+                                    </div>
+                                    <div style="color: white; height: 20%;">벤치프레스</div>
+                                </div>
+                                <div class="box downbox" style="width: 15%; height: 100%;">
+                                    <div style="color: white; width: 80%; height: 80%;">
+                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+                                    </div>
+                                    <div style="color: white; height: 20%;">벤치프레스</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;">버튼</div>
+                    </div>
+                </div>
+                    `
+                </script>
+
                 <div class="wrap" style="height: 150px;">
                     <div class="box stat row-flex-box">
                         <div class="box leftro" style="width: 95%; height:100%; background: black;">

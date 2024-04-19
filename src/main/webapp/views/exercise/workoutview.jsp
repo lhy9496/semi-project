@@ -134,6 +134,14 @@
             </div>
 
             <div id="workout-container">
+                <c:if test="${empty list}">
+                    <div class="workout-info">
+                        <div>
+                            운동기록이 없습니다.
+                        </div>
+                    </div>
+                </c:if>
+                
                 <c:forEach var="exercise" items="${list}" varStatus="loop">
                     <c:if test="${!exercise.exName.equals(list[loop.index - 1].exName)}">
                         <!-- 이전 운동명과 다른 경우에만 출력 -->

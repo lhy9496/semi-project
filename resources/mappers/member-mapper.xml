@@ -58,7 +58,18 @@
 		#{age}
 		)
 	</insert>
-	
+	<insert id="">
+		INSERT INTO MEM_PHYSICAL_INFO (
+                        PINFO_NO,
+                        USER_NO,
+                        MEM_HEIGHT,
+                        MEM_WEIGHT,
+                        MEM_SMM,
+                        MEM_BFP)
+            VALUES (
+                
+            );
+	</insert>
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 		SELECT USER_NO,
 				USER_NAME,

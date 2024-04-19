@@ -12,4 +12,6 @@ public interface MemberService {
 	public Member findId(Member m);
 	
 	public Member findPwd(Member m);
+	
+	public int nicknameCheck(String checkNickname);
 }

@@ -112,7 +112,7 @@
         color: white;
         font-size: 36px;
     }
-    #checkId, #resetId{
+    #checkId, #resetId, #checkNickname, #resetNickname{
         width: 160px;
         height: 33px;
         color: white;
@@ -146,6 +146,7 @@
                 <div style="margin: auto;">
                     <button type="button" id="checkId" style="display: block;">중복확인</button>
                     <button type="button" id="resetId" style="display: none;">다시입력</button>
+                    <input type="checkbox" name="checkboxId" class="checkbox" style="display: none;">
                 </div>
             </div>
             <div class="middle-line">
@@ -165,6 +166,7 @@
                     <input type="password" name="userPwdCheck" id="pwdChk" class="input-space" placeholder="비밀번호 확인" onkeyup="pwdCheck(pwdResult)" required>
                 </div>
                 <div style="margin: auto; font-size: 13px;" id="pwdResult"></div>
+                <input type="checkbox" name="checkboxPwd" class="checkbox" style="display: none;">
             </div>
 
             
@@ -183,6 +185,11 @@
                 </div>
                 <div class="input-space">
                     <input type="text" class="input-space" name="userNickname" placeholder="닉네임" required>
+                </div>
+                <div style="margin: auto;">
+                    <button type="button" id="checkNickname" style="display: block;">중복확인</button>
+                    <button type="button" id="resetNickname" style="display: none;">다시입력</button>
+                    <input type="checkbox" name="checkboxNickname" class="checkbox" style="display: none;">
                 </div>
             </div>
             <div class="middle-line2">
@@ -208,7 +215,7 @@
 
             <!-- 가입신청 -->
             <div class="submit-space">
-                <button type="submit" class="submit-button" id="enroll-button" onclick="return chkPwd();" disabled><b>가입신청</b></button>
+                <button type="submit" class="submit-button" id="enroll-button" disabled><b>가입신청</b></button>
             </div>
         </div>
     </form>
@@ -225,16 +232,18 @@
             genArea2.style.background = "white";
             genArea2.style.color = "black";
         }
+        
         // 비번 관련 스크립트
         const pwd = document.getElementById("pwd");
         const pwdMsg = document.getElementById("pwdMsg");
         const pwdChk = document.getElementById("pwdChk");
         const pwdResult = document.getElementById("pwdResult");
-        const enroll_button = document.querySelector("#enroll-button");
+        const checkboxPwd = document.querySelector("#checkboxPwd");
         
         const pwdNotice = function() {
             pwdChk.value = "";
             pwdResult.innerHTML = "";
+            checkboxPwd.checked = false;
             if (pwd.value == ""){
                 pwdMsg.innerHTML = "영문자 대/소문자 특수문자, 숫자 포함 5~15자";
             } else {
@@ -254,27 +263,20 @@
             } else if (pwd.value == pwdChk.value){
                 pwdResult.style.color = "green"; 
                 pwdResult.innerHTML = "비밀번호가 일치합니다.";
+                checkboxPwd.checked = true;
             } else {
                 pwdResult.style.color = "red";
                 pwdResult.innerHTML = "비밀번호가 일치하지 않습니다.";
+                checkboxPwd.checked = false;
             }
         }
 
-        function chkPwd(){
-            if (pwd.value !== pwdChk.value){
-                alert("비밀번호가 일치하지 않습니다.");
-                return false;
-            }
-        }
-
-        // 이메일 중복 확인 ajax
+        // 이메일 중복 확인 ajax + 정규식
         const checkId = document.querySelector("#checkId");
         const resetId = document.querySelector("#resetId");
         const emailInput = document.querySelector("#email");
         const regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
-
-        //이메일 정규식
-
+        const checkboxId = document.querySelector("#checkboxId");
 
         checkId.onclick = function(){
 
@@ -294,7 +296,7 @@
                             emailInput.setAttribute("readonly", true);
                             checkId.style.display = "none";
                             resetId.style.display = "block";
-                            enroll_button.removeAttribute("disabled");
+                            checkboxId.checked = true;
                         }else{
                             // 이미 존재하는 이메일입니다.
                             alert("이미 존재하는 이메일입니다. 다시 입력해주세요.")
@@ -307,10 +309,6 @@
                         console.log("실패 : ", err)
                     }
                 })
-                // 기능 확인용 코드
-                // emailInput.readOnly = true;
-                // checkId.style.display = "none";
-                // resetId.style.display = "block";
             } else{
                 alert("올바른 형식의 이메일이 아닙니다.")
                 emailInput.focus();
@@ -321,7 +319,65 @@
             emailInput.value = ""
             resetId.style.display = "none";
             checkId.style.display = "block";
-            enroll_button.setAttribute("disabled", true);
+            checkboxId.checked = false;
+        }
+
+        // 닉네임 중복 확인 ajax
+        const checkboxNickname = document.querySelector("#checkboxNickname");
+        const checkNickname = document.querySelector("#checkNickname");
+        const resetNickname = document.querySelector("#resetNickname");
+        const nicknameInput = document.querySelector("#Nickname");
+
+        checkNickname.onclick = function(){
+
+        if(nicknameInput.value != ""){
+
+            //ajax용 코드
+            $.ajax({
+                type : "GET",
+                url : "nicknameCheck.me",
+                data: {
+                    checkNickname : nicknameInput.value
+                },
+                success: function(result){
+                    // 사용가능한 닉네임입니다.
+                    if(result === "NNNNY"){
+                        alert("사용가능한 닉네임입니다.")
+                        nicknameInput.setAttribute("readonly", true);
+                        checkNickname.style.display = "none";
+                        resetNickname.style.display = "block";
+                        checkboxNickname.checked = true;
+                    }else{
+                        // 이미 존재하는 닉네임입니다.
+                        alert("이미 존재하는 닉네임입니다. 다시 입력해주세요.")
+                        nicknameInput.focus();
+                        nicknameInput.value = ""
+                    }
+                    
+                },
+                error: function(err){
+                    console.log("실패 : ", err)
+                }
+            })
+        } else{
+            alert("올바른 형식의 이메일이 아닙니다.")
+            nicknameInput.focus();
+        }
+        }
+        resetNickname.onclick = function(){
+            nicknameInput.readOnly = false;
+            nicknameInput.value = ""
+            resetNickname.style.display = "none";
+            checkNickname.style.display = "block";
+            checkboxNickname.checked = false;
+        }
+
+        const enroll_button = document.querySelector("#enroll-button");
+
+        if(checkboxId.checked && checkboxPwd.checked && checkboxNickname.checked){
+        enroll_button.removeAttribute("disabled");
+        } else{
+        enroll_button.setAttribute("disabled", true);
         }
     </script>
 </body>

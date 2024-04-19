@@ -1,6 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+<%@ page import="java.util.HashMap,
+				java.util.ArrayList" %>
+<%@ page import="com.pss.member.model.vo.Member,
+				com.pss.member.model.vo.UserPhysicalInfo,
+				com.pss.member.model.vo.UserPicture,
+				com.pss.diet.model.vo.UserDietRecord,
+				com.pss.exercise.model.vo.ExerciseRecord" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+	HashMap<String, Object> searchUserTotalInfoMap = (HashMap<String, Object>)request.getAttribute("SearchUserTotalInfoMap");
+
+	Member member = (Member)(searchUserTotalInfoMap.get("SearchUserInfo"));
+	UserPhysicalInfo userPhysicalInfo = (UserPhysicalInfo)(searchUserTotalInfoMap.get("SearchUserPhysicalInfo"));
+	UserPicture userPicture = (UserPicture)(searchUserTotalInfoMap.get("SearchUserPicture"));
+	ArrayList<UserDietRecord> userdietRecord = (ArrayList<UserDietRecord>)(searchUserTotalInfoMap.get("SearchUserdietRecord"));
+	ArrayList<ExerciseRecord> exerciseRecord = (ArrayList<ExerciseRecord>)(searchUserTotalInfoMap.get("SearchUserExerciseRecord"));
+%>
  
 <!DOCTYPE html>
 <html>
@@ -183,10 +200,10 @@
                     </div>
                     <div class="box" style="width: 60%; height: 100%;">
                         <div class="box" style="height: 55%; text-align: center; padding-top: 60px; padding-right: 70px;">
-                            <h1>${SearchUserInfo.name}</h1>
+                            <h1><%=member.getUserName() %></h1>
                         </div>
                         <div class="box" style="height: 45%; text-align: center; padding-right: 70px;">
-                            <h3>${SearchUserInfo.age} / ${SearchUserInfo.gender}</h3>
+                            <h3><%=member.getAge() %> / <%=member.getGender() %></h3>
                         </div>
                     </div>
                 </div>
@@ -215,25 +232,25 @@
                             <div class="box flex-box" style="height: 25%;">
                                 <div class="box spac">
                                     <div class="box flex-box" style="width: 50%; height: 100%;"><b>키</b></div>
-                                    <div class="box flex-box" style="width: 50%; height: 100%;">${SearchUserPhysicalInfo.height}</div>
+                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemHeight() %></div>
                                 </div>
                             </div>
                             <div class="box flex-box" style="height: 25%;">
                                 <div class="box spac">
                                     <div class="box flex-box" style="width: 50%; height: 100%;"><b>체중</b></div>
-                                    <div class="box flex-box" style="width: 50%; height: 100%;">${SearchUserPhysicalInfo.weight}</div>
+                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemWeight() %></div>
                                 </div>
                             </div>
                             <div class="box flex-box" style="height: 25%;">
                                 <div class="box spac">
                                     <div class="box flex-box" style="width: 50%; height: 100%;"><b>체지방률</b></div>
-                                    <div class="box flex-box" style="width: 50%; height: 100%;">${SearchUserPhysicalInfo.bep}</div>
+                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemBep() %></div>
                                 </div>
                             </div>
                             <div class="box flex-box" style="height: 25%;">
                                 <div class="box spac">
                                     <div class="box flex-box" style="width: 50%; height: 100%;"><b>골격근량</b></div>
-                                    <div class="box flex-box" style="width: 50%; height: 100%;">${SearchUserPhysicalInfo.smm}</div>
+                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemSmm() %></div>
                                 </div>
                             </div>
                         </div>
@@ -251,7 +268,7 @@
                             <div class="left-flex-box box" style="width: 100%; height: 100%;">
                                 <div class="box flex-box" style="width: 20%; height: 100%;">
                                     <div style="color: white;">
-                                        <h1>${SearchUserExerciseRecord.exRecordDate}</h1>
+                                        <h1>3/21 (목)</h1>
                                         총 2000Kcal 섭취
                                     </div>
                                 </div>

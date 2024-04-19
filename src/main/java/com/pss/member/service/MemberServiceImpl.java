@@ -49,6 +49,16 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
+	public int nicknameCheck(String checkNickname) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = mDao.nicknameCheck(sqlSession, checkNickname);
+		sqlSession.close();
+		
+		return result;
+	}
+	
+	@Override
 	public Member findId(Member m) {
 		SqlSession sqlSession = Template.getSqlSession();
 		

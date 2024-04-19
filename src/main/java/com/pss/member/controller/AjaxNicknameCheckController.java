@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.pss.member.service.MemberServiceImpl;
 
 /**
- * Servlet implementation class MemberEmailCheckController
+ * Servlet implementation class AjaxNicknameCheckController
  */
-@WebServlet("/idCheck.me")
-public class AjaxCheckController extends HttpServlet {
+@WebServlet("/nicknameCheck.me")
+public class AjaxNicknameCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxCheckController() {
+    public AjaxNicknameCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,9 +28,9 @@ public class AjaxCheckController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String checkId = request.getParameter("checkId");
+		String checkNickname = request.getParameter("checkNickname");
 		
-		int count = new MemberServiceImpl().idCheck(checkId);
+		int count = new MemberServiceImpl().nicknameCheck(checkNickname);
 		
 		if (count > 0) {
 			response.getWriter().print("NNNNN");

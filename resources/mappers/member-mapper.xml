@@ -58,17 +58,14 @@
 		#{age}
 		)
 	</insert>
-	<insert id="">
+	<insert id="insertMemberInfo" parameterType="UserPhysicalInfo">
 		INSERT INTO MEM_PHYSICAL_INFO (
                         PINFO_NO,
                         USER_NO,
-                        MEM_HEIGHT,
-                        MEM_WEIGHT,
-                        MEM_SMM,
-                        MEM_BFP)
-            VALUES (
-                
-            );
+        )VALUES (
+                SEQ_UPINO.NEXTVAL,
+                SEQ_UNO.CURRVAL,
+        );
 	</insert>
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 		SELECT USER_NO,

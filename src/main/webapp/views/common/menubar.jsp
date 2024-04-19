@@ -173,7 +173,7 @@
                     <form action="search.me" method="GET">
 	                    <div class="search-space-out" >
 	                        <div class="search-space-in">
-	                            <input type="text" class="search-input" name="nickname" placeholder="유저 닉네임">
+	                            <input type="text" class="search-input" name="userNickname" placeholder="유저 닉네임">
 	                            <button type="submit" class="search-button">검색</button>
 	                        </div>
 	                    </div>

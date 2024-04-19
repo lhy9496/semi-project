@@ -14,7 +14,7 @@ public class MemberDao {
 		int result2 = 0;
 		
 		if (result1 > 0) {
-			int result2 = sqlSession.insert("memberMapper.", m);
+			result2 = sqlSession.insert("memberMapper.insertMember", m);
 		}
 		return result2;
 	}

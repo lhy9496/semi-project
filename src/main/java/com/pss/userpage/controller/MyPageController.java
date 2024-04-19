@@ -37,7 +37,7 @@ public class MyPageController extends HttpServlet {
 		HashMap<String, Object> searchUserTotalInfoMap = new SearchUserServiceImpl().getSearchUserTotalInfo(nickname);
 		
 		if (searchUserTotalInfoMap.get("SearchUserInfo") == null) {
-			request.setAttribute("alertMsg", "존재하지 않는 유저입니다.");
+			request.setAttribute("alertMsg", "페이지를 가져오는데 실패하였습니다.");
 			response.sendRedirect(request.getContextPath());
 		} else {
 

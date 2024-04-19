@@ -1,28 +1,25 @@
-package com.pss.exercise.Controller;
+package com.pss.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pss.exercise.model.vo.Exercise;
-import com.pss.exercise.service.ExerciseServiceImpl;
+import com.pss.member.service.MemberServiceImpl;
 
 /**
- * Servlet implementation class WorkoutEnrollController
+ * Servlet implementation class AjaxNicknameCheckController
  */
-@WebServlet("/enroll.wo")
-public class WorkoutEnrollController extends HttpServlet {
+@WebServlet("/nicknameCheck.me")
+public class AjaxNicknameCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WorkoutEnrollController() {
+    public AjaxNicknameCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,10 +28,15 @@ public class WorkoutEnrollController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		ArrayList<Exercise> exList = new ExerciseServiceImpl().selectExerciseList();
-		request.setAttribute("exList", exList);
-		request.getRequestDispatcher("views/exercise/workoutenrollview.jsp").forward(request, response);
+		String checkNickname = request.getParameter("checkNickname");
+		
+		int count = new MemberServiceImpl().nicknameCheck(checkNickname);
+		
+		if (count > 0) {
+			response.getWriter().print("NNNNN");
+		} else {
+			response.getWriter().print("NNNNY");
+		}
 	}
 
 	/**

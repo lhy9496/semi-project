@@ -12,13 +12,14 @@ public class SearchUserServiceImpl implements SearchUserService {
 	@Override
 	public HashMap<String, Object> getSearchUserTotalInfo(String nickname) {
 		SqlSession sqlSession = Template.getSqlSession();
-		HashMap<String, Object> SearchUserTotalInfoMap = new HashMap<>();
+		HashMap<String, Object> SearchUserTotalInfoMap = new HashMap<String, Object>();
 		SearchUserDao searchUserDao = new SearchUserDao();
-		SearchUserTotalInfoMap.put("SearchUserInfo", searchUserDao.getSearchUserInfo(sqlSession, nickname));
-		SearchUserTotalInfoMap.put("SearchUserPhysicalInfo", searchUserDao.getSearchUserPhysicalInfo(sqlSession, nickname));
-		SearchUserTotalInfoMap.put("SearchUserPicture", searchUserDao.getSearchUserPicture(sqlSession, nickname));
-		SearchUserTotalInfoMap.put("SearchUserdietRecord", searchUserDao.getSearchUserdietRecord(sqlSession, nickname));
-		SearchUserTotalInfoMap.put("SearchUserExerciseRecord", searchUserDao.getSearchUserExerciseRecord(sqlSession, nickname));
+		
+		SearchUserTotalInfoMap.put("searchUserInfo", searchUserDao.getSearchUserInfo(sqlSession, nickname));
+		SearchUserTotalInfoMap.put("searchUserPhysicalInfo", searchUserDao.getSearchUserPhysicalInfo(sqlSession, nickname));
+		SearchUserTotalInfoMap.put("searchUserPicture", searchUserDao.getSearchUserPicture(sqlSession, nickname));
+		SearchUserTotalInfoMap.put("searchUserdietRecord", searchUserDao.getSearchUserdietRecord(sqlSession, nickname));
+		SearchUserTotalInfoMap.put("searchUserExerciseRecord", searchUserDao.getSearchUserExerciseRecord(sqlSession, nickname));
 		
 		
 		sqlSession.close();

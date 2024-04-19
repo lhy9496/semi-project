@@ -1,25 +1,29 @@
-package com.pss.member.controller;
+package com.pss.exercise.Controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pss.member.service.MemberServiceImpl;
+import com.pss.exercise.model.vo.Exercise;
+import com.pss.exercise.service.ExerciseServiceImpl;
+import com.pss.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberEmailCheckController
+ * Servlet implementation class WorkoutEnrollController
  */
-@WebServlet("/idCheck.me")
-public class AjaxCheckController extends HttpServlet {
+@WebServlet("/enroll.wo")
+public class WorkoutEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxCheckController() {
+    public WorkoutEnrollFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,15 +32,12 @@ public class AjaxCheckController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String checkId = request.getParameter("checkId");
+		// TODO Auto-generated method stub
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
-		int count = new MemberServiceImpl().idCheck(checkId);
-		
-		if (count > 0) {
-			response.getWriter().print("NNNNN");
-		} else {
-			response.getWriter().print("NNNNY");
-		}
+		ArrayList<Exercise> exList = new ExerciseServiceImpl().selectExerciseList();
+		request.setAttribute("exList", exList);
+		request.getRequestDispatcher("views/exercise/workoutenrollview.jsp").forward(request, response);
 	}
 
 	/**

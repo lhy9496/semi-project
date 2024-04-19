@@ -19,12 +19,12 @@ public class ExerciseDao {
 		return sqlSession.insert("exerciseMapper.insertExerciseRecord", map);
 	}
 
-	public ArrayList<ExerciseRecord> selectExerciseRecordList(SqlSession sqlSession) {
-		return (ArrayList)sqlSession.selectList("exerciseMapper.selectExerciseRecordList");
+	public ArrayList<ExerciseRecord> selectExerciseRecordList(SqlSession sqlSession, int userNo) {
+		return (ArrayList)sqlSession.selectList("exerciseMapper.selectExerciseRecordList",userNo);
 	}
 
-	public ArrayList<ExerciseRecord> selectClickedDateWorkoutList(SqlSession sqlSession, String clickedDate) {
-		return (ArrayList)sqlSession.selectList("exerciseMapper.selectClickedDateWorkoutList",clickedDate);
+	public ArrayList<ExerciseRecord> selectClickedDateWorkoutList(SqlSession sqlSession, HashMap<String,String> map) {
+		return (ArrayList)sqlSession.selectList("exerciseMapper.selectClickedDateWorkoutList",map);
 	}
 
 }

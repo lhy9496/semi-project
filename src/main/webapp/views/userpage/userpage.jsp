@@ -1,6 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+<%@ page import="java.util.HashMap,
+				java.util.ArrayList" %>
+<%@ page import="com.pss.member.model.vo.Member,
+				com.pss.member.model.vo.UserPhysicalInfo,
+				com.pss.member.model.vo.UserPicture,
+				com.pss.diet.model.vo.UserDietRecord,
+				com.pss.exercise.model.vo.ExerciseRecord" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+	HashMap<String, Object> searchUserTotalInfoMap = (HashMap<String, Object>)request.getAttribute("searchUserTotalInfoMap");
+
+	Member member = (Member)(searchUserTotalInfoMap.get("searchUserInfo"));
+	UserPhysicalInfo userPhysicalInfo = (UserPhysicalInfo)(searchUserTotalInfoMap.get("searchUserPhysicalInfo"));
+	UserPicture userPicture = (UserPicture)(searchUserTotalInfoMap.get("searchUserPicture"));
+	ArrayList<UserDietRecord> userdietRecord = (ArrayList<UserDietRecord>)(searchUserTotalInfoMap.get("searchUserdietRecord"));
+	ArrayList<ExerciseRecord> exerciseRecord = (ArrayList<ExerciseRecord>)(searchUserTotalInfoMap.get("searchUserExerciseRecord"));
+%>
  
 <!DOCTYPE html>
 <html>
@@ -183,10 +200,10 @@
                     </div>
                     <div class="box" style="width: 60%; height: 100%;">
                         <div class="box" style="height: 55%; text-align: center; padding-top: 60px; padding-right: 70px;">
-                            <h1>${SearchUserInfo.name}</h1>
+                            <h1><%=member.getUserName() %></h1>
                         </div>
                         <div class="box" style="height: 45%; text-align: center; padding-right: 70px;">
-                            <h3>${SearchUserInfo.age} / ${SearchUserInfo.gender}</h3>
+                            <h3><%=member.getAge() %> / <%=member.getGender() %></h3>
                         </div>
                     </div>
                 </div>
@@ -215,25 +232,25 @@
                             <div class="box flex-box" style="height: 25%;">
                                 <div class="box spac">
                                     <div class="box flex-box" style="width: 50%; height: 100%;"><b>키</b></div>
-                                    <div class="box flex-box" style="width: 50%; height: 100%;">${SearchUserPhysicalInfo.height}</div>
+                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemHeight() %></div>
                                 </div>
                             </div>
                             <div class="box flex-box" style="height: 25%;">
                                 <div class="box spac">
                                     <div class="box flex-box" style="width: 50%; height: 100%;"><b>체중</b></div>
-                                    <div class="box flex-box" style="width: 50%; height: 100%;">${SearchUserPhysicalInfo.weight}</div>
+                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemWeight() %></div>
                                 </div>
                             </div>
                             <div class="box flex-box" style="height: 25%;">
                                 <div class="box spac">
                                     <div class="box flex-box" style="width: 50%; height: 100%;"><b>체지방률</b></div>
-                                    <div class="box flex-box" style="width: 50%; height: 100%;">${SearchUserPhysicalInfo.bep}</div>
+                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemBep() %></div>
                                 </div>
                             </div>
                             <div class="box flex-box" style="height: 25%;">
                                 <div class="box spac">
                                     <div class="box flex-box" style="width: 50%; height: 100%;"><b>골격근량</b></div>
-                                    <div class="box flex-box" style="width: 50%; height: 100%;">${SearchUserPhysicalInfo.smm}</div>
+                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemSmm() %></div>
                                 </div>
                             </div>
                         </div>
@@ -245,405 +262,55 @@
                     <div class="box stat">그래프</div>
                 </div>
                 
-                <div class="wrap" style="height: 150px;">
-                    <div class="box stat row-flex-box">
-                        <div class="box leftro" style="width: 95%; height:100%; background: black;">
-                            <div class="left-flex-box box" style="width: 100%; height: 100%;">
-                                <div class="box flex-box" style="width: 20%; height: 100%;">
-                                    <div style="color: white;">
-                                        <h1>${SearchUserExerciseRecord.exRecordDate}</h1>
-                                        총 2000Kcal 섭취
+                <div id="totalUserInfoBox"></div>
+                <script>
+                    const sibal = document.getElementById("totalUserInfoBox");
+                    for (let i = 1; i <= 10; i++) {
+                        sibal.innerHTML += 
+                        `
+                    <div class="wrap" style="height: 150px;">
+                        <div class="box stat row-flex-box">
+                            <div class="box leftro" style="width: 95%; height:100%; background: black;">
+                                <div class="left-flex-box box" style="width: 100%; height: 100%;">
+                                    <div class="box flex-box" style="width: 20%; height: 100%;">
+                                        <div style="color: white;">
+                                            <h1>날짜~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</h1>
+                                            총 2000Kcal 섭취
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+                                    <div class="box downbox" style="width: 15%; height: 100%;">
+                                        <div style="color: white; width: 80%; height: 80%;">
+                                            <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+                                        </div>
+                                        <div style="color: white; height: 20%;">벤치프레스</div>
                                     </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+                                    <div class="box downbox" style="width: 15%; height: 100%;">
+                                        <div style="color: white; width: 80%; height: 80%;">
+                                            <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+                                        </div>
+                                        <div style="color: white; height: 20%;">벤치프레스</div>
                                     </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+                                    <div class="box downbox" style="width: 15%; height: 100%;">
+                                        <div style="color: white; width: 80%; height: 80%;">
+                                            <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+                                        </div>
+                                        <div style="color: white; height: 20%;">벤치프레스</div>
                                     </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+                                    <div class="box downbox" style="width: 15%; height: 100%;">
+                                        <div style="color: white; width: 80%; height: 80%;">
+                                            <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+                                        </div>
+                                        <div style="color: white; height: 20%;">벤치프레스</div>
                                     </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
                                 </div>
                             </div>
+                            <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;">버튼</div>
                         </div>
-                        <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;">버튼</div>
                     </div>
-                </div>
-                
-                <div class="wrap" style="height: 150px;">
-                    <div class="box stat row-flex-box">
-                        <div class="box leftro" style="width: 95%; height:100%; background: black;">
-                            <div class="left-flex-box box" style="width: 100%; height: 100%;">
-                                <div class="box flex-box" style="width: 20%; height: 100%;">
-                                    <div style="color: white;">
-                                        <h1>3/21 (목)</h1>
-                                        총 2000Kcal 섭취
-                                    </div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;">버튼</div>
-                    </div>
-                </div>
-
-                <div class="wrap" style="height: 150px;">
-                    <div class="box stat row-flex-box">
-                        <div class="box leftro" style="width: 95%; height:100%; background: black;">
-                            <div class="left-flex-box box" style="width: 100%; height: 100%;">
-                                <div class="box flex-box" style="width: 20%; height: 100%;">
-                                    <div style="color: white;">
-                                        <h1>3/21 (목)</h1>
-                                        총 2000Kcal 섭취
-                                    </div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;">버튼</div>
-                    </div>
-                </div>
-
-                <div class="wrap" style="height: 150px;">
-                    <div class="box stat row-flex-box">
-                        <div class="box leftro" style="width: 95%; height:100%; background: black;">
-                            <div class="left-flex-box box" style="width: 100%; height: 100%;">
-                                <div class="box flex-box" style="width: 20%; height: 100%;">
-                                    <div style="color: white;">
-                                        <h1>3/21 (목)</h1>
-                                        총 2000Kcal 섭취
-                                    </div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;">버튼</div>
-                    </div>
-                </div>
-
-                <div class="wrap" style="height: 150px;">
-                    <div class="box stat row-flex-box">
-                        <div class="box leftro" style="width: 95%; height:100%; background: black;">
-                            <div class="left-flex-box box" style="width: 100%; height: 100%;">
-                                <div class="box flex-box" style="width: 20%; height: 100%;">
-                                    <div style="color: white;">
-                                        <h1>3/21 (목)</h1>
-                                        총 2000Kcal 섭취
-                                    </div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;">버튼</div>
-                    </div>
-                </div>
-
-                <div class="wrap" style="height: 150px;">
-                    <div class="box stat row-flex-box">
-                        <div class="box leftro" style="width: 95%; height:100%; background: black;">
-                            <div class="left-flex-box box" style="width: 100%; height: 100%;">
-                                <div class="box flex-box" style="width: 20%; height: 100%;">
-                                    <div style="color: white;">
-                                        <h1>3/21 (목)</h1>
-                                        총 2000Kcal 섭취
-                                    </div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;">버튼</div>
-                    </div>
-                </div>
-
-                <div class="wrap" style="height: 150px;">
-                    <div class="box stat row-flex-box">
-                        <div class="box leftro" style="width: 95%; height:100%; background: black;">
-                            <div class="left-flex-box box" style="width: 100%; height: 100%;">
-                                <div class="box flex-box" style="width: 20%; height: 100%;">
-                                    <div style="color: white;">
-                                        <h1>3/21 (목)</h1>
-                                        총 2000Kcal 섭취
-                                    </div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;">버튼</div>
-                    </div>
-                </div>
-
-                <div class="wrap" style="height: 150px;">
-                    <div class="box stat row-flex-box">
-                        <div class="box leftro" style="width: 95%; height:100%; background: black;">
-                            <div class="left-flex-box box" style="width: 100%; height: 100%;">
-                                <div class="box flex-box" style="width: 20%; height: 100%;">
-                                    <div style="color: white;">
-                                        <h1>3/21 (목)</h1>
-                                        총 2000Kcal 섭취
-                                    </div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;">버튼</div>
-                    </div>
-                </div>
-
-                <div class="wrap" style="height: 150px;">
-                    <div class="box stat row-flex-box">
-                        <div class="box leftro" style="width: 95%; height:100%; background: black;">
-                            <div class="left-flex-box box" style="width: 100%; height: 100%;">
-                                <div class="box flex-box" style="width: 20%; height: 100%;">
-                                    <div style="color: white;">
-                                        <h1>3/21 (목)</h1>
-                                        총 2000Kcal 섭취
-                                    </div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;">버튼</div>
-                    </div>
-                </div>
-
-                <div class="wrap" style="height: 150px;">
-                    <div class="box stat row-flex-box">
-                        <div class="box leftro" style="width: 95%; height:100%; background: black;">
-                            <div class="left-flex-box box" style="width: 100%; height: 100%;">
-                                <div class="box flex-box" style="width: 20%; height: 100%;">
-                                    <div style="color: white;">
-                                        <h1>3/21 (목)</h1>
-                                        총 2000Kcal 섭취
-                                    </div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                                <div class="box downbox" style="width: 15%; height: 100%;">
-                                    <div style="color: white; width: 80%; height: 80%;">
-                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                    </div>
-                                    <div style="color: white; height: 20%;">벤치프레스</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;">버튼</div>
-                    </div>
-                </div>
+                    `
+                    }
+                    
+                </script>
             </div>
         </div>
     </div>

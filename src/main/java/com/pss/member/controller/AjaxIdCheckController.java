@@ -1,27 +1,25 @@
-package com.pss.userpage.controller;
+package com.pss.member.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pss.userpage.service.SearchUserServiceImpl;
+import com.pss.member.service.MemberServiceImpl;
 
 /**
- * Servlet implementation class MyPageController
+ * Servlet implementation class MemberEmailCheckController
  */
-@WebServlet("/menuToUserPage.me")
-public class MyPageController extends HttpServlet {
+@WebServlet("/idCheck.me")
+public class AjaxIdCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageController() {
+    public AjaxIdCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,21 +28,14 @@ public class MyPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		String checkId = request.getParameter("checkId");
 		
-		String nickname = (String)(request.getSession().getAttribute("userNickname"));
+		int count = new MemberServiceImpl().idCheck(checkId);
 		
-		HashMap<String, Object> searchUserTotalInfoMap = new SearchUserServiceImpl().getSearchUserTotalInfo(nickname);
-		
-		if (searchUserTotalInfoMap.get("searchUserInfo") == null) {
-			request.setAttribute("alertMsg", "페이지를 가져오는데 실패하였습니다.");
-			response.sendRedirect(request.getContextPath());
+		if (count > 0) {
+			response.getWriter().print("NNNNN");
 		} else {
-
-			request.setAttribute("SearchUserTotalInfoMap", searchUserTotalInfoMap);
-
-			request.getRequestDispatcher("/views/userpage/userpage.jsp").forward(request, response);
-			
+			response.getWriter().print("NNNNY");
 		}
 	}
 

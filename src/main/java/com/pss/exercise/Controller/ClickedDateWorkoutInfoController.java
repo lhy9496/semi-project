@@ -2,6 +2,7 @@ package com.pss.exercise.Controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.pss.exercise.model.vo.ExerciseRecord;
 import com.pss.exercise.service.ExerciseServiceImpl;
+import com.pss.member.model.vo.Member;
 
 /**
  * Servlet implementation class ClickedDateWorkoutInfoController
@@ -35,9 +37,15 @@ public class ClickedDateWorkoutInfoController extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		String clickedDate = request.getParameter("clickedDate");
-		// 이 날짜로 해당 날짜의 운동기록 불러오기
-		ArrayList<ExerciseRecord> list = new ExerciseServiceImpl().selectClickedDateWorkoutList(clickedDate);
+		String userNo = String.valueOf(((Member)request.getSession().getAttribute("loginUser")).getUserNo());
 		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("clickedDate", clickedDate);
+		map.put("userNo", userNo);
+		// 이 날짜로 해당 날짜의 운동기록 불러오기
+		ArrayList<ExerciseRecord> list = new ExerciseServiceImpl().selectClickedDateWorkoutList(map);
+
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(list,response.getWriter());
 	}

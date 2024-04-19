@@ -36,17 +36,17 @@ public class SearchUserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String nickname = request.getParameter("nickname");
+		String nickname = request.getParameter("userNickname");
 		
 		HashMap<String, Object> searchUserTotalInfoMap = new SearchUserServiceImpl().getSearchUserTotalInfo(nickname);
 		
 
-		if (searchUserTotalInfoMap.get("SearchUserInfo") == null) {
+		if (searchUserTotalInfoMap.get("searchUserInfo") == null) {
 			request.setAttribute("alertMsg", "존재하지 않는 유저입니다.");
 			response.sendRedirect(request.getContextPath());
 		} else {
 
-			request.setAttribute("SearchUserTotalInfoMap", searchUserTotalInfoMap);
+			request.setAttribute("searchUserTotalInfoMap", searchUserTotalInfoMap);
 
 			
 			request.getRequestDispatcher("/views/userpage/userpage.jsp").forward(request, response);

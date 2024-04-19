@@ -7,11 +7,16 @@ import com.pss.exercise.model.vo.Exercise;
 import com.pss.exercise.model.vo.ExerciseRecord;
 
 public interface ExerciseService {
-	ArrayList<Exercise> selectExerciseList();
 
 	int insertExerciseRecord(HashMap<String, Integer> map);
 	
-	 ArrayList<ExerciseRecord> selectExerciseRecordList();
+	ArrayList<ExerciseRecord> selectExerciseRecordList(int userNo);
 
-	ArrayList<ExerciseRecord> selectClickedDateWorkoutList(String clickedDate);
+
+	ArrayList<Exercise> selectExerciseList();
+
+
+	ArrayList<ExerciseRecord> selectClickedDateWorkoutList(HashMap<String, String> map);
+
+	
 }

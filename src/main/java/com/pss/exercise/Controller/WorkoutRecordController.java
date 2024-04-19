@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.pss.exercise.model.vo.ExerciseInfo;
 import com.pss.exercise.model.vo.WorkoutRecord;
 import com.pss.exercise.service.ExerciseServiceImpl;
+import com.pss.member.model.vo.Member;
 
 /**
  * Servlet implementation class WorkoutRecordController
@@ -46,13 +47,9 @@ public class WorkoutRecordController extends HttpServlet {
 		
 		String jsonData = sb.toString();
 		
-//		int loginUserNo = ((Member)request.getAttribute("loginUser")).getUserNo();
+		int loginUserNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 
-//		int exerciseNo = 0;
-//		int exSet = 0;
-//		int exWeight = 0;
-//		int exCount = 0;
-//		int result = 0;
+		System.out.println(loginUserNo);
 		
 		
 		Gson gson = new Gson();
@@ -61,24 +58,20 @@ public class WorkoutRecordController extends HttpServlet {
 		for(WorkoutRecord record : workoutRecords) {
 
 			int exerciseNo = Integer.parseInt(record.getExerciseNo());
-			System.out.println(exerciseNo);
             for (ExerciseInfo info : record.getExInfos()) {
                
             	int exSet = Integer.parseInt(info.getExSet());
-                System.out.println("Set: " + info.getExSet());
                 
                 int exWeight = Integer.parseInt(info.getExWeight());
-                System.out.println("Weight: " + info.getExWeight());
                
                 int exCount = Integer.parseInt(info.getExCount());
-                System.out.println("Count: " + info.getExCount());
                 
                 HashMap<String, Integer> map = new HashMap<>();
                 map.put("exerciseNo", exerciseNo);
                 map.put("exSet", exSet);
                 map.put("exWeight", exWeight);
                 map.put("exCount", exCount);
-                System.out.println(map);
+                map.put("userNo",loginUserNo);
                 
                 int result = new ExerciseServiceImpl().insertExerciseRecord(map);
                        

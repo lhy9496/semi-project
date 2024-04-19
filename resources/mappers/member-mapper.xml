@@ -99,7 +99,7 @@
 		AND STATUS = 'Y'
  	</select>
  	
- 	<select id="SearchUserPhysicalInfo" parameterType="String" resultMap="UserPhysicalInfo">
+ 	<select id="SearchUserPhysicalInfo" parameterType="String" resultMap="UserPhysicalInfoResultSet">
  		SELECT PINFO_NO,
  				USER_NO,
  				MEM_HEIGHT,
@@ -112,7 +112,7 @@
 		AND STATUS = 'Y'
  	</select>
  	
- 	<select id="SearchUserPicture" parameterType="String" resultMap="UserPicture">
+ 	<select id="SearchUserPicture" parameterType="String" resultMap="UserPictureResultSet">
  		SELECT PIC_NO,
  				USER_NO,
  				ORIGIN_NAME,

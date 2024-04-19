@@ -37,16 +37,16 @@ public class ExerciseServiceImpl implements ExerciseService{
 	}
 
 	@Override
-	public ArrayList<ExerciseRecord> selectExerciseRecordList() {
+	public ArrayList<ExerciseRecord> selectExerciseRecordList(int userNo) {
 		SqlSession sqlSession = Template.getSqlSession();
-		ArrayList<ExerciseRecord> list = exerciseDao.selectExerciseRecordList(sqlSession);
+		ArrayList<ExerciseRecord> list = exerciseDao.selectExerciseRecordList(sqlSession,userNo);
 		return list;
 	}
 
 	@Override
-	public ArrayList<ExerciseRecord> selectClickedDateWorkoutList(String clickedDate) {
+	public ArrayList<ExerciseRecord> selectClickedDateWorkoutList(HashMap<String, String> map) {
 		SqlSession sqlSession = Template.getSqlSession();
-		ArrayList<ExerciseRecord> list = exerciseDao.selectClickedDateWorkoutList(sqlSession, clickedDate);
+		ArrayList<ExerciseRecord> list = exerciseDao.selectClickedDateWorkoutList(sqlSession, map);
 		
 		
 		sqlSession.close();

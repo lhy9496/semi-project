@@ -1,7 +1,5 @@
 package com.pss.userpage.model.dao;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -33,7 +31,5 @@ public class SearchUserDao {
 	public List<ExerciseRecord> getSearchUserExerciseRecord(SqlSession sqlSession, String nickname) {
 		return sqlSession.selectList("exerciseMapper.selectExerciseRecordList", nickname);
 	}
-	
-	
 
 }

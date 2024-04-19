@@ -11,18 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pss.exercise.model.vo.Exercise;
 import com.pss.exercise.service.ExerciseServiceImpl;
+import com.pss.member.model.vo.Member;
 
 /**
  * Servlet implementation class WorkoutEnrollController
  */
 @WebServlet("/enroll.wo")
-public class WorkoutEnrollController extends HttpServlet {
+public class WorkoutEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WorkoutEnrollController() {
+    public WorkoutEnrollFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,6 +33,8 @@ public class WorkoutEnrollController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+		
 		ArrayList<Exercise> exList = new ExerciseServiceImpl().selectExerciseList();
 		request.setAttribute("exList", exList);
 		request.getRequestDispatcher("views/exercise/workoutenrollview.jsp").forward(request, response);

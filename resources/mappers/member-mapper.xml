@@ -110,7 +110,7 @@
  				MODIFY_DATE,
  				STATUS
  		FROM MEMBER
-		WHERE NICKNAME = #{nickname}
+		WHERE USER_NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
  	
@@ -123,7 +123,7 @@
  				MEM_BFP
  		FROM MEMBER
  		JOIN MEM_PHYSICAL_INFO USING (USER_NO)
-		WHERE NICKNAME = #{nickname}
+		WHERE USER_NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
  	
@@ -132,10 +132,10 @@
  				USER_NO,
  				ORIGIN_NAME,
  				CHANGE_NAME,
- 				FILE_PATH,
+ 				FILE_PATH
  		FROM MEMBER
- 		JOIN EX_RECORD USING (USER_NO)
-		WHERE NICKNAME = #{nickname}
+ 		JOIN USER_PIC USING (USER_NO)
+		WHERE USER_NICKNAME = #{nickname}
 		AND STATUS = 'Y'
  	</select>
  	

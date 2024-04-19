@@ -16,10 +16,10 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="resources/css/workoutbody.css?after">
+    <link rel="stylesheet" href="resources/css/calendar.css?after">
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     <script>
-    
         document.addEventListener('DOMContentLoaded', function () {
             let calendarEl = document.getElementById('calendar');
             let calendar = new FullCalendar.Calendar(calendarEl, {
@@ -28,6 +28,8 @@
                 selectable: true,
                 dateClick: function (info) {
                     let clickedDate = info.dateStr;
+
+                    // 달력에 클릭한 날짜에 대한 운동기록 조회하기
                     $.ajax({
                         url: 'cinfo.wo',
                         data: {
@@ -35,56 +37,65 @@
                         },
                         success: function (res) {
                             let exerciseRecordList = exerciseRecordFormat(res);
-
-                            $("#workout-container").empty();
-                            for (let key in exerciseRecordList){
-                                
-                                let str = `<div class="workout-info">`;
-
-                                let recodeList = exerciseRecordList[key]
-                                recodeList.forEach(function (exercise, index) {
-                                    if (index === 0) {
-                                        str += `      
-                                            <div class="workout">
-                                                <div class="workout-name">`+exercise.exName+`</div>
-                                                <div class="workout-bodypart">`+exercise.exBodyPartName+`</div>
-                                            </div>
-                                            <table class="workout-record">
-                                                <thead>
-                                                    <tr><td>세트</td><td>중량</td><td>횟수</td></tr>
-                                                </thead>`
-                                    }
-
-                                    str += `<tbody>
-                                                <tr>
-                                                    <td>`+exercise.exRecordSet+`</td>
-                                                    <td>`+exercise.exRecordWeight+`</td>
-                                                    <td>`+exercise.exRecordCount+`</td>
-                                                </tr>
-                                            </tbody>`
-
-                                    if (index === recodeList.length - 1) {
-                                        str += `</table>`;
-                                    }
-                                });
-
-                                str += `</div>`;
-                                $("#workout-container").append(str);
-                            }
-                          
+                            drawExerciseRecordTable(exerciseRecordList);                  
                         },
                         error: function () {
-                            console.log("조회실패");
+                            console.log("운동기록 조회실패");
                         }
                     })
-
-                    
                 }
             });
             calendar.render();
 
         });
 
+        function drawExerciseRecordTable(list) {
+            $("#workout-container").empty();
+            // 만약 Object배열 길이가 0이면 운동기록 없다고하자
+
+            if(Object.keys(list).length === 0) {
+                let str = `<div class="workout-info" style="background: white;">
+                                <div style="font-size: 25px">
+                                    운동기록이 없습니다.
+                                </div>
+                            </div>`;
+                $("#workout-container").append(str);
+            }
+            
+            for (let key in list) {
+
+                let str = `<div class="workout-info">`;
+
+                let recodeList = list[key]
+                recodeList.forEach(function (exercise, index) {
+                    if (index === 0) {
+                        str += `      
+                                            <div class="workout">
+                                                <div class="workout-name">`+ exercise.exName + `</div>
+                                                <div class="workout-bodypart">`+ exercise.exBodyPartName + `</div>
+                                            </div>
+                                            <table class="workout-record">
+                                                <thead>
+                                                    <tr><td>세트</td><td>중량</td><td>횟수</td></tr>
+                                                </thead>`
+                    }
+                    str += `<tbody>
+                                                <tr>
+                                                    <td>`+ exercise.exRecordSet + `</td>
+                                                    <td>`+ exercise.exRecordWeight + `</td>
+                                                    <td>`+ exercise.exRecordCount + `</td>
+                                                </tr>
+                                            </tbody>`
+
+                    if (index === recodeList.length - 1) {
+                        str += `</table>`;
+                    }
+                });
+
+                str += `</div>`;
+                $("#workout-container").append(str);
+            }
+        }
 
         function exerciseRecordFormat(list) {
             let exerciseRecordList = {};
@@ -95,8 +106,6 @@
                     exerciseRecordList[recode.exName] = [recode];
                 }
             }
-
-            console.log(exerciseRecordList)
 
             return exerciseRecordList;
         }
@@ -143,24 +152,24 @@
                                 </thead>
                                 <tbody>
                     </c:if>
-                                    <tr>
-                                        <td>${exercise.exRecordSet}</td>
-                                        <td>${exercise.exRecordWeight}</td>
-                                        <td>${exercise.exRecordCount}</td>
-                                    </tr>
+                    <tr>
+                        <td>${exercise.exRecordSet}</td>
+                        <td>${exercise.exRecordWeight}</td>
+                        <td>${exercise.exRecordCount}</td>
+                    </tr>
                     <c:if test="${!exercise.exName.equals(list[loop.index + 1].exName)}">
                         <!-- 다음 운동명과 다른 경우에만 tbody를 닫음 -->
-                        		</tbody>
-                        	</table>
-            		    </div>
-            		</c:if>
-            </c:forEach>
+                        </tbody>
+                        </table>
             </div>
+            </c:if>
+            </c:forEach>
         </div>
+    </div>
 
-        <div class="right-container">
-            <div id='calendar'></div>
-        </div>
+    <div class="right-container">
+        <div id='calendar'></div>
+    </div>
     </div>
     <script>
         $(function () {

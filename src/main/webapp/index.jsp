@@ -115,7 +115,7 @@
             <div class="account-space">
                 <button type="button" class="account-button" onclick="location.href='loginForm.me'" style="left: 60px;">로그인</button>
                 <button type="button" class="account-button" onclick="location.href='enrollForm.me'" style="left: 220px;">회원가입</button>
-                <button type="button" class="account-button" onclick="location.href=''" style="right: 60px;">커뮤니티</button>
+                <button type="button" class="account-button" onclick="location.href='list.bo?cpage=1'" style="right: 60px;">커뮤니티</button>
             </div>
         </c:when>
         <c:otherwise>
@@ -123,10 +123,10 @@
                 <img src="/pss/resources/logo/person_icon.png" alt="유저 아이콘">${loginUser.userNickname}
             </div>
                 <!-- 로그인을 한 상태 -->
-            <div class="account-space">    
+            <div class="account-space">
                 <button type="button" class="account-button" onclick="location.href='logout.me'" style="left: 60px;">로그아웃</button>
-                <button type="button" class="account-button" onclick="location.href=''" style="left: 220px;">마이페이지</button>
-                <button type="button" class="account-button" onclick="location.href=''" style="right: 60px;">커뮤니티</button>
+                <button type="button" class="account-button" onclick="location.href='menuToUserPage.me'" style="left: 220px;">마이페이지</button>
+                <button type="button" class="account-button" onclick="location.href='list.bo?cpage=1'" style="right: 60px;">커뮤니티</button>
             </div>
         </c:otherwise>
     </c:choose>
@@ -137,7 +137,7 @@
         </div>
         <form action="search.me" method="GET">
             <div class="search-space">
-                <input type="text" class="search-input" name="userNickname" placeholder="유저 닉네임">
+                <input type="text" class="search-input" name="nickname" placeholder="유저 닉네임">
                 <button type="submit" class="search-button">검색</button>
             </div>
         </form>

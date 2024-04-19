@@ -10,9 +10,13 @@ public class MemberDao {
 	
 	public int insertMember(SqlSession sqlSession, Member m) {
 		
-		int result = sqlSession.insert("memberMapper.insertMember", m);
+		int result1 = sqlSession.insert("memberMapper.insertMember", m);
+		int result2 = 0;
 		
-		return result;
+		if (result1 > 0) {
+			int result2 = sqlSession.insert("memberMapper.", m);
+		}
+		return result2;
 	}
 	
 	public Member loginMember(SqlSession sqlSession, Member m) {

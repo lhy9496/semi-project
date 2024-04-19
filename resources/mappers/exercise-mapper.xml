@@ -50,7 +50,7 @@
 		)			
 	</insert>
 	
-	<select id="SearchUserExerciseRecord" parameterType="String" resultMap="UserExerciseRecordResultSet">
+	<select id="SearchUserExerciseRecord" parameterType="string" resultMap="UserExerciseRecordResultSet">
  		SELECT EXR_NO,
  				USER_NO,
  				EX_NO,

@@ -95,6 +95,7 @@
                 <jsp:include page="../common/menubar.jsp" />
                     <div id="menubar-space">
                         <form action="" id="bdList">
+                            <input type="hidden" name="cpage" value="1">
                             <div id="nav" class="bo">
                                 <ul>
                                     <li><a href="#">전체</a></li>

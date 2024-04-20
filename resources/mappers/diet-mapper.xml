@@ -13,6 +13,17 @@
 		<result column="WHEN_EAT_DATE" property="whenEatDate"/>
 	</resultMap>
 	
+	<resultMap id="foodResultSet" type="Food">
+		<result column="FOOD_NO" property="foodNo" />
+		<result column="FOOD_NAME" property="foodName" />
+		<result column="FOOD_KCAL" property="foodKcal" />
+		<result column="CARB" property="foodCarb" />
+		<result column="PROTEIN" property="foodProtein" />
+		<result column="FAT" property="foodFat" />
+	
+	</resultMap>
+	
+	
   	<select id="SearchUserDietRecord" parameterType="String" resultMap="UserDietRecordResultSet">
  		SELECT MR_NO,
  				USER_NO,
@@ -23,6 +34,16 @@
  		JOIN MEAL_RECORD USING (USER_NO)
 		WHERE USER_NICKNAME = #{nickname}
 		AND STATUS = 'Y'
+ 	</select>
+ 	
+ 	<select id="selectFoodList" resultMap="foodResultSet">
+ 		SELECT FOOD_NO,
+				FOOD_NAME,
+				FOOD_KCAL,
+				CARB,
+				PROTEIN,
+				FAT
+		  FROM	FOOD
  	</select>
  	
   </mapper>

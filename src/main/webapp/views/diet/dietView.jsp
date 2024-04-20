@@ -46,7 +46,7 @@
             <script>
                 $(function () {
                     $("#addMeal").on("click", function () {
-                        location.href = "${contextPath}/enroll.fo";
+                        location.href = "${contextPath}/enroll.mr";
                     })
                     })
             </script>

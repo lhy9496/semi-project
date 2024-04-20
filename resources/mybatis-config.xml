@@ -14,6 +14,7 @@
 	<typeAliases>
 		<typeAlias type="com.pss.exercise.model.vo.Exercise" alias="Exercise" />
 		<typeAlias type="com.pss.member.model.vo.Member" alias="Member" />
+		<typeAlias type="com.pss.diet.model.vo.Food" alias="Food" />
 		
 		<typeAlias type="com.pss.board.model.vo.Board" alias="Board" />
 		<typeAlias type="com.pss.board.model.vo.Reply" alias="Reply" />

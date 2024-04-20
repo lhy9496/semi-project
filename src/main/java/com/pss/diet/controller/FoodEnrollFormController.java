@@ -1,4 +1,4 @@
-package com.pss.diet;
+package com.pss.diet.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BoardSampleServlet
+ * Servlet implementation class FoodEnrollFormController
  */
-@WebServlet("/DietSampleServlet")
-public class DietSampleServlet extends HttpServlet {
+@WebServlet("/enroll.fo")
+public class FoodEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DietSampleServlet() {
+    public FoodEnrollFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,10 @@ public class DietSampleServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		
+		
+		request.getRequestDispatcher("views/diet/foodEnrollView.jsp").forward(request, response);
 	}
 
 	/**

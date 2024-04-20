@@ -135,8 +135,8 @@
 
             <div id="workout-container">
                 <c:if test="${empty list}">
-                    <div class="workout-info">
-                        <div>
+                    <div class="workout-info" style="background: white;">
+                        <div style="font-size: 25px">
                             운동기록이 없습니다.
                         </div>
                     </div>

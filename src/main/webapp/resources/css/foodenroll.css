@@ -1,0 +1,37 @@
+* {
+  box-sizing: border-box;
+}
+
+#mealenroll-area {
+  width: 80%;
+  margin: 0 auto;
+  /* padding: 50px; */
+  margin-top: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.food-list {
+  width: 100%;
+}
+
+#meal_form{
+  width: 100%;
+}
+
+#food-list td {
+  text-align: center;
+}
+
+#meal_select {
+  width: 100px;
+  font-size: 25px;
+  margin-bottom: 25px;
+}
+
+.food_amount {
+  width: 100px;
+  text-align: center;
+}

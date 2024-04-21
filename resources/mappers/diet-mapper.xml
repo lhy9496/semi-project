@@ -20,9 +20,19 @@
 		<result column="CARB" property="foodCarb" />
 		<result column="PROTEIN" property="foodProtein" />
 		<result column="FAT" property="foodFat" />
-	
 	</resultMap>
 	
+	<resultMap id="mealRecordResultMap" type="MealRecord">
+		<result column="MR_NO" property="mealRecordNo"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="FOOD_NAME" property="foodName"/>
+		<result column="FOOD_COUNT" property="amount"/>
+		<result column="FOOD_KCAL" property="foodKcal"/>
+		<result column="WHEN_EAT_DATE" property="whenEatDate"/>
+		<result column="MLT_NO" property="mealTimingNo"/>
+		<result column="MLT_NAME" property="mealTimingName"/>
+				
+	</resultMap>
 	
   	<select id="SearchUserDietRecord" parameterType="String" resultMap="UserDietRecordResultSet">
  		SELECT MR_NO,
@@ -46,4 +56,41 @@
 		  FROM	FOOD
  	</select>
  	
+
+ 	<insert id="insertMealRecord" parameterType="hashmap">
+ 		INSERT INTO MEAL_RECORD(
+ 			MR_NO,
+ 			USER_NO,
+ 			FOOD_NO,
+ 			FOOD_COUNT,
+ 			WHEN_EAT_DATE,
+ 			MLT_NO
+ 		) VALUES (
+ 			SEQ_MRNO.NEXTVAL,
+ 			1,
+ 			${foodNo},
+ 			${foodAmount},
+ 			SYSDATE,
+ 			${mealTimingNo}
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectMealRecord" resultMap="mealRecordResultMap">
+ 		SELECT MR_NO,
+				USER_NO,
+				FOOD_NAME,
+				FOOD_COUNT,
+				FOOD_KCAL,
+				WHEN_EAT_DATE,
+				MLT_NO,
+				MLT_NAME
+		   FROM MEAL_RECORD
+		   JOIN MEMBER USING (USER_NO)
+		   JOIN FOOD USING (FOOD_NO)
+		   JOIN MEAL_TIMING USING (MLT_NO)
+		   WHERE USER_NO = 1
+		   	AND TO_CHAR(WHEN_EAT_DATE,'yyyymmdd') = TO_CHAR(SYSDATE,'yyyymmdd')
+		   ORDER BY	MLT_NO,MR_NO
+ 	</select>
+
   </mapper>

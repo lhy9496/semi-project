@@ -40,6 +40,7 @@ public class ExerciseServiceImpl implements ExerciseService{
 	public ArrayList<ExerciseRecord> selectExerciseRecordList(int userNo) {
 		SqlSession sqlSession = Template.getSqlSession();
 		ArrayList<ExerciseRecord> list = exerciseDao.selectExerciseRecordList(sqlSession,userNo);
+		sqlSession.close();
 		return list;
 	}
 

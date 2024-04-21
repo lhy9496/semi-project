@@ -30,10 +30,10 @@
         <h2 align="center" style="font-size: 50px; margin: 20px;">식사내용을 입력해주세요</h2>
 
         <select name="meal_timing" id="meal_select">
-            <option value="">아침</option>
-            <option value="">점심</option>
-            <option value="">저녁</option>
-            <option value="">간식</option>
+            <option value="1">아침</option>
+            <option value="2">점심</option>
+            <option value="3">저녁</option>
+            <option value="4">간식</option>
         </select>
         <div id="food-list">
             <table class="table">
@@ -77,7 +77,9 @@
                 $('.food').each(function () {
                     if ($(this).find('input[type=checkbox]').prop('checked')) {
 
-                        let mealTiming = $('#meal_select :selected').text();
+                        // let mealTiming = $('#meal_select :selected').text();
+                        let mealTimingNo = $('#meal_select :selected').val();
+                        // console.log(mn);
                         let foodNo = $(this).find('.foodNo').val();
                         let amount = $(this).find('.food_amount').val();
 
@@ -85,7 +87,7 @@
                             alert("음식개수를 입력해주세요")
                         } else {
                             mealRecord.push({
-                                mealTiming: mealTiming,
+                                mealTimingNo: mealTimingNo,
                                 foodNo: foodNo,
                                 amount: amount
                             });
@@ -103,8 +105,8 @@
                     contentType: 'application/json',
                     data: JSON.stringify(mealRecord),
                     success: function (res) {
-                        alert("성공적으로 식사르 기록하였습니다.");
-                        // location.href = "${contextPath}/info.mr"
+                        alert("성공적으로 식사를 기록하였습니다.");
+                        location.href = "${contextPath}/info.mr"
                     },
                     error: function () {
                         console.log('식사 기록에 실패하였습니다.')

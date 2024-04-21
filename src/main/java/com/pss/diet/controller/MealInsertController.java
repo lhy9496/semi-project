@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.pss.diet.model.vo.MealRecord;
+import com.pss.diet.service.FoodServiceImpl;
 import com.pss.exercise.model.vo.ExerciseInfo;
 import com.pss.exercise.model.vo.WorkoutRecord;
 import com.pss.exercise.service.ExerciseServiceImpl;
@@ -54,22 +55,27 @@ public class MealInsertController extends HttpServlet {
 		
 		Gson gson = new Gson();
 		MealRecord[] mealRecords = gson.fromJson(jsonData, MealRecord[].class);
-		System.out.println(mealRecords);
-		
+
 		for(MealRecord meal : mealRecords) {
 
 			int foodNo = meal.getFoodNo();
 			int foodAmount = meal.getAmount();
-			String mealTiming = meal.getMealTiming();
+			int mealTimingNo = meal.getMealTimingNo();
                 
             HashMap<String, Integer> map = new HashMap<>();
             System.out.println(foodNo);
             System.out.println(foodAmount);
-            System.out.println(mealTiming);
-//            int result = new ExerciseServiceImpl().insertExerciseRecord(map);
+            System.out.println(mealTimingNo);
+            
+            map.put("foodNo", foodNo);
+            map.put("foodAmount", foodAmount);
+            map.put("mealTimingNo", mealTimingNo);
+            
+            int result = new FoodServiceImpl().insertMealRecord(map);
                        
-           
 		}
+		
+		new Gson().toJson("",response.getWriter());
 	}
 
 	/**

@@ -14,7 +14,6 @@
   width: 620px;
   padding: 50px;
   padding-top: 20px;
-  border: 2px solid blue;
 }
 
 #right-container {
@@ -38,7 +37,7 @@
 }
 
 #meal-container {
-  height: 410px;
+  height: 580px;
   overflow: scroll;
 }
 

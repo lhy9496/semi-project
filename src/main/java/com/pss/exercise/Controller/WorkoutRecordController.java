@@ -78,7 +78,7 @@ public class WorkoutRecordController extends HttpServlet {
             }
 		}
 		
-		new Gson().toJson("", response.getWriter());
+		gson.toJson("", response.getWriter());
 		
 //		System.out.println(jsonData);
 		

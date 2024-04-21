@@ -18,11 +18,9 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <link rel="stylesheet" href="../../resources/css/dietview.css?after">
+    <link rel="stylesheet" href="resources/css/dietview.css?after">
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
-    <script src="../../resources/js/calendar.js"></script>
-    <script src="../../resources/js/dietview.js"></script>
 </head>
 <body style="height: 100vh;">
 	<c:import url="../../views/common/menubar.jsp" />
@@ -43,145 +41,72 @@
                 </div>
             </div>
 
-            <script>
-                $(function () {
-                    $("#addMeal").on("click", function () {
-                        location.href = "${contextPath}/enroll.mr";
-                    })
-                    })
-            </script>
-
             <div id="meal-container">
                 <!-- 음식기록이 없을 경우 -->
-                <div class="meal-info" style="background: white;">
-                    <div style="font-size: 25px">
-                        식사기록이 없습니다.
-                    </div>
-                </div>
-
-                <!-- 음식기록이 있을 경우 -->
-                <div class="meal-info">
-                    <div class="meal">
-                        <div class="meal-timing">아침식사</div>
-                        <div class="meal-kcal">총 500kcal</div>
-                    </div>
-                    <table class="meal-record">
-                        <thead>
-                            <tr>
-                                <td>음식</td>
-                                <td>수량</td>
-                                <td>칼로리</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>라면</td>
-                                <td>1</td>
-                                <td>500</td>
-                            </tr>
-                            <tr>
-                                <td>라면</td>
-                                <td>1</td>
-                                <td>500</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="meal-info">
-                    <div class="meal">
-                        <div class="meal-timing">점심식사</div>
-                        <div class="meal-kcal">총 500kcal</div>
-                    </div>
-                    <table class="meal-record">
-                        <thead>
-                            <tr>
-                                <td>음식</td>
-                                <td>수량</td>
-                                <td>칼로리</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>라면</td>
-                                <td>1</td>
-                                <td>500</td>
-                            </tr>
-                            <tr>
-                                <td>라면</td>
-                                <td>1</td>
-                                <td>500</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="meal-info">
-                    <div class="meal">
-                        <div class="meal-timing">저녁식사</div>
-                        <div class="meal-kcal">총 500kcal</div>
-                    </div>
-                    <table class="meal-record">
-                        <thead>
-                            <tr>
-                                <td>음식</td>
-                                <td>수량</td>
-                                <td>칼로리</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>라면</td>
-                                <td>1</td>
-                                <td>500</td>
-                            </tr>
-                            <tr>
-                                <td>라면</td>
-                                <td>1</td>
-                                <td>500</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="meal-info">
-                    <div class="meal">
-                        <div class="meal-timing">간식</div>
-                        <div class="meal-kcal">총 500kcal</div>
-                    </div>
-                    <table class="meal-record">
-                        <thead>
-                            <tr>
-                                <td>음식</td>
-                                <td>수량</td>
-                                <td>칼로리</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>라면</td>
-                                <td>1</td>
-                                <td>500</td>
-                            </tr>
-                            <tr>
-                                <td>라면</td>
-                                <td>1</td>
-                                <td>500</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
+                <c:choose>
+                	<c:when test="${empty mealRecordList }">
+                		<div class="meal-info" style="background: white;">
+		                    <div style="font-size: 25px">
+		                        식사기록이 없습니다.
+		                    </div>
+                		</div>
+                	</c:when>
+                	<c:otherwise>
+                		<!-- 음식기록이 있을 경우 -->
+                		<c:forEach var="meal" items="${mealRecordList }" varStatus="loop">
+                			<c:if test="${!meal.mealTimingName.equals(mealRecordList[loop.index-1].mealTimingName)}">
+                				<div class="meal-info">
+				                    <div class="meal">
+				                        <div class="meal-timing">${meal.mealTimingName }</div>
+				                        <div class="meal-kcal">총 500kcal</div>
+				                    </div>
+				                    <table class="meal-record">
+				                        <thead>
+				                            <tr>
+				                                <td>음식</td>
+				                                <td>수량</td>
+				                                <td>칼로리</td>
+				                            </tr>
+				                        </thead>
+				                        <tbody>
+                			</c:if>
+                						<tr>
+                							<td>${meal.foodName }</td>
+                							<td>${meal.amount }</td>
+                							<td>${meal.foodKcal }</td>
+                						</tr>
+                			<c:if test="${!meal.mealTimingName.equals(mealRecordList[loop.index+1].mealTimingName)}">
+                				</tbody>
+                				</table>
+                				</div>
+                			</c:if>
+                		</c:forEach>
+                	</c:otherwise>
+                </c:choose>
             </div>
-
         </div>
-
         <div id="right-container">
             <div id='calendar'></div>
-
         </div>
-
     </div>
+
+    <script>
+        $(function () {
+            $("#addMeal").on("click", function () {
+                location.href = "${contextPath}/enroll.mr";
+            })
+        })
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+              initialView: 'dayGridMonth',
+              height: "100%",
+              selectable:true
+            });
+            calendar.render();
+          });
+    </script>
 
 </body>
 </html>

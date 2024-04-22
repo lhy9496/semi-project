@@ -87,9 +87,6 @@
                                     <c:set var="totalKcal" value="0"></c:set>
                                 </tr>
                 				</tbody>
-                                <tfoot>
-                                    <div></div>
-                                </tfoot>
                 				</table>
                 				</div>
                 			</c:if>
@@ -119,12 +116,93 @@
               selectable:true,
               dateClick: function(info) {
                 let clickedDate = info.dateStr;
+
+                $.ajax({
+                    url: 'cinfo.mr',
+                    data: {
+                        clickedDate: clickedDate
+                    },
+                    success: function(res) {
+                        let mealRecordList = mealRecordFormat(res);
+                        drawMealRecordTable(mealRecordList);
+                    },
+
+                    error: function() {
+                        console.log("식사기록 조회 실패");
+                    }
+                })
               }
             });
             calendar.render();
           });
+        
+          function mealRecordFormat(list) {
+            let mealRecordList = {};
+            for(let record of list) {
+                if(mealRecordList[record.mealTimingName]) {
+                    mealRecordList[record.mealTimingName].push(record);
+                } else {
+                    mealRecordList[record.mealTimingName] = [record];
+                }
+            }
+            return mealRecordList;
+          }
 
+          function drawMealRecordTable(list) {
+            $('#meal-container').empty();
 
+            if(Object.keys(list).length === 0) {
+                let str = `<div class="meal-info" style="background: white;">
+		                    <div style="font-size: 25px">
+		                        식사기록이 없습니다.
+		                    </div>
+                		</div>`;
+                $('#meal-container').append(str);
+            }
+
+            for (let key in list ){
+                let str = `<div class="meal-info">`;
+                
+                let recordList = list[key];
+                let totalKcal = 0;
+                recordList.forEach(function(meal, index) {
+                    if(index === 0) {
+                        str += `<div class="meal">
+				                        <div class="meal-timing">`+meal.mealTimingName+`</div>
+				                    </div>
+				                    <table class="meal-record">
+				                        <thead>
+				                            <tr>
+				                                <td>음식</td>
+				                                <td>수량</td>
+				                                <td>칼로리</td>
+				                            </tr>
+				                        </thead>
+                                        <tbody>`;
+                    }
+                    str += `
+                            <tr>
+                                <td>`+meal.foodName+`</td>
+                                <td>`+meal.amount +`</td>`
+                    let foodKcal = meal.foodKcal * meal.amount;            
+                    str += `    
+                            <td>`+foodKcal+`</td>`
+                    totalKcal += foodKcal;
+                    str += `</tr>
+                            </tbody>`;
+                    if(index === recordList.length - 1) {
+                        str += `<tr>
+                                    <td style="background-color: aliceblue; font-weight: bold;">총 칼로리</td>
+                                    <td colspan="3" style="background-color: aliceblue; font-weight: bold;">`+totalKcal+` kcal</td>
+                                    <c:set var="totalKcal" value="0"></c:set>
+                                </tr>
+                                </tbody>`;
+                    }
+                })
+                str += `</div>`;
+                $('#meal-container').append(str);
+            }
+          }
     </script>
 
 </body>

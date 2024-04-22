@@ -23,4 +23,10 @@ public class FoodDao {
 		return (ArrayList)sqlSession.selectList("dietMapper.selectMealRecord", userNo);
 	}
 
+
+	public ArrayList<MealRecord> selectClickedDateMealList(SqlSession sqlSession, HashMap<String, String> map) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("dietMapper.selectClickedMealList",map);
+	}
+
 }

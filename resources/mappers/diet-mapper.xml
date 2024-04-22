@@ -92,5 +92,23 @@
 		   	AND TO_CHAR(WHEN_EAT_DATE,'yyyymmdd') = TO_CHAR(SYSDATE,'yyyymmdd')
 		   ORDER BY	MLT_NO,MR_NO
  	</select>
+ 	
+ 	<select id="selectClickedMealList" resultMap="mealRecordResultMap">
+ 		SELECT MR_NO,
+				USER_NO,
+				FOOD_NAME,
+				FOOD_COUNT,
+				FOOD_KCAL,
+				WHEN_EAT_DATE,
+				MLT_NO,
+				MLT_NAME
+		   FROM MEAL_RECORD
+		   JOIN MEMBER USING (USER_NO)
+		   JOIN FOOD USING (FOOD_NO)
+		   JOIN MEAL_TIMING USING (MLT_NO)
+		   WHERE USER_NO = ${userNo}
+		   	AND TO_CHAR(WHEN_EAT_DATE,'yyyy-mm-dd') = #{clickedDate}
+		   ORDER BY	MLT_NO,MR_NO
+ 	</select>
 
   </mapper>

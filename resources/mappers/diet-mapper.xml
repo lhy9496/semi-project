@@ -67,7 +67,7 @@
  			MLT_NO
  		) VALUES (
  			SEQ_MRNO.NEXTVAL,
- 			1,
+ 			${userNo},
  			${foodNo},
  			${foodAmount},
  			SYSDATE,
@@ -88,7 +88,7 @@
 		   JOIN MEMBER USING (USER_NO)
 		   JOIN FOOD USING (FOOD_NO)
 		   JOIN MEAL_TIMING USING (MLT_NO)
-		   WHERE USER_NO = 1
+		   WHERE USER_NO = ${userNo}
 		   	AND TO_CHAR(WHEN_EAT_DATE,'yyyymmdd') = TO_CHAR(SYSDATE,'yyyymmdd')
 		   ORDER BY	MLT_NO,MR_NO
  	</select>

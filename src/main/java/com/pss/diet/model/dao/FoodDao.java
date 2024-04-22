@@ -19,8 +19,8 @@ public class FoodDao {
 		return sqlSession.insert("dietMapper.insertMealRecord", map);
 	}
 
-	public ArrayList<MealRecord> selectMealRecord(SqlSession sqlSession) {
-		return (ArrayList)sqlSession.selectList("dietMapper.selectMealRecord");
+	public ArrayList<MealRecord> selectMealRecord(SqlSession sqlSession, int userNo) {
+		return (ArrayList)sqlSession.selectList("dietMapper.selectMealRecord", userNo);
 	}
 
 }

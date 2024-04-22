@@ -55,6 +55,7 @@ public class MealInsertController extends HttpServlet {
 		
 		Gson gson = new Gson();
 		MealRecord[] mealRecords = gson.fromJson(jsonData, MealRecord[].class);
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 
 		for(MealRecord meal : mealRecords) {
 
@@ -70,6 +71,7 @@ public class MealInsertController extends HttpServlet {
             map.put("foodNo", foodNo);
             map.put("foodAmount", foodAmount);
             map.put("mealTimingNo", mealTimingNo);
+            map.put("userNo",userNo);
             
             int result = new FoodServiceImpl().insertMealRecord(map);
                        

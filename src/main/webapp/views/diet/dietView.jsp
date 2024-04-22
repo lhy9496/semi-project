@@ -53,12 +53,14 @@
                 	</c:when>
                 	<c:otherwise>
                 		<!-- 음식기록이 있을 경우 -->
+                		<c:set var="totalKcal" value="0"/>
+                		
                 		<c:forEach var="meal" items="${mealRecordList }" varStatus="loop">
                 			<c:if test="${!meal.mealTimingName.equals(mealRecordList[loop.index-1].mealTimingName)}">
+                                
                 				<div class="meal-info">
 				                    <div class="meal">
 				                        <div class="meal-timing">${meal.mealTimingName }</div>
-				                        <div class="meal-kcal">총 500kcal</div>
 				                    </div>
 				                    <table class="meal-record">
 				                        <thead>
@@ -73,14 +75,26 @@
                 						<tr>
                 							<td>${meal.foodName }</td>
                 							<td>${meal.amount }</td>
-                							<td>${meal.foodKcal }</td>
+                							<c:set var="foodKcal" value="${meal.foodKcal * meal.amount }"/>
+                							<td><c:out value="${foodKcal }" /></td>
+                							<c:set var="totalKcal" value="${totalKcal + foodKcal}"></c:set>
+                                            
                 						</tr>
                 			<c:if test="${!meal.mealTimingName.equals(mealRecordList[loop.index+1].mealTimingName)}">
+                                <tr>
+                                    <td style="background-color: aliceblue; font-weight: bold;">총 칼로리</td>
+                                    <td colspan="3" style="background-color: aliceblue; font-weight: bold;"><c:out value="${totalKcal}" /> kcal</td>
+                                    <c:set var="totalKcal" value="0"></c:set>
+                                </tr>
                 				</tbody>
+                                <tfoot>
+                                    <div></div>
+                                </tfoot>
                 				</table>
                 				</div>
                 			</c:if>
                 		</c:forEach>
+
                 	</c:otherwise>
                 </c:choose>
             </div>
@@ -102,10 +116,15 @@
             var calendar = new FullCalendar.Calendar(calendarEl, {
               initialView: 'dayGridMonth',
               height: "100%",
-              selectable:true
+              selectable:true,
+              dateClick: function(info) {
+                let clickedDate = info.dateStr;
+              }
             });
             calendar.render();
           });
+
+
     </script>
 
 </body>

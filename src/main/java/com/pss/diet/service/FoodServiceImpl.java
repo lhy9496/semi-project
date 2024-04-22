@@ -40,9 +40,10 @@ public class FoodServiceImpl implements FoodService{
 
 
 	@Override
-	public ArrayList<MealRecord> selectMealRecord() {
+	public ArrayList<MealRecord> selectMealRecord(int userNo) {
 		SqlSession sqlSession = Template.getSqlSession();
-		ArrayList<MealRecord> list = foodDao.selectMealRecord(sqlSession);
+		ArrayList<MealRecord> list = foodDao.selectMealRecord(sqlSession,userNo);
+		
 		sqlSession.close();
 		return list;
 	}

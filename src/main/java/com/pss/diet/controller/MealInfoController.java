@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pss.diet.model.vo.MealRecord;
 import com.pss.diet.service.FoodServiceImpl;
+import com.pss.member.model.vo.Member;
 
 /**
  * Servlet implementation class MealInfoController
@@ -32,8 +33,10 @@ public class MealInfoController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ArrayList<MealRecord> list = new FoodServiceImpl().selectMealRecord();
-		System.out.println(list);
+		
+		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
+		
+		ArrayList<MealRecord> list = new FoodServiceImpl().selectMealRecord(userNo);
 		
 		request.setAttribute("mealRecordList", list);
 		request.getRequestDispatcher("views/diet/dietView.jsp").forward(request, response);

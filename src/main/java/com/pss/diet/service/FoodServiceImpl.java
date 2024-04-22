@@ -48,4 +48,14 @@ public class FoodServiceImpl implements FoodService{
 		return list;
 	}
 
+
+	@Override
+	public ArrayList<MealRecord> selectClickedDateMealList(HashMap<String, String> map) {
+		SqlSession sqlSession = Template.getSqlSession();
+		ArrayList<MealRecord> list = foodDao.selectClickedDateMealList(sqlSession, map);
+		
+		sqlSession.close();
+		return list;
+	}
+
 }

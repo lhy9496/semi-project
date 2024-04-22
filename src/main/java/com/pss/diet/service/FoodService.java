@@ -15,8 +15,10 @@ public interface FoodService {
 	int insertMealRecord(HashMap<String, Integer> map);
 	
 	// 식사기록 가져오기
-
 	ArrayList<MealRecord> selectMealRecord(int userNo);
+
+	// 클릭한 날짜의 식사기록 가져오기 
+	ArrayList<MealRecord> selectClickedDateMealList(HashMap<String, String> map);
 	
 	
 }

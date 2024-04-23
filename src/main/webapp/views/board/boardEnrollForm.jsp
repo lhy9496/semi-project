@@ -95,7 +95,7 @@
                     </div>
                 </div>
             </div>
-            <jsp:include page="../common/.jsp" />
+            
             <script>
                 // HTML 문서가 로드될 때 실행될 함수
                 document.addEventListener("DOMContentLoaded", function() {

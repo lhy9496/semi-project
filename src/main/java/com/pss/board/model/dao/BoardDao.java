@@ -56,4 +56,9 @@ public class BoardDao {
 	public ArrayList<Reply> selectReplyList(SqlSession sqlSession, int boardNo){
 		return (ArrayList)sqlSession.selectList("boardMapper.selectReplyList", boardNo);
 	}
+
+	public int insertReply(SqlSession sqlSession, Reply r) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("boardMapper.insertReply", r);
+	}
 }

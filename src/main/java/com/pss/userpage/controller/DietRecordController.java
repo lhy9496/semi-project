@@ -1,4 +1,4 @@
-package com.pss.diet.controller;
+package com.pss.userpage.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pss.diet.model.vo.MealRecord;
-import com.pss.diet.service.FoodServiceImpl;
-import com.pss.member.model.vo.Member;
+import com.pss.diet.model.dao.DietRecord;
+import com.pss.userpage.service.SearchUserServiceImpl;
 
 /**
- * Servlet implementation class MealInfoController
+ * Servlet implementation class DietRecordController
  */
-@WebServlet("/info.mr")
-public class MealInfoController extends HttpServlet {
+@WebServlet("/dietRecord.me")
+public class DietRecordController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MealInfoController() {
+    public DietRecordController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +31,10 @@ public class MealInfoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		String nickname = request.getParameter("userNickname");
 		
-		if(request.getSession().getAttribute("loginUser") == null) {
-			request.setAttribute("errorMsg", "로그인 후 이용 가능한 페이지입니다.");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
-		
-		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
-		
-		ArrayList<MealRecord> list = new FoodServiceImpl().selectMealRecord(userNo);
-		
-		request.setAttribute("mealRecordList", list);
-		request.getRequestDispatcher("views/diet/dietView.jsp").forward(request, response);
+		ArrayList<DietRecord> dietList = new SearchUserServiceImpl().getSearchUserDietRecord(nickname);;
 	}
 
 	/**

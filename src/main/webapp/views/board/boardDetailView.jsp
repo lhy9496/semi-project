@@ -100,7 +100,7 @@
                                 <div id="area1">
                                     <table align="center">
                                         <tr>
-                                            <th>&lt;${ b.category }&gt;</th>
+                                            <th>&lt;${ b.categoryName }&gt;</th>
                                             <th></th>
                                             <th></th>
                                             <th width="550px">&lt;${ b.boardTitle }&gt;</th>
@@ -136,12 +136,20 @@
                                 <div id="area1" style="padding: 10px;">&lt;댓글&gt;(${list.size()})</div>
                                 <div class="date1" style="padding: 30px;">
                                     <table id="com" style="padding: 30px;">
+                                    <c:forEach var="reply" items="${rlist }">
                                         <tr>
-                                            <th id="user1">&lt; ${ b.boardWriter }&gt;${r.createDate }</th>
+                                            <th id="user1">&lt;${reply.replyWriter }&gt;${reply.createDate }</th>
                                         </tr>
                                         <tr>
-                                            <td colspan="3">(${list.size()})</td>
+                                            <!--<td colspan="3">(${list.size()})</td>  -->
+                                 
+                                            <th>${reply.replyContent }</th>
+                                            
                                         </tr>
+                                     </c:forEach>
+                                     <tbody>
+                                     	
+                                     </tbody>   
                                     </table>
                                 </div>
 
@@ -151,38 +159,83 @@
                                             required></textarea>
 
                                         <div style="width: 10px; background: rgb(250, 243, 243);"></div>
-
-                                        <div class="bt" style="margin: auto; ">
-                                            <button onclick="insertReply()"
+										<c:if test="${not empty loginUser }">
+											<div class="bt" style="margin: auto; ">
+                                            <button type="button" onclick="insertReply()"
                                                 style="background: rgb(207, 200, 200); border: 0px; ">등록</button>
                                         </div>
+										</c:if>
+                                        <c:if test="${empty loginUser }">
+                                        	<div class="bt" style="margin: auto; ">
+                                            <button type="button" 
+                                                style="background: rgb(207, 200, 200); border: 0px; " disabled>등록</button>
+                                        </div>
+                                        </c:if>
                                     </div>
-                                    <c:forEach var="r" items="${list }">
-                                        <tr>
-                                            <th>${r.replyWriter }</th>
-                                            <th>${r.replyContent }</th>
-                                            <th>${r.createDate }</th>
-                                        </tr>
-                                    </c:forEach>
-
-
-                                    <!--  <div class="wr">
-                                                <textarea id="con" name="con" rows="10" placeholder="내용을 입력하세요."
-                                                    required></textarea>
-
-                                                <div style="width: 10px; background: white;"></div>
-
-                                                <div class="bt" style="margin: auto; ">
-                                                    <button disabled>등록</button>
-                                                </div>
-                                            </div>-->
                                 </div>
 
                             </ul>
                         </div>
                     </form>
                 </div>
+		<script>
+			$(function(){
+                selectReplyList();
+			})
+			
+			function selectReplyList() {
+				$.ajax({
+					url: "rlist.bo",
+					data : {
+						bno : ${b.boardNo}
+					},
+					success: function(res) {
+						console.log(res);
+						let str = "";
+                        for(let reply of res){
+                            str += ("<tr>"+
+                                    "<td>" + reply.replyWriter + "</td>" +
+                                    "<td>" + reply.replyContent + "</td>" +
+                                    "<td>" + reply.createDate + "</td>" +
+                                    "</tr>")
+                        }
+                        
+                        document.querySelector("#com tbody").innerHTML = str;
+					},
+					
+					error: function() {
+						
+					}
+				})
+			}
+			
+			
+            function insertReply(){
+                let replyContent = $('#con').val();
+                let boardNo = ${b.boardNo};
+                console.log(boardNo);
+                console.log(replyContent);
 
+                $.ajax({
+                        url : "rinsert.bo",
+                        data : {
+                            bno : boardNo,
+                            content : replyContent
+                        },
+                        type : "POST",
+                        success : function(res){
+                            document.querySelector("#con").value = "";
+                            selectReplyList();
+                        }, 
+                        error : function(){
+                            console.log("댓글 작성중 ajax통신 실패")
+                        }
+                    })	
+            }
+
+           
+		
+		</script>
         </body>
 
         </html>

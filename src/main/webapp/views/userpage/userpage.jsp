@@ -12,13 +12,65 @@
 	Member member = (Member)(searchUserTotalInfoMap.get("searchUserInfo"));
 	UserPhysicalInfo userPhysicalInfo = (UserPhysicalInfo)(searchUserTotalInfoMap.get("searchUserPhysicalInfo"));
 	UserPicture userPicture = (UserPicture)(searchUserTotalInfoMap.get("searchUserPicture"));
+    String nickname = member.getUserNickname();
 %>
  
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8"> 
 <title>Physical S</title>
+
+    <script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "dietRecord.me",
+            data : {
+                userNickname : nickname
+            },
+            success: function(response) {
+                const dietList = response;
+            },
+            error: function() {
+                console.log("AJAX 오류 발생");
+            }
+        });
+
+        $.ajax({
+            url: "exerciseRecord.me",
+            data : {
+                userNickname : nickname
+            },
+            success: function(response) {
+                const exerciseList = response;
+            },
+            error: function() {
+                console.log("AJAX 오류 발생");
+            }
+        });
+    });
+        
+
+    </script>
+
+       /*
+       $.ajax({
+                        url : "rinsert.bo",
+                        data : {
+                            bno : boardNo,
+                            content : content
+                        },
+                        type : "POST",
+                        success : function(res){
+                            document.querySelector("#reply-content").value = "";
+                            selectReplyList();
+                        }, 
+                        error : function(){
+                            console.log("댓글 작성중 ajax통신 실패")
+                        }
+                    })
+       */
 <style>
     *{
         box-sizing: border-box;

@@ -1,7 +1,7 @@
 package com.pss.userpage.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,23 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
-import com.google.gson.Gson;
-import com.pss.userpage.model.vo.TotalRecord;
+import com.pss.diet.model.dao.DietRecord;
+import com.pss.exercise.model.vo.ExerciseRecord;
 import com.pss.userpage.service.SearchUserServiceImpl;
 
 /**
- * Servlet implementation class TotalRecordController
+ * Servlet implementation class ExerciseRecordController
  */
-@WebServlet("/totalRecord.do")
-public class TotalRecordController extends HttpServlet {
+@WebServlet("/exerciseRecord.me")
+public class ExerciseRecordController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TotalRecordController() {
+    public ExerciseRecordController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,14 +33,9 @@ public class TotalRecordController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
 		String nickname = request.getParameter("userNickname");
 		
-		List<TotalRecord> totalRecordList = new SearchUserServiceImpl().getSearchUserTotalRecord(nickname);
-		
-		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(totalRecordList, response.getWriter());
-		
+		ArrayList<ExerciseRecord> exerciseList = new SearchUserServiceImpl().getSearchUserExerciseRecord(nickname);;
 	}
 
 	/**

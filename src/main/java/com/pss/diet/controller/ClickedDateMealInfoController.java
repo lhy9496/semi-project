@@ -37,15 +37,13 @@ public class ClickedDateMealInfoController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String clickedDate = request.getParameter("clickedDate");
 		String userNo = String.valueOf(((Member)request.getSession().getAttribute("loginUser")).getUserNo());
-		System.out.println(clickedDate);
-		System.out.println(userNo);
+		
 		HashMap<String, String> map = new HashMap<String, String>();
 		
 		map.put("clickedDate", clickedDate);
 		map.put("userNo", userNo);
 		
 		ArrayList<MealRecord> list = new FoodServiceImpl().selectClickedDateMealList(map);
-		System.out.println(list);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(list,response.getWriter());

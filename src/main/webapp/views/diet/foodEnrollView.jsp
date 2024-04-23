@@ -51,7 +51,7 @@
                             <td class="food_name" name="food_name" data-foodNo=${food.foodNo}>${food.foodName }</td>
                             <input type="hidden" class="foodNo" value=${food.foodNo}>
                             <td class="food_kcal" name="food_kcal">${food.foodKcal }</td>
-                            <td><input type="text" style="border-width: 0 0 1px;" class="food_amount"
+                            <td><input type="number" style="border-width: 0 0 1px;" class="food_amount"
                                     name="food_amount"></td>
                             <td class="food_check"><input type="checkbox" name="workout" class="workout_chkbox"
                                     style="zoom: 2.0;"></td>

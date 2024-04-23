@@ -64,17 +64,13 @@ public class MealInsertController extends HttpServlet {
 			int mealTimingNo = meal.getMealTimingNo();
                 
             HashMap<String, Integer> map = new HashMap<>();
-            System.out.println(foodNo);
-            System.out.println(foodAmount);
-            System.out.println(mealTimingNo);
             
             map.put("foodNo", foodNo);
             map.put("foodAmount", foodAmount);
             map.put("mealTimingNo", mealTimingNo);
             map.put("userNo",userNo);
             
-            int result = new FoodServiceImpl().insertMealRecord(map);
-                       
+            int result = new FoodServiceImpl().insertMealRecord(map);                  
 		}
 		
 		new Gson().toJson("",response.getWriter());

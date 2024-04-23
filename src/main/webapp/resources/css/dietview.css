@@ -37,7 +37,7 @@
 }
 
 #meal-container {
-  height: 580px;
+  height: 410px;
   overflow: scroll;
 }
 
@@ -89,4 +89,14 @@
 #addMeal:hover {
   background-color : rgb(184, 181, 181);
   cursor: pointer;
+}
+
+.fc-day-sun a {
+  color: red;
+  text-decoration: none;
+}
+
+.fc-day-sat a {
+  color: blue;
+  text-decoration: none;
 }

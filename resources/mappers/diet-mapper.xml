@@ -22,7 +22,7 @@
 		<result column="FAT" property="foodFat" />
 	</resultMap>
 	
-	<resultMap id="mealRecordResultMap" type="MealRecord">
+	<resultMap id="mealRecordResultMap1" type="MealRecord">
 		<result column="MR_NO" property="mealRecordNo"/>
 		<result column="USER_NO" property="userNo"/>
 		<result column="FOOD_NAME" property="foodName"/>
@@ -34,7 +34,7 @@
 				
 	</resultMap>
 	
-	<resultMap id="mealRecordResultMap" type="DietRecord">
+	<resultMap id="mealRecordResultMap" type="UserDietRecord">
 		<result column="FOOD_COUNT" property="foodCount"/>
 		<result column="WHEN_EAT_DATE" property="whenEatDate"/>
 		<result column="FOOD_KCAL" property="foodKcal"/>
@@ -82,7 +82,7 @@
  		)
  	</insert>
  	
- 	<select id="selectMealRecord" resultMap="mealRecordResultMap">
+ 	<select id="selectMealRecord" resultMap="mealRecordResultMap1">
  		SELECT MR_NO,
 				USER_NO,
 				FOOD_NAME,
@@ -117,7 +117,7 @@
 		   	AND TO_CHAR(WHEN_EAT_DATE,'yyyy-mm-dd') = #{clickedDate}
 		   ORDER BY	MLT_NO,MR_NO
  	</select>
- 	
+ 	<!-- 
  	<select id="tenDayDietRecord" resultMap="dietRecordList">
  		SELECT FOOD_COUNT,
        			WHEN_EAT_DATE,
@@ -129,5 +129,6 @@
 			AND STATUS = 'Y'
 		  	AND WHEN_EAT_DATE > (SYSDATE - 10);
  	</select>
+ 	 -->
 
   </mapper>

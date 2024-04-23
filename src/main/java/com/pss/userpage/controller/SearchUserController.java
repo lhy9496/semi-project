@@ -34,7 +34,6 @@ public class SearchUserController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	System.out.println("서블릿 도착함^^");
 		request.setCharacterEncoding("UTF-8");
 		
 		String nickname = request.getParameter("userNickname");

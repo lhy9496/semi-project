@@ -40,7 +40,6 @@ public class WorkoutInfoController extends HttpServlet {
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
 		ArrayList<ExerciseRecord> list = new ExerciseServiceImpl().selectExerciseRecordList(userNo);
-		System.out.println(list);
 		
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/exercise/workoutview.jsp").forward(request, response);

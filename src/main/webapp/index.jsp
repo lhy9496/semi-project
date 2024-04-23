@@ -4,6 +4,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
 <%
     String alertMsg = (String)session.getAttribute("alertMsg");
+    String redirectUrl = (String)session.getAttribute("redirectUrl");
 %>
 <!DOCTYPE html>
 <html>
@@ -108,6 +109,9 @@
 		</script>
 		<% session.removeAttribute("alertMsg"); %>
 	<% } %>
+    <% if(redirectUrl != null){ %>
+        <% session.removeAttribute("redirectUrl"); %>
+    <% }%>
     
     <c:choose>
         <c:when test="${empty loginUser }">

@@ -1,7 +1,7 @@
 package com.pss.userpage.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pss.member.model.vo.Member;
+import org.json.simple.JSONObject;
+
+import com.google.gson.Gson;
+import com.pss.userpage.model.vo.TotalRecord;
 import com.pss.userpage.service.SearchUserServiceImpl;
 
 /**
- * Servlet implementation class MyPageController
+ * Servlet implementation class TotalRecordController
  */
-@WebServlet("/menuToUserPage.me")
-public class MyPageController extends HttpServlet {
+@WebServlet("/totalRecord.do")
+public class TotalRecordController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageController() {
+    public TotalRecordController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +36,13 @@ public class MyPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		Member user = (Member)request.getSession().getAttribute("loginUser");
-		String nickname = user.getUserNickname();
+		String nickname = request.getParameter("userNickname");
 		
-		HashMap<String, Object> searchUserTotalInfoMap = new SearchUserServiceImpl().getSearchUserTotalInfo(nickname);
+		List<TotalRecord> totalRecordList = new SearchUserServiceImpl().getSearchUserTotalRecord(nickname);
 		
-		if (searchUserTotalInfoMap.get("searchUserInfo") == null) {
-			request.setAttribute("alertMsg", "페이지를 가져오는데 실패하였습니다.");
-			response.sendRedirect(request.getContextPath());
-		} else {
-
-			request.setAttribute("SearchUserTotalInfoMap", searchUserTotalInfoMap);
-
-			request.getRequestDispatcher("/views/userpage/userpage.jsp").forward(request, response);
-			
-		}
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(totalRecordList, response.getWriter());
+		
 	}
 
 	/**

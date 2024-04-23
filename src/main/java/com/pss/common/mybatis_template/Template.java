@@ -17,10 +17,10 @@ public class Template {
 		
 		try {
 			InputStream inputStream = Resources.getResourceAsStream(resource);
-			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-			sqlSession = sqlSessionFactory.openSession(false);
+//			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//			sqlSession = sqlSessionFactory.openSession(false);
 			
-//			sqlSession = new SqlSessionFactoryBuilder().build(inputStream).openSession(false);
+			sqlSession = new SqlSessionFactoryBuilder().build(inputStream).openSession(false);
 			
 		} catch (IOException e) {
 			e.printStackTrace();

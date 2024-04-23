@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <!DOCTYPE html>
     <html>
 
@@ -63,10 +63,11 @@
     </head>
 
     <body>
-        <%@ include file="../common/menubar.jsp" %>
+        <jsp:include page="../common/menubar.jsp" />
 
-            <div id="board-enroll-area">
-                <form action="">
+            <div id="board-enroll-area" >
+                <form action="" action="" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="userNo" value="${m.loginUser}">
                 <div class="outer">
                     <div style="font-size: xx-large; font-weight: bold; color: white;">커뮤니티 글쓰기</div>
                     <div align="right">
@@ -78,7 +79,7 @@
                     <input type="hidden" name="userNo" value="">
                     <div id="nav" class="bo">
                         <ul style="gap: 10px; list-style: none;">
-                            <li><a href="#" onclick="">자유</a></li>
+                            <li><a href="#">자유</a></li>
                             <li><a href="#">헬창</a></li>
                             <li><a href="#">헬린이</a></li>
                             <li><a href="#">Q / A</a></li>
@@ -93,32 +94,25 @@
                         <textarea id="content" name="content" rows="10" placeholder="내용을 입력하세요." required></textarea>
                     </div>
                 </div>
-    
-                <script>
-                    // 카테고리를 선택했을 때 제목 입력란에 자동으로 설정하는 함수
-                    function setCategory(category) {
-                        document.getElementById("title").value = category;
-                    }
-    
-                    // 등록 버튼을 눌렀을 때 실행되는 함수
-                    function upload() {
-                        // 제목과 내용을 가져옴
-                        var title = document.getElementById("title").value;
-                        var content = document.getElementById("content").value;
-    
-                        // 제목과 내용이 비어있는지 확인
-                        if (title.trim() === "" || content.trim() === "") {
-                            alert("제목 또는 내용을 입력하세요.");
-                        } else {
-                            // 등록 작업 수행
-                            // 여기에 등록 작업을 위한 코드를 추가하면 됨
-                            alert("게시글이 등록되었습니다.");
-                            // 등록 후 페이지 이동 또는 다른 작업 수행 가능
-                        }
-                    }
-                </script>
             </div>
+            <jsp:include page="../common/.jsp" />
+            <script>
+                // HTML 문서가 로드될 때 실행될 함수
+                document.addEventListener("DOMContentLoaded", function() {
+                    // 카테고리 링크를 선택
+                    var categoryLinks = document.querySelectorAll("#nav li a");
             
+                    // 각 링크에 이벤트 리스너 추가
+                    categoryLinks.forEach(function(link) {
+                        // 링크가 클릭되었을 때 실행될 함수
+                        link.addEventListener("click", function(event) {
+                            // 링크의 텍스트(카테고리 이름)를 가져와 제목 필드에 할당
+                            var categoryName = event.target.textContent;
+                            document.getElementById("title").value = categoryName;
+                        });
+                    });
+                });
+            </script>
 
     </body>
 

@@ -120,7 +120,7 @@
                                         <tr>
                                             <td>${b.boardNo}</td>
                                             <td><b>헬창</b></td>
-                                            <td><a href="detail.bo?bno=${b.boardName}">${b.boardTitle}</a></td>
+                                            <td><a href="detail.bo?bno=${b.boardNo}">${b.boardTitle}</a></td>
                                             <td>${b.boardWriter }</td>
                                             <td>${b.createDate }</td>
                                             <td>${b.count }</td>

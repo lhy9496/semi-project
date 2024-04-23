@@ -1,8 +1,0 @@
-#calendar {
-  color: black;
-  
-
-}
-
-.fc-day-number.fc-sat.fc-past { color:#0000FF; }
-.fc-day-number.fc-sun.fc-past { color:#FF0000; }

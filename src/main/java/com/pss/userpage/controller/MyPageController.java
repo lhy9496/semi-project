@@ -39,12 +39,13 @@ public class MyPageController extends HttpServlet {
 		HashMap<String, Object> searchUserTotalInfoMap = new SearchUserServiceImpl().getSearchUserTotalInfo(nickname);
 		
 		if (searchUserTotalInfoMap.get("searchUserInfo") == null) {
-			request.setAttribute("alertMsg", "페이지를 가져오는데 실패하였습니다.");
+			request.setAttribute("alertMsg", "존재하지 않는 유저입니다.");
 			response.sendRedirect(request.getContextPath());
 		} else {
 
-			request.setAttribute("SearchUserTotalInfoMap", searchUserTotalInfoMap);
+			request.setAttribute("searchUserTotalInfoMap", searchUserTotalInfoMap);
 
+			
 			request.getRequestDispatcher("/views/userpage/userpage.jsp").forward(request, response);
 			
 		}

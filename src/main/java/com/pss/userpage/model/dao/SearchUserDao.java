@@ -9,15 +9,15 @@ import com.pss.member.model.vo.UserPicture;
 public class SearchUserDao {
 
 	public Member getSearchUserInfo(SqlSession sqlSession, String nickname) {
-		return sqlSession.selectOne("memberMapper.SearchUserInfo", nickname);
+		return sqlSession.selectOne("memberMapper.searchUserInfo", nickname);
 	}
 
 	public UserPhysicalInfo getSearchUserPhysicalInfo(SqlSession sqlSession, String nickname) {
-		return sqlSession.selectOne("memberMapper.SearchUserPhysicalInfo", nickname);
+		return sqlSession.selectOne("memberMapper.searchUserPhysicalInfo", nickname);
 	}
 
 	public UserPicture getSearchUserPicture(SqlSession sqlSession, String nickname) {
-		return sqlSession.selectOne("memberMapper.SearchUserPicture", nickname);
+		return sqlSession.selectOne("memberMapper.searchUserPicture", nickname);
 	}
 
 }

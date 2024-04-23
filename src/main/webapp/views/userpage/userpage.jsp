@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
-<%@ page import="java.util.HashMap,
-				java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
 <%@ page import="com.pss.member.model.vo.Member,
 				com.pss.member.model.vo.UserPhysicalInfo,
-				com.pss.member.model.vo.UserPicture,
-				com.pss.diet.model.vo.UserDietRecord,
-				com.pss.exercise.model.vo.ExerciseRecord" %>
+				com.pss.member.model.vo.UserPicture" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
@@ -15,8 +12,6 @@
 	Member member = (Member)(searchUserTotalInfoMap.get("searchUserInfo"));
 	UserPhysicalInfo userPhysicalInfo = (UserPhysicalInfo)(searchUserTotalInfoMap.get("searchUserPhysicalInfo"));
 	UserPicture userPicture = (UserPicture)(searchUserTotalInfoMap.get("searchUserPicture"));
-	ArrayList<UserDietRecord> userdietRecordList = (ArrayList<UserDietRecord>)(searchUserTotalInfoMap.get("searchUserdietRecord"));
-	ArrayList<ExerciseRecord> exerciseRecordList = (ArrayList<ExerciseRecord>)(searchUserTotalInfoMap.get("searchUserExerciseRecord"));
 %>
  
 <!DOCTYPE html>

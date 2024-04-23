@@ -100,7 +100,7 @@
 		   ORDER BY	MLT_NO,MR_NO
  	</select>
  	
- 	<select id="selectClickedMealList" resultMap="mealRecordResultMap">
+ 	<select id="selectClickedMealList" resultMap="mealRecordResultMap1">
  		SELECT MR_NO,
 				USER_NO,
 				FOOD_NAME,

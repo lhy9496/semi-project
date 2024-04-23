@@ -33,20 +33,16 @@ public class BoardListController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//----------- 페이징처리---------------------------
 		int listCount = new BoardServiceImpl().selectListCount(); //현재 총 게시글 수 
-		
-		String cpageParam = request.getParameter("cpage");
-		int currentPage = 1; // 기본값 설정
-		if (cpageParam != null) {
-		    currentPage = Integer.parseInt(cpageParam);
-		}
+		System.out.println(listCount);
+		int currentPage = Integer.parseInt(request.getParameter("cpage"));
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		ArrayList<Board> list = new BoardServiceImpl().selectList(pi);
-		
+		System.out.println(list);
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
 		

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ page import="com.pss.board.model.vo.Board" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <!DOCTYPE html>
         <html>
 
@@ -114,12 +114,13 @@
                                     <th width="100">날짜</th>
                                     <th width="50" style="border-radius: 0px 15px 15px 0px;">조회</th>
                                 </thead>
+                                
                                 <tbody>
                                     <c:forEach var="b" items="${list}">
                                         <tr>
                                             <td>${b.boardNo}</td>
                                             <td><b>헬창</b></td>
-                                            <td><a href="detail.bo?bno=${b.boardNo}">${b.boardTitle}</a></td>
+                                            <td><a href="detail.bo?bno=${b.boardName}">${b.boardTitle}</a></td>
                                             <td>${b.boardWriter }</td>
                                             <td>${b.createDate }</td>
                                             <td>${b.count }</td>

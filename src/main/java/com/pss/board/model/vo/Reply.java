@@ -8,13 +8,17 @@ public class Reply {
 	private String replyContent;
 	private int refBoardNo;
 	private String replyWriter;
-	private Date createDate;
+//	private Date createDate;
+	private String createDate;
 	private String status;
 	
 	public Reply() {
 		super();
 	}
-	public Reply(int replyNo, String replyContent, int refBoardNo, String replyWriter, Date createDate, String status) {
+	
+	
+	public Reply(int replyNo, String replyContent, int refBoardNo, String replyWriter, String createDate,
+			String status) {
 		super();
 		this.replyNo = replyNo;
 		this.replyContent = replyContent;
@@ -23,7 +27,8 @@ public class Reply {
 		this.createDate = createDate;
 		this.status = status;
 	}
-	
+
+
 	public int getReplyNo() {
 		return replyNo;
 	}
@@ -48,12 +53,17 @@ public class Reply {
 	public void setReplyWriter(String replyWriter) {
 		this.replyWriter = replyWriter;
 	}
-	public Date getCreateDate() {
+	
+	public String getCreateDate() {
 		return createDate;
 	}
-	public void setCreateDate(Date createDate) {
+
+
+	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
+
+
 	public String getStatus() {
 		return status;
 	}

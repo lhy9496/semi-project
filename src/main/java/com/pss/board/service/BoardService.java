@@ -20,4 +20,9 @@ public interface BoardService {
 		//게시글 상세조회
 		public Board increaseCount(int boardNo);
 		public ArrayList<Reply> selectReplyList(int boardNo);
+		
+		
+		public int insertReply(Reply r);
+		
+		
 }

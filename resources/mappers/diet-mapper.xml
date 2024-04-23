@@ -34,6 +34,13 @@
 				
 	</resultMap>
 	
+	<resultMap id="mealRecordResultMap" type="DietRecord">
+		<result column="FOOD_COUNT" property="foodCount"/>
+		<result column="WHEN_EAT_DATE" property="whenEatDate"/>
+		<result column="FOOD_KCAL" property="foodKcal"/>
+				
+	</resultMap>
+	
   	<select id="SearchUserDietRecord" parameterType="String" resultMap="UserDietRecordResultSet">
  		SELECT MR_NO,
  				USER_NO,
@@ -46,7 +53,7 @@
 		AND STATUS = 'Y'
  	</select>
  	
- 	<select id="selectFoodList" resultMap="foodResultSet">
+ 	<select id="dietRecordList" resultMap="foodResultSet">
  		SELECT FOOD_NO,
 				FOOD_NAME,
 				FOOD_KCAL,
@@ -109,6 +116,18 @@
 		   WHERE USER_NO = ${userNo}
 		   	AND TO_CHAR(WHEN_EAT_DATE,'yyyy-mm-dd') = #{clickedDate}
 		   ORDER BY	MLT_NO,MR_NO
+ 	</select>
+ 	
+ 	<select id="tenDayDietRecord" resultMap="dietRecordList">
+ 		SELECT FOOD_COUNT,
+       			WHEN_EAT_DATE,
+       			FOOD_KCAL
+			FROM MEMBER
+			JOIN MEAL_RECORD USING (USER_NO)
+			JOIN FOOD USING (FOOD_NO)
+			WHERE WHERE USER_NICKNAME = #{nickname}
+			AND STATUS = 'Y'
+		  	AND WHEN_EAT_DATE > (SYSDATE - 10);
  	</select>
 
   </mapper>

@@ -6,6 +6,7 @@ public class Board {
 	
 	private int boardNo;
 	private int categoryNo;
+	private String categoryName;
 	private String boardTitle;
 	private String boardContent;
 	private String boardWriter;
@@ -28,6 +29,14 @@ public class Board {
 		this.count = count;
 		this.createDate = createDate;
 		this.status = status;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	public int getBoardNo() {
@@ -96,11 +105,13 @@ public class Board {
 
 	@Override
 	public String toString() {
-		return "Board [boardNo=" + boardNo + ", categoryNo=" + categoryNo + ", boardTitle=" + boardTitle
-				+ ", boardContent=" + boardContent + ", boardWriter=" + boardWriter + ", count=" + count
-				+ ", createDate=" + createDate + ", status=" + status + "]";
+		return "Board [boardNo=" + boardNo + ", categoryNo=" + categoryNo + ", categoryName=" + categoryName
+				+ ", boardTitle=" + boardTitle + ", boardContent=" + boardContent + ", boardWriter=" + boardWriter
+				+ ", count=" + count + ", createDate=" + createDate + ", status=" + status + ", getCategoryName()="
+				+ getCategoryName() + ", getBoardNo()=" + getBoardNo() + ", getCategoryNo()=" + getCategoryNo()
+				+ ", getBoardTitle()=" + getBoardTitle() + ", getBoardContent()=" + getBoardContent()
+				+ ", getBoardWriter()=" + getBoardWriter() + ", getCount()=" + getCount() + ", getCreateDate()="
+				+ getCreateDate() + ", getStatus()=" + getStatus() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
 	}
-	
-	
-	
 }

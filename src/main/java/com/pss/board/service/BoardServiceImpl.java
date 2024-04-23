@@ -83,4 +83,22 @@ public class BoardServiceImpl implements BoardService{
 		return list;
 	}
 
+	@Override
+	public int insertReply(Reply r) {
+		// TODO Auto-generated method stub
+		SqlSession sqlSession = Template.getSqlSession();
+		int result = bDao.insertReply(sqlSession, r);
+		
+		if(result > 0) {
+			sqlSession.commit();
+			
+		}else {
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
 }

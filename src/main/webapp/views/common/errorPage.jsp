@@ -10,6 +10,6 @@
 	
 	<jsp:include page="menubar.jsp" />
 	<br><br>
-	<h1 align="center" style="color:red">${errorMsg }</h1>
+	<h1 align="center" style="color:red; margin-top: 250px">${errorMsg }</h1>
 </body>
 </html>

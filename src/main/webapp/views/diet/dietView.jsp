@@ -30,7 +30,7 @@
 
             <h2>기록하기</h2>
             <br>
-
+            
             <div id="addMeal">
                 <div></div>
                 <span style="font-size: 35px;">식사 추가</span>

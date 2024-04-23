@@ -141,7 +141,7 @@
             <!-- 상단 입력칸 3개 -->
             <div class="top-line">
                 <div class="icon-space">
-                    <img src="/pss/resources/logo/person_icon.png" alt="인물 이미지">
+                    <img src="/pss/resources/logo/email_icon.png" alt="이메일 이미지">
                 </div>
                 <div class="input-space">
                     <input type="text" name="userEmail" id="email" class="input-space" placeholder="이메일" required>
@@ -154,7 +154,7 @@
             </div>
             <div class="middle-line">
                 <div class="icon-space">
-                    <img src="/pss/resources/logo/person_icon.png" alt="비번 이미지">
+                    <img src="/pss/resources/logo/pwd_icon.png" alt="비번 이미지">
                 </div>
                 <div class="input-space">
                     <input type="password" name="userPwd" id="pwd" class="input-space" placeholder="비밀번호" required>

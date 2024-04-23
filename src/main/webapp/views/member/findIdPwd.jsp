@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
-<%
-    String alertMsg = (String)session.getAttribute("alertMsg");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -120,7 +117,7 @@
         <form action="findPwd.me" id="findPwd-form" method="post">
             <div class="top-line">
                 <div class="icon-space">
-                    <img src="/pss/resources/logo/person_icon.png" alt="인물 이미지">
+                    <img src="/pss/resources/logo/email_icon.png" alt="이메일 이미지">
                 </div>
                 <div class="input-space">
                     <input type="text" name="userEmail" id="email" class="input-space" placeholder="이메일" required>
@@ -148,3 +145,4 @@
         </form>
     </div>
 </body>
+</html>

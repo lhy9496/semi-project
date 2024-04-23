@@ -10,114 +10,110 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <style>
-        html{
-            height: 100%;
-        }
-        body{
-            min-height: 100%;
-            background-color: rgb(225, 15, 26);
-        }
-        .login-frame{
-            width: 720px;
-            height: max-content;
-            margin-left: auto;
-            margin-right: auto;
-
-        }
-        .logo-space{
-            margin-top: 55px;
-            width: 252px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .input-background{
-            margin-top: 35px;
-            width: 720px;
-            height: 360px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0px 5px 5px;
-            position: relative;
-        }
-        .input-lineId, .input-linePwd{
-            width: 450px;
-            height: 50px;
-            display: flex;
-            flex-wrap: wrap;
-            border: 1px solid black;
-            border-radius: 15px;
-            position: absolute;
-            left: 0px;
-            right: 0px;
-            margin: auto;
-        }
-        .input-lineId{
-            top: 70px;
-        }
-        .input-linePwd{
-            top: 140px;
-        }
-        .icon-space{
-            width: 40px;
-            align-content: center;
-            padding-left: 20px;
-            padding-right: 20px;
-            padding: auto;
-        }
-        .input-space{
-            display: flex;
-            width: 370px;
-            border: none;
-            border-radius: 15px;
-            font-size: 16px;
-            outline: none;
-        }
-        .subit-space{
-            width: 450px;
-            height: 64px;
-            border-radius: 10px;
-            position: absolute;
-            left: 0px;
-            right: 0px;
-            bottom: 60px;
-            margin: auto;
-            box-shadow: 0px 2px 3px;
-        }
-        .subit-button{
-            width: 450px;
-            height: 64px;
-            border-radius: 10px;
-            border: 0px;
-            background-color: rgb(224, 15, 26); 
-            color: white;
-            font-size: 36px;
-        }
-        .etc-line{
-        width: 450px;
-        display: flex;
+<style>
+    body{
+        background-color: rgb(225, 15, 26);
+    }
+    .login-frame{
+        width: 720px;
+        height: max-content;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 60px;
-        }
-        .etc-space{
-            width: 200px;
-            height: 40px;
-            margin: auto;
-        }
-        .etc-button{
-            width: 100%;
-            height: 40px;
-            border: 0px;
-            border-radius: 15px;
-            background: rgba(255, 255, 255);
-            font-size: 16px;
-            font-weight: 600;
-        }
-        .etc-button:hover{
-            cursor: pointer;
-        }
-    </style>
+
+    }
+    .logo-space{
+        margin-top: 55px;
+        width: 252px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .input-background{
+        margin-top: 35px;
+        width: 720px;
+        height: 360px;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0px 5px 5px;
+        position: relative;
+    }
+    .input-lineId, .input-linePwd{
+        width: 450px;
+        height: 50px;
+        display: flex;
+        flex-wrap: wrap;
+        border: 1px solid black;
+        border-radius: 15px;
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+    }
+    .input-lineId{
+        top: 70px;
+    }
+    .input-linePwd{
+        top: 140px;
+    }
+    .icon-space{
+        width: 40px;
+        align-content: center;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding: auto;
+    }
+    .input-space{
+        display: flex;
+        width: 370px;
+        border: none;
+        border-radius: 15px;
+        font-size: 16px;
+        outline: none;
+    }
+    .subit-space{
+        width: 450px;
+        height: 64px;
+        border-radius: 10px;
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        bottom: 60px;
+        margin: auto;
+        box-shadow: 0px 2px 3px;
+    }
+    .subit-button{
+        width: 450px;
+        height: 64px;
+        border-radius: 10px;
+        border: 0px;
+        background-color: rgb(224, 15, 26); 
+        color: white;
+        font-size: 36px;
+    }
+    .etc-line{
+    width: 450px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    }
+    .etc-space{
+        width: 200px;
+        height: 40px;
+        margin: auto;
+    }
+    .etc-button{
+        width: 100%;
+        height: 40px;
+        border: 0px;
+        border-radius: 15px;
+        background: rgba(255, 255, 255);
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .etc-button:hover{
+        cursor: pointer;
+    }
+</style>
 </head>
 <body>
     <% if(alertMsg != null){ %>
@@ -135,7 +131,7 @@
             <div class="input-background">
                 <div class="input-lineId">
                     <div class="icon-space">
-                        <img src="/pss/resources/logo/person_icon.png" alt="인물 이미지">
+                        <img src="/pss/resources/logo/email_icon.png" alt="이메일 이미지">
                     </div>
                     <div class="input-space">
                         <input type="text" name="userEmail" id="email" class="input-space" placeholder="이메일" required>

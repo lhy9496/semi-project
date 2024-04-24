@@ -28,7 +28,7 @@
     $(document).ready(function() {
 
         let nickname = '<%= nickname %>';
-        console.log(nickname);
+        let dietList, exerciseList;
 
         $.ajax({
             url: "dietRecord.me",
@@ -36,9 +36,8 @@
                 userNickname : nickname
             },
             success: function(response) {
-                console.log("AJAX 성공");
-                const dietList = response;
-                console.log(dietList);
+                dietList = response;
+                drawMainView(dietList, exerciseList);
             },
             error: function() {
 
@@ -52,18 +51,66 @@
                 userNickname : nickname
             },
             success: function(response) {
-                console.log("AJAX 성공");
-                const exerciseList = response;
-                console.log(exerciseList);
+                exerciseList = response;
+                drawMainView(dietList, exerciseList);
             },
             error: function() {
                 console.log("AJAX 오류 발생");
             }
         });
+
+
+
     });
+
+    function drawMainView(dietList, exerciseList){
+        if (!dietList || !exerciseList)
+            return;
+        
+        let transDataList = {};
+
+
+        const toDay = new Date();
+        toDay.setDate(toDay.getDate() - 9);
+
+        for(let i = 0; i < 10; i++) {
+            let day = new Date(toDay);
+            day.setDate(day.getDate() + i);
+            let year = day.getFullYear();
+            let month = ('0' + (day.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 +1 해준 후 두 자리로 포맷팅
+            let date = ('0' + day.getDate()).slice(-2); // 일을 두 자리로 포맷팅
+
+            day = year + "-" + month + "-" + date;
+            transDataList[day] = {
+                "dietList" : [],
+                "exerciseList" : []
+            }
+        }
+
+        for (let data in transDataList){
+            for (let diet of dietList) {
+                if (data === diet.whenEatDate){
+                    transDataList[data].dietList.push(diet);
+                }
+            }
+
+            for (let exercise of exerciseList) {
+                if (data === exercise.exrDate){
+                    transDataList[data].exerciseList.push(exercise);
+                }
+            }
+        }
+
+
+        console.log("transDataList", transDataList)
+
+
+
+    }
         
 
     </script>
+
 <style>
     *{
         box-sizing: border-box;
@@ -250,7 +297,9 @@
                 <div class="box flex-box" style="height: 150px;">
                     <div class="box bodybox row-flex-box">
                         <div class="box flex-box" style="height: 100%; width: 35%;">
-                            <div class="box flex-box" style="width: 100px; height: 100px; background: #D9D9D9;;">휘장이미지</div>
+                            <div class="box flex-box" style="width: 100px; height: 100px;">
+                                <img src="/pss/resources/logo/Prize.png" alt="휘장" width="100" height="100">
+                            </div>
                         </div>
                         <div class="box" style="height: 100%; width: 65%;">
                             <div class="flex-box centeralign" style="height: 100%;">
@@ -265,8 +314,10 @@
                 <div class="box flex-box" style="height: 500px;">
                     <div class="box bodybox">
                         <div class="box titlearea" style="height: 10%;">
-                            <h2>신체정보</h2>
-                            <a>수정버튼</a>
+                            <div>신체정보</div>
+                            <a href="pupdateform.me">
+                                <img src="/pss/resources/logo/edit.png" alt="수정버튼" width="20" height="20">
+                            </a>
                         </div>
                         <div class="box" style="height: 90%;">
                             <div class="box flex-box" style="height: 25%;">

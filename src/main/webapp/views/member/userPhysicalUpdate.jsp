@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.pss.member.model.vo.UserPhysicalInfo" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
 <%
     String alertMsg = (String)session.getAttribute("alertMsg");
+    UserPhysicalInfo physicalInfo = (UserPhysicalInfo)session.getAttribute("physicalInfo");
 %>
 <!DOCTYPE html>
 <html>
@@ -66,7 +68,7 @@
         padding: auto;
     }
     .input-describe{
-        width: 80px;
+        width: 120px;
         align-content: center;
         padding-left: 5px;
         padding-right: 5px;
@@ -76,7 +78,7 @@
     }
     .input-space{
         display: flex;
-        width: 270px;
+        width: 200px;
         border: none;
         border-radius: 15px;
         font-size: 16px;
@@ -129,53 +131,59 @@
 </style>
 </head>
 <body>
-    <form action="update.me" id="update-form" method="POST">
+    <% if(alertMsg != null){ %>
+		<script>
+			alert("<%=alertMsg%>")
+		</script>
+		<% session.removeAttribute("alertMsg"); %>
+	<% } %>
+    <form action="pupdate.me" id="update-form" method="POST">
         <input type="hidden" name="redirectLastPage" value="">
         <div class="update-frame">
             <div class="logo-space">
                 <a href="${contextPath}"><img src="/pss/resources/logo/psslogologin.png" alt="로고 이미지"></a>
             </div>
             <div class="input-background">
-                <form action="findPwd.me" id="findPwd-form" method="post">
+                <form action="bodyupdate.me" method="post">
                     <div class="top-line">
                         <div class="icon-space">
                             <img src="/pss/resources/logo/height_icon.png" alt="키 이미지">
                         </div>
-                        <div class="input-describe">키</div>
+                        <div class="input-describe">키(cm)</div>
                         <div class="input-space">
-                            <input type="text" name="memHeight" id="email" class="input-space" value="키" required>
+                            <input type="number" min="50" max="250" step="0.1" name="memHeight" id="email" class="input-space" value="${physicalInfo.memHeight}" required>
                         </div>
                     </div>
                     <div class="middle-line1">
                         <div class="icon-space">
                             <img src="/pss/resources/logo/weight_icon.png" alt="체중 이미지">
                         </div>
-                        <div class="input-describe">체중</div>
+                        <div class="input-describe">체중(kg)</div>
                         <div class="input-space">
-                            <input type="text" class="input-space" name="memWeight" value="몸무게" required>
+                            <input type="number" min="20" max="500" step="0.1" class="input-space" name="memWeight" value="${physicalInfo.memWeight}" required>
                         </div>
                     </div>
                     <div class="middle-line2">
                         <div class="icon-space">
                             <img src="/pss/resources/logo/fat_icon.png" alt="체지방률 이미지">
                         </div>
-                        <div class="input-describe">체지방률</div>
+                        <div class="input-describe">체지방률(%)</div>
                         <div class="input-space">
-                            <input type="text" class="input-space" name="memBfp" value="체지방률" required>
+                            <input type="number" min="3" max="50" step="0.1" class="input-space" name="memBep" value="${physicalInfo.memBep}" required>
                         </div>
                     </div>
                     <div class="bottom-line">
                         <div class="icon-space">
                             <img src="/pss/resources/logo/muscle_icon.png" alt="골격근량 이미지">
                         </div>
-                        <div class="input-describe">골격근량</div>
+                        <div class="input-describe">골격근량(kg)</div>
                         <div class="input-space">
-                            <input type="text" class="input-space" name="memSmm" value="골격근량" required>
+                            <input type="number" min="9" max="225" step="0.1" class="input-space" name="memSmm" value="${physicalInfo.memSmm}" required>
                         </div>
                     </div>
                     <div class="submit-line">
                         <div class="submit-space">
-                            <a href="update.me"><button type="submit" class="submit-button">정보 수정</button></a>
+                            <button type="submit" class="submit-button">정보 수정</button>
                         </div>
                         <div class="submit-space">
                             <a href="menuToUserPage.me"><button type="button" class="submit-button">취소</button></a>

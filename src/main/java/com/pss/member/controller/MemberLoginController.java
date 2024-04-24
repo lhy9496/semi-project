@@ -31,6 +31,7 @@ public class MemberLoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
 		
 		Member m = new Member();
 		
@@ -39,14 +40,14 @@ public class MemberLoginController extends HttpServlet {
 		Member loginUser = new MemberServiceImpl().loginMember(m);
 		
 		if (loginUser == null) {
-			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "이메일이나 비밀번호가 올바르지 않습니다.");
 			response.sendRedirect(request.getContextPath() + "/loginForm.me");
 		} else {
-			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", loginUser.getUserNickname() + "님 환영합니다.");
 			request.getSession().setAttribute("loginUser", loginUser);
+			
 			String redirectUrl = (String)session.getAttribute("redirectUrl");
+			
 			if (redirectUrl == null) {
 			response.sendRedirect(request.getContextPath());
 			} else {

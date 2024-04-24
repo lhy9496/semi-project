@@ -44,9 +44,8 @@ public class SearchUserController extends HttpServlet {
 			request.setAttribute("alertMsg", "존재하지 않는 유저입니다.");
 			response.sendRedirect(request.getContextPath());
 		} else {
-
+			
 			request.setAttribute("searchUserTotalInfoMap", searchUserTotalInfoMap);
-
 			
 			request.getRequestDispatcher("/views/userpage/userpage.jsp").forward(request, response);
 			

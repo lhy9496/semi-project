@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.pss.common.mybatis_template.Template;
 import com.pss.member.model.dao.MemberDao;
 import com.pss.member.model.vo.Member;
+import com.pss.member.model.vo.UserPhysicalInfo;
 
 public class MemberServiceImpl implements MemberService{
 
@@ -79,5 +80,20 @@ public class MemberServiceImpl implements MemberService{
 		return findPwd;
 	}
 	
-	
+	@Override
+	public int updatePhysicalInfo(UserPhysicalInfo userPInfo) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = mDao.updatePhysicalInfo(sqlSession, userPInfo);
+		
+		if (result > 0) {
+			sqlSession.commit();
+		} else {
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
 }

@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PhysicalS - 운동 추가</title>
+  <title>PhysicalS - 운동추가</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <!-- jQuery library -->
@@ -69,6 +69,7 @@
         <!-- Modal body -->
         <div class="modal-body">
           <div id="checked_workout">
+            
           </div>
         </div>
 
@@ -112,10 +113,10 @@
 				                    <tr>
 				                      <td class="txt-center exSet">`+setCount+`</td>
 				                      <td class="td-25 txt-center">
-				                        <input class="bottom-border exWeight" type="text" style="width: 50px;"> kg
+				                        <input class="bottom-border exWeight" type="number" style="width: 50px;" min='0'> kg
 				                      </td>
 				                      <td class="td-25 txt-center">
-				                        <input class="bottom-border exCount" type="text" style="width: 50px;"> 개
+				                        <input class="bottom-border exCount" type="number" style="width: 50px;" min='0'> 개
 				                      </td>
 				                      <td class="td-25 txt-center">
 				                        <button class="btn btn-danger delete-set-button">삭제</button>
@@ -140,10 +141,10 @@
           tbody.append(`<tr>
                               <td class="txt-center exSet">`+currentCount+`</td>
                               <td class="td-25 txt-center">
-                                <input class="bottom-border exWeight" type="text" style="width: 50px;"> kg
+                                <input class="bottom-border exWeight" type="number" style="width: 50px;" min='0'> kg
                               </td>
                               <td class="td-25 txt-center">
-                                <input class="bottom-border exCount" type="text" style="width: 50px;"> 개
+                                <input class="bottom-border exCount" type="number" style="width: 50px;" min='0'> 개
                               </td>
                               <td class="td-25 txt-center">
                                 <button class="btn btn-danger delete-set-button">삭제</button>
@@ -161,8 +162,6 @@
         let workoutRecord = [];
         
         $(".check_workout_list").each(function() {
-          // let exercise = $(this).find(".exercise").text();
-          // let bodyPart = $(this).find(".bodyPart").text();
           let exerciseNo = $(this).find("input[type=hidden]").val();
           let exInfos = [];
 

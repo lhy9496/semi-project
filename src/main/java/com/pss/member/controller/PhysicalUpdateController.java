@@ -16,13 +16,13 @@ import com.pss.member.service.MemberServiceImpl;
  * Servlet implementation class MemberBodyUpdateController
  */
 @WebServlet("/pupdate.me")
-public class MemberPhysicalUpdateController extends HttpServlet {
+public class PhysicalUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberPhysicalUpdateController() {
+    public PhysicalUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }

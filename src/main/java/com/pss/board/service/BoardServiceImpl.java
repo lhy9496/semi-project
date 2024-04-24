@@ -100,5 +100,21 @@ public class BoardServiceImpl implements BoardService{
 		
 		return result;
 	}
+	
+	@Override
+	public int insertBoard(Board board) {
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		int result = bDao.insertBoard(sqlSession, board);
+		
+		if(result > 0) {
+			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
+		}
+		sqlSession.close();
+		
+		return result;
+	}
 
 }

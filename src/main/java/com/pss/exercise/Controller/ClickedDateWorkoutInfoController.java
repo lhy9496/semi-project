@@ -34,7 +34,6 @@ public class ClickedDateWorkoutInfoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		String clickedDate = request.getParameter("clickedDate");
 		String userNo = String.valueOf(((Member)request.getSession().getAttribute("loginUser")).getUserNo());

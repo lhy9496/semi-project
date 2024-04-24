@@ -41,8 +41,10 @@
                 </div>
             </div>
 
+            <div id="date-div"></div>
+
             <div id="meal-container">
-                <!-- 음식기록이 없을 경우 -->
+                <!-- 식사기록이 없을 경우 -->
                 <c:choose>
                 	<c:when test="${empty mealRecordList }">
                 		<div class="meal-info" style="background: white;">
@@ -52,7 +54,7 @@
                 		</div>
                 	</c:when>
                 	<c:otherwise>
-                		<!-- 음식기록이 있을 경우 -->
+                		<!-- 식사기록이 있을 경우 -->
                 		<c:set var="totalKcal" value="0"/>
                 		
                 		<c:forEach var="meal" items="${mealRecordList }" varStatus="loop">
@@ -103,10 +105,22 @@
 
     <script>
         $(function () {
+            getTodayDate();
             $("#addMeal").on("click", function () {
                 location.href = "${contextPath}/enroll.mr";
             })
         })
+
+        function getTodayDate() {
+            let today = new Date();
+            let year = today.getFullYear();
+            let month = ('0' + (today.getMonth() + 1)).slice(-2);
+            let day = ('0' + today.getDate()).slice(-2);
+
+            let dateString = year + '-' + month + '-' + day;
+            const date = document.querySelector('#date-div');
+            date.innerHTML=dateString;
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
@@ -116,7 +130,10 @@
               selectable:true,
               dateClick: function(info) {
                 let clickedDate = info.dateStr;
+                let date_div = document.querySelector("#date-div");
 
+                date_div.innerHTML="";
+                date_div.innerHTML=clickedDate;
                 $.ajax({
                     url: 'cinfo.mr',
                     data: {

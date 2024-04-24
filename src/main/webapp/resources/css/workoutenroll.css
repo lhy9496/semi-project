@@ -88,3 +88,10 @@
   border-width: 0 0 1px;
 }
 
+.exCount::-webkit-outer-spin-button,
+.exCount::-webkit-inner-spin-button,
+.exWeight::-webkit-outer-spin-button,
+.exWeight::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}

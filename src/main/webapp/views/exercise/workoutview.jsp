@@ -28,7 +28,10 @@
                 selectable: true,
                 dateClick: function (info) {
                     let clickedDate = info.dateStr;
+                    let date_div = document.querySelector("#date-div");
 
+                    date_div.innerHTML="";
+                    date_div.innerHTML=clickedDate;
                     // 달력에 클릭한 날짜에 대한 운동기록 조회하기
                     $.ajax({
                         url: 'cinfo.wo',
@@ -133,6 +136,8 @@
                 </div>
             </div>
 
+            <div id="date-div"></div>
+
             <div id="workout-container">
                 <c:if test="${empty list}">
                     <div class="workout-info" style="background: white;">
@@ -181,10 +186,22 @@
     </div>
     <script>
         $(function () {
+            getTodayDate();
             $(".addWorkout").on("click", function () {
                 location.href = "${contextPath}/enroll.wo";
             })
         })
+
+        function getTodayDate() {
+            let today = new Date();
+            let year = today.getFullYear();
+            let month = ('0' + (today.getMonth() + 1)).slice(-2);
+            let day = ('0' + today.getDate()).slice(-2);
+
+            let dateString = year + '-' + month + '-' + day;
+            const date = document.querySelector('#date-div');
+            date.innerHTML=dateString;
+        }
     </script>
 </body>
 

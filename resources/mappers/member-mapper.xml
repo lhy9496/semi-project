@@ -151,4 +151,12 @@
  		AND USER_NICKNAME = #{userNickname}
  		AND STATUS = 'Y'
  	</select>
+ 	<update id="updatePhysicalInfo" parameterType="UserPhysicalInfo">
+ 		UPDATE	MEM_PHYSICAL_INFO
+ 		SET		MEM_HEIGHT = #{memHeight},
+ 				MEM_WEIGHT = #{memWeight},
+ 				MEM_SMM = #{memSmm},
+ 				MEM_BFP = #{memBep}
+ 		WHERE	USER_NO = #{userNo}
+ 	</update>
 </mapper>

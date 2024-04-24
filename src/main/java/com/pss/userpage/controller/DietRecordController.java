@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pss.diet.model.dao.DietRecord;
+import com.pss.diet.model.vo.TenDayDietRecord;
+import com.pss.diet.model.vo.UserDietRecord;
 import com.pss.userpage.service.SearchUserServiceImpl;
 
 /**
@@ -34,7 +35,7 @@ public class DietRecordController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String nickname = request.getParameter("userNickname");
 		
-		ArrayList<DietRecord> dietList = new SearchUserServiceImpl().getSearchUserDietRecord(nickname);;
+		ArrayList<TenDayDietRecord> dietList = new SearchUserServiceImpl().getSearchUserDietRecord(nickname);
 	}
 
 	/**

@@ -8,8 +8,10 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.pss.common.mybatis_template.Template;
-import com.pss.diet.model.dao.DietRecord;
+import com.pss.diet.model.vo.TenDayDietRecord;
+import com.pss.diet.model.vo.UserDietRecord;
 import com.pss.exercise.model.vo.ExerciseRecord;
+import com.pss.exercise.model.vo.TenDayExerciseRecord;
 import com.pss.userpage.model.dao.SearchUserDao;
 
 public class SearchUserServiceImpl implements SearchUserService {
@@ -29,19 +31,19 @@ public class SearchUserServiceImpl implements SearchUserService {
 		return SearchUserTotalInfoMap;
 	}
 
-	public ArrayList<ExerciseRecord> getSearchUserExerciseRecord(String nickname) {
+	public ArrayList<TenDayExerciseRecord> getSearchUserExerciseRecord(String nickname) {
 		SqlSession sqlSession = Template.getSqlSession();
-		ArrayList<ExerciseRecord> exerciseList = new ArrayList<>();
-		exerciseList.addAll(new SearchUserDao().getDietList(sqlSession, nickname));
+		ArrayList<TenDayExerciseRecord> exerciseList = new ArrayList<>();
+		exerciseList.addAll(new SearchUserDao().getExerciseList(sqlSession, nickname));
 		
 		sqlSession.close();
 		return exerciseList;
 	}
 
-	public ArrayList<DietRecord> getSearchUserDietRecord(String nickname) {
+	public ArrayList<TenDayDietRecord> getSearchUserDietRecord(String nickname) {
 		SqlSession sqlSession = Template.getSqlSession();
-		ArrayList<DietRecord> dietList = new ArrayList<>();
-//		dietList.addAll(new SearchUserDao().getExerciseList(sqlSession, nickname)); -------------------- 여기서부터 하자.............
+		ArrayList<TenDayDietRecord> dietList = new ArrayList<>();
+		dietList.addAll(new SearchUserDao().getDietList(sqlSession, nickname));
 		
 		sqlSession.close();
 		return dietList;

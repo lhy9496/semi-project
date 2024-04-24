@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.pss.diet.model.dao.DietRecord;
-import com.pss.exercise.model.vo.ExerciseRecord;
+import com.pss.diet.model.vo.TenDayDietRecord;
+import com.pss.exercise.model.vo.TenDayExerciseRecord;
 import com.pss.member.model.vo.Member;
 import com.pss.member.model.vo.UserPhysicalInfo;
 import com.pss.member.model.vo.UserPicture;
@@ -23,13 +23,15 @@ public class SearchUserDao {
 	public UserPicture getSearchUserPicture(SqlSession sqlSession, String nickname) {
 		return sqlSession.selectOne("memberMapper.searchUserPicture", nickname);
 	}
+	
+	public ArrayList<TenDayExerciseRecord> getExerciseList(SqlSession sqlSession, String nickname) {
+		return (ArrayList)sqlSession.selectList("exerciseMapper.tenDayExerciseRecord", nickname);
+	}
 
-	public ArrayList<ExerciseRecord> getDietList(SqlSession sqlSession, String nickname) {
+	public ArrayList<TenDayDietRecord> getDietList(SqlSession sqlSession, String nickname) {
 		return (ArrayList)sqlSession.selectList("dietMapper.tenDayDietRecord", nickname);
 	}
 
-	public ArrayList<ExerciseRecord> getExerciseList(SqlSession sqlSession, String nickname) {
-		return (ArrayList)sqlSession.selectList("exerciseMapper.tenDayExerciseRecord", nickname);
-	}
+	
 
 }

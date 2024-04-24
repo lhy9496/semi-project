@@ -31,6 +31,7 @@
             },
             success: function(response) {
                 const dietList = response;
+                console.log(dietList);
             },
             error: function() {
                 console.log("AJAX 오류 발생");
@@ -44,6 +45,7 @@
             },
             success: function(response) {
                 const exerciseList = response;
+                console.log(exerciseList);
             },
             error: function() {
                 console.log("AJAX 오류 발생");

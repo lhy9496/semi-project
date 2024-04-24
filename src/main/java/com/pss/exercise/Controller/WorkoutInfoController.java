@@ -32,10 +32,14 @@ public class WorkoutInfoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getSession().getAttribute("loginUser") == null) {
+			request.setAttribute("errorMsg", "로그인 후 이용 가능한 페이지입니다.");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+		
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
 		ArrayList<ExerciseRecord> list = new ExerciseServiceImpl().selectExerciseRecordList(userNo);
-		System.out.println(list);
 		
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/exercise/workoutview.jsp").forward(request, response);

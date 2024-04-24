@@ -40,7 +40,7 @@
                 <thead>
                     <tr>
                         <td>음식이름</td>
-                        <td>kcal</td>
+                        <td>개당 kcal</td>
                         <td>수량</td>
                         <td>체크해주세요</td>
                     </tr>
@@ -51,10 +51,10 @@
                             <td class="food_name" name="food_name" data-foodNo=${food.foodNo}>${food.foodName }</td>
                             <input type="hidden" class="foodNo" value=${food.foodNo}>
                             <td class="food_kcal" name="food_kcal">${food.foodKcal }</td>
-                            <td><input type="text" style="border-width: 0 0 1px;" class="food_amount"
+                            <td><input type="number" style="border-width: 0 0 1px;" class="food_amount"
                                     name="food_amount"></td>
                             <td class="food_check"><input type="checkbox" name="workout" class="workout_chkbox"
-                                    style="zoom: 2.0;"></td>
+                                    style="zoom: 2.0;" min="0"></td>
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -77,9 +77,7 @@
                 $('.food').each(function () {
                     if ($(this).find('input[type=checkbox]').prop('checked')) {
 
-                        // let mealTiming = $('#meal_select :selected').text();
                         let mealTimingNo = $('#meal_select :selected').val();
-                        // console.log(mn);
                         let foodNo = $(this).find('.foodNo').val();
                         let amount = $(this).find('.food_amount').val();
 

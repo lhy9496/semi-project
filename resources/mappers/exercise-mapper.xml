@@ -22,6 +22,10 @@
 		<result column="EXR_WEIGHT" property="exRecordWeight"/>
 		<result column="EXR_COUNT" property="exRecordCount"/>
 	</resultMap>
+	
+	<resultMap id="TenDayExerciseRecordResultSet" type="TenDayExerciseRecord">
+		<result column="EX_NAME" property="exName"/>
+	</resultMap>
 
 	<select id="selectExerciseList" resultMap="exerciseResultSet">
 		SELECT EX_NO,
@@ -98,6 +102,16 @@
  		WHERE USER_NO = ${userNo}
  			AND TO_CHAR(EXR_DATE,'yyyy-mm-dd') = #{clickedDate}
  		ORDER BY EX_NAME, EXR_SET
+ 	</select>
+ 	
+ 	<select id="tenDayExerciseRecord" resultMap="TenDayExerciseRecordResultSet">
+ 		SELECT EX_NAME
+			FROM MEMBER
+			JOIN EX_RECORD USING (USER_NO)
+			JOIN EXERCISE USING (EX_NO)
+			WHERE USER_NICKNAME = #{nickname}
+			AND STATUS = 'Y'
+		  	AND EXR_DATE > (SYSDATE - 10)
  	</select>
 
 </mapper>

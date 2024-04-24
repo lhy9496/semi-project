@@ -12,7 +12,7 @@ public class FoodDao {
 
 	public ArrayList<Food> selectFoodList(SqlSession sqlSession) {
 		// TODO Auto-generated method stub
-		return (ArrayList)sqlSession.selectList("dietMapper.selectFoodList");
+		return (ArrayList)sqlSession.selectList("dietMapper.dietRecordList");
 	}
 
 	public int insertMealRecord(SqlSession sqlSession, HashMap<String,Integer> map) {

@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pss.diet.model.dao.DietRecord;
-import com.pss.exercise.model.vo.ExerciseRecord;
+import com.google.gson.Gson;
+import com.pss.exercise.model.vo.TenDayExerciseRecord;
 import com.pss.userpage.service.SearchUserServiceImpl;
 
 /**
@@ -35,7 +35,10 @@ public class ExerciseRecordController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String nickname = request.getParameter("userNickname");
 		
-		ArrayList<ExerciseRecord> exerciseList = new SearchUserServiceImpl().getSearchUserExerciseRecord(nickname);;
+		ArrayList<TenDayExerciseRecord> exerciseList = new SearchUserServiceImpl().getSearchUserExerciseRecord(nickname);
+		
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(exerciseList, response.getWriter());
 	}
 
 	/**

@@ -28,10 +28,9 @@
                 selectable: true,
                 dateClick: function (info) {
                     let clickedDate = info.dateStr;
-                    let date_div = document.querySelector("#date-div");
 
-                    date_div.innerHTML="";
-                    date_div.innerHTML=clickedDate;
+                    drawDate(clickedDate);
+                    
                     // 달력에 클릭한 날짜에 대한 운동기록 조회하기
                     $.ajax({
                         url: 'cinfo.wo',
@@ -51,6 +50,13 @@
             calendar.render();
 
         });
+
+        function drawDate(date) {
+            let date_div = document.querySelector("#date-div");
+
+            date_div.innerHTML="";
+            date_div.innerHTML=date;
+        }
 
         function drawExerciseRecordTable(list) {
             $("#workout-container").empty();

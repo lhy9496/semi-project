@@ -297,7 +297,9 @@
                 <div class="box flex-box" style="height: 150px;">
                     <div class="box bodybox row-flex-box">
                         <div class="box flex-box" style="height: 100%; width: 35%;">
-                            <div class="box flex-box" style="width: 100px; height: 100px; background: #D9D9D9;;">휘장이미지</div>
+                            <div class="box flex-box" style="width: 100px; height: 100px;">
+                                <img src="/pss/resources/logo/Prize.png" alt="휘장" width="100" height="100">
+                            </div>
                         </div>
                         <div class="box" style="height: 100%; width: 65%;">
                             <div class="flex-box centeralign" style="height: 100%;">

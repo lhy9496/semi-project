@@ -34,10 +34,6 @@ public class WorkoutEnrollFormController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		if(request.getSession().getAttribute("loginUser") == null) {
-			request.setAttribute("errorMsg", "로그인 후 이용 가능한 페이지입니다.");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
 		
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		

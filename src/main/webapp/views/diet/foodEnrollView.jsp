@@ -7,7 +7,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>PhysicalS - 식단추가</title>
 
     <link href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.css' rel='stylesheet'>
 

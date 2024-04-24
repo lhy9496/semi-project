@@ -6,20 +6,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.pss.member.service.MemberServiceImpl;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class MemberEmailCheckController
+ * Servlet implementation class MemberUpdateFormController
  */
-@WebServlet("/idCheck.me")
-public class AjaxIdCheckController extends HttpServlet {
+@WebServlet("/updateForm.me")
+public class MemberUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxIdCheckController() {
+    public MemberUpdateFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,15 +27,11 @@ public class AjaxIdCheckController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String checkId = request.getParameter("checkId");
-		
-		int count = new MemberServiceImpl().idCheck(checkId);
-		
-		if (count > 0) {
-			response.getWriter().print("NNNNY");
-		} else {
-			response.getWriter().print("NNNNN");
+		HttpSession session = request.getSession();
+		if((String)session.getAttribute("redirectUrl") == null) {
+			session.setAttribute("redirectUrl", request.getParameter("redirectUrl"));
 		}
+		request.getRequestDispatcher("views/member/userDataUpdate.jsp").forward(request, response);
 	}
 
 	/**

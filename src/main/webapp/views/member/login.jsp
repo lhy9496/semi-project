@@ -123,7 +123,6 @@
 		<% session.removeAttribute("alertMsg"); %>
 	<% } %>
     <form action="login.me" id="login-form" method="POST">
-        <input type="hidden" name="redirectLastPage" value="">
         <div class="login-frame">
             <div class="logo-space">
                 <a href="${contextPath}"><img src="/pss/resources/logo/psslogologin.png" alt="로고 이미지"></a>

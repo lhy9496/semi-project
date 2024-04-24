@@ -46,7 +46,6 @@ public class SearchUserController extends HttpServlet {
 		} else {
 			
 			request.setAttribute("searchUserTotalInfoMap", searchUserTotalInfoMap);
-			request.getSession().setAttribute("physicalInfo", searchUserTotalInfoMap.get("searchUserPhysicalInfo"));
 			
 			request.getRequestDispatcher("/views/userpage/userpage.jsp").forward(request, response);
 			

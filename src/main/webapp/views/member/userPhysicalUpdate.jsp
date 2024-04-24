@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.pss.member.model.vo.UserPhysicalInfo" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
 <%
     String alertMsg = (String)session.getAttribute("alertMsg");
+    UserPhysicalInfo physicalInfo = (UserPhysicalInfo)session.getAttribute("physicalInfo");
 %>
 <!DOCTYPE html>
 <html>
@@ -149,7 +151,7 @@
                         </div>
                         <div class="input-describe">키(cm)</div>
                         <div class="input-space">
-                            <input type="number" min="50" max="250" step="0.1" name="memHeight" id="email" class="input-space" value="" required>
+                            <input type="number" min="50" max="250" step="0.1" name="memHeight" id="email" class="input-space" value="${physicalInfo.memHeight}" required>
                         </div>
                     </div>
                     <div class="middle-line1">
@@ -158,7 +160,7 @@
                         </div>
                         <div class="input-describe">체중(kg)</div>
                         <div class="input-space">
-                            <input type="number" min="20" max="500" step="0.1" class="input-space" name="memWeight" value="" required>
+                            <input type="number" min="20" max="500" step="0.1" class="input-space" name="memWeight" value="${physicalInfo.memWeight}" required>
                         </div>
                     </div>
                     <div class="middle-line2">
@@ -167,7 +169,7 @@
                         </div>
                         <div class="input-describe">체지방률(%)</div>
                         <div class="input-space">
-                            <input type="number" min="3" max="50" step="0.1" class="input-space" name="memBfp" value="" required>
+                            <input type="number" min="3" max="50" step="0.1" class="input-space" name="memBep" value="${physicalInfo.memBep}" required>
                         </div>
                     </div>
                     <div class="bottom-line">
@@ -176,7 +178,7 @@
                         </div>
                         <div class="input-describe">골격근량(kg)</div>
                         <div class="input-space">
-                            <input type="number" min="9" max="225" step="0.1" class="input-space" name="memSmm" value="" required>
+                            <input type="number" min="9" max="225" step="0.1" class="input-space" name="memSmm" value="${physicalInfo.memSmm}" required>
                         </div>
                     </div>
                     <div class="submit-line">

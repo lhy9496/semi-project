@@ -120,7 +120,7 @@
  	
  	<select id="tenDayDietRecord" resultMap="mealRecordResultMap">
  		SELECT FOOD_COUNT,
-       			WHEN_EAT_DATE,
+       			TO_CHAR(WHEN_EAT_DATE, 'YYYY-MM-DD') AS "WHEN_EAT_DATE",
        			FOOD_KCAL
 			FROM MEMBER
 			JOIN MEAL_RECORD USING (USER_NO)

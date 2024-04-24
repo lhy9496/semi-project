@@ -25,6 +25,7 @@
 	
 	<resultMap id="TenDayExerciseRecordResultSet" type="TenDayExerciseRecord">
 		<result column="EX_NAME" property="exName"/>
+		<result column="EXR_DATE" property="exrDate"/>
 	</resultMap>
 
 	<select id="selectExerciseList" resultMap="exerciseResultSet">
@@ -105,7 +106,8 @@
  	</select>
  	
  	<select id="tenDayExerciseRecord" resultMap="TenDayExerciseRecordResultSet">
- 		SELECT EX_NAME
+ 		SELECT EX_NAME,
+ 			   TO_CHAR(EXR_DATE, 'YYYY-MM-DD') AS EXR_DATE
 			FROM MEMBER
 			JOIN EX_RECORD USING (USER_NO)
 			JOIN EXERCISE USING (EX_NO)

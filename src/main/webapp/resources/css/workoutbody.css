@@ -44,7 +44,6 @@ td {
   text-align: center;
   padding: 20px;
   color: white;
-  margin-bottom: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -113,4 +112,12 @@ td {
 .fc-day-sat a {
   color: blue;
   text-decoration: none;
+}
+
+#date-div {
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

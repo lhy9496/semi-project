@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+td {
+  font-size: 20px;
+}
+
 #content-container {
   padding-top: 250px; 
   width: 100%;
@@ -30,7 +34,6 @@
   text-align: center;
   padding: 20px;
   color: white;
-  margin-bottom: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -99,4 +102,12 @@
 .fc-day-sat a {
   color: blue;
   text-decoration: none;
+}
+
+#date-div {
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

@@ -35,3 +35,9 @@
   width: 100px;
   text-align: center;
 }
+
+.food_amount::-webkit-outer-spin-button,
+.food_amount::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

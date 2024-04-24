@@ -46,7 +46,7 @@
         font-size: 25px;
         text-align: right;
     }
-    #login, #logout{
+    #login, #logout, #updateform{
         background-color: black;
         color: white;
         width: 85px;
@@ -54,6 +54,9 @@
         border: 0px;
         border-radius: 5px;
         font-size: 15px;
+    }
+    #updateform{
+        width: 110px;
     }
     .logo-search-space{
         width: 1100px;
@@ -160,6 +163,7 @@
                 <c:otherwise>
                     <img src="/pss/resources/logo/person_icon.png" alt="유저 아이콘">${loginUser.userNickname}
                     <button id="logout" onclick="location.href='${contextPath}/logout.me'">로그아웃</button>
+                    <button id="updateform" onclick="location.href='${contextPath}/updateform.me'">회원정보수정</button>
                 </c:otherwise>
             </c:choose>
             </div>

@@ -86,6 +86,12 @@ public class MemberServiceImpl implements MemberService{
 		
 		int result = mDao.updatePhysicalInfo(sqlSession, userPInfo);
 		
+		if (result > 0) {
+			sqlSession.commit();
+		} else {
+			sqlSession.rollback();
+		}
+		
 		sqlSession.close();
 		
 		return result;

@@ -71,9 +71,9 @@
 
 
         const toDay = new Date();
-        toDay.setDate(toDay.getDate() - 10);
+        toDay.setDate(toDay.getDate() - 9);
 
-        for(let i = 0; i <= 10; i++) {
+        for(let i = 0; i < 10; i++) {
             let day = new Date(toDay);
             day.setDate(day.getDate() + i);
             let year = day.getFullYear();
@@ -110,6 +110,7 @@
         
 
     </script>
+
 <style>
     *{
         box-sizing: border-box;
@@ -313,6 +314,11 @@
                         <div class="box titlearea" style="height: 10%;">
                             <h2>신체정보</h2>
                             <a>수정버튼</a>
+                            <!--
+                            <a href="${contextPath}">
+                                <img src="/pss/resources/logo/psslogomenubar.png" alt="로고">
+                            </a>
+                            -->
                         </div>
                         <div class="box" style="height: 90%;">
                             <div class="box flex-box" style="height: 25%;">

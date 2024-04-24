@@ -125,9 +125,9 @@
 			FROM MEMBER
 			JOIN MEAL_RECORD USING (USER_NO)
 			JOIN FOOD USING (FOOD_NO)
-			WHERE WHERE USER_NICKNAME = #{nickname}
+			WHERE USER_NICKNAME = #{nickname}
 			AND STATUS = 'Y'
-		  	AND WHEN_EAT_DATE > (SYSDATE - 10);
+		  	AND WHEN_EAT_DATE > (SYSDATE - 10)
  	</select>
 
   </mapper>

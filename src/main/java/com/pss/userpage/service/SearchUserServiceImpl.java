@@ -2,15 +2,11 @@ package com.pss.userpage.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.pss.common.mybatis_template.Template;
 import com.pss.diet.model.vo.TenDayDietRecord;
-import com.pss.diet.model.vo.UserDietRecord;
-import com.pss.exercise.model.vo.ExerciseRecord;
 import com.pss.exercise.model.vo.TenDayExerciseRecord;
 import com.pss.userpage.model.dao.SearchUserDao;
 

@@ -5,13 +5,13 @@ import java.sql.Date;
 public class TenDayDietRecord {
 	
 	private int foodCount;
-	private Date whenEatDate;
+	private String whenEatDate;
 	private int foodKcal;
 	public TenDayDietRecord() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public TenDayDietRecord(int foodCount, Date whenEatDate, int foodKcal) {
+	public TenDayDietRecord(int foodCount, String whenEatDate, int foodKcal) {
 		super();
 		this.foodCount = foodCount;
 		this.whenEatDate = whenEatDate;
@@ -23,10 +23,10 @@ public class TenDayDietRecord {
 	public void setFoodCount(int foodCount) {
 		this.foodCount = foodCount;
 	}
-	public Date getWhenEatDate() {
+	public String getWhenEatDate() {
 		return whenEatDate;
 	}
-	public void setWhenEatDate(Date whenEatDate) {
+	public void setWhenEatDate(String whenEatDate) {
 		this.whenEatDate = whenEatDate;
 	}
 	public int getFoodKcal() {

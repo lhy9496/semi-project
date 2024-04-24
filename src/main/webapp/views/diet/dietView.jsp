@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>PhysicalS - 식단기록</title>
 
     <link href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.css' rel='stylesheet'>
 
@@ -74,14 +74,14 @@
 				                        </thead>
 				                        <tbody>
                 			</c:if>
-                						<tr>
-                							<td>${meal.foodName }</td>
-                							<td>${meal.amount }</td>
-                							<c:set var="foodKcal" value="${meal.foodKcal * meal.amount }"/>
-                							<td><c:out value="${foodKcal }" /></td>
-                							<c:set var="totalKcal" value="${totalKcal + foodKcal}"></c:set>
-                                            
-                						</tr>
+                                            <tr>
+                                                <td>${meal.foodName }</td>
+                                                <td>${meal.amount }</td>
+                                                <c:set var="foodKcal" value="${meal.foodKcal * meal.amount }"/>
+                                                <td><c:out value="${foodKcal }" /></td>
+                                                <c:set var="totalKcal" value="${totalKcal + foodKcal}"></c:set>
+                                                
+                                            </tr>
                 			<c:if test="${!meal.mealTimingName.equals(mealRecordList[loop.index+1].mealTimingName)}">
                                 <tr>
                                     <td style="background-color: aliceblue; font-weight: bold;">총 칼로리</td>

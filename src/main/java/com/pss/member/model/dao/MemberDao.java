@@ -5,6 +5,7 @@ package com.pss.member.model.dao;
 import org.apache.ibatis.session.SqlSession;
 
 import com.pss.member.model.vo.Member;
+import com.pss.member.model.vo.UserPhysicalInfo;
 
 public class MemberDao {
 	
@@ -46,5 +47,10 @@ public class MemberDao {
 	public Member findPwd(SqlSession sqlSession, Member m) {
 	
 		return sqlSession.selectOne("memberMapper.findPwd", m);
+	}
+	
+	public int updatePhysicalInfo(SqlSession sqlSession, UserPhysicalInfo userPInfo) {
+		
+		return sqlSession.update("memberMapper.updatePhysicalInfo", userPInfo);
 	}
 }

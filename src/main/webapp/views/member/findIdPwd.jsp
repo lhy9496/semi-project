@@ -41,7 +41,6 @@
         border-bottom: 0px;
     }
     .bottom-line{
-        
         border-radius: 0px 0px 15px 15px
     }
     .logo-space{

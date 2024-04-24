@@ -26,16 +26,22 @@
 
     <script>
     $(document).ready(function() {
+
+        let nickname = '<%= nickname %>';
+        console.log(nickname);
+
         $.ajax({
             url: "dietRecord.me",
             data : {
                 userNickname : nickname
             },
             success: function(response) {
+                console.log("AJAX 성공");
                 const dietList = response;
                 console.log(dietList);
             },
             error: function() {
+
                 console.log("AJAX 오류 발생");
             }
         });
@@ -46,6 +52,7 @@
                 userNickname : nickname
             },
             success: function(response) {
+                console.log("AJAX 성공");
                 const exerciseList = response;
                 console.log(exerciseList);
             },

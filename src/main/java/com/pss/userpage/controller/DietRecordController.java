@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.pss.diet.model.vo.TenDayDietRecord;
-import com.pss.diet.model.vo.UserDietRecord;
 import com.pss.userpage.service.SearchUserServiceImpl;
 
 /**
@@ -36,6 +36,9 @@ public class DietRecordController extends HttpServlet {
 		String nickname = request.getParameter("userNickname");
 		
 		ArrayList<TenDayDietRecord> dietList = new SearchUserServiceImpl().getSearchUserDietRecord(nickname);
+		
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(dietList, response.getWriter());
 	}
 
 	/**

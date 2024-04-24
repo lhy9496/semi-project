@@ -109,9 +109,9 @@
 			FROM MEMBER
 			JOIN EX_RECORD USING (USER_NO)
 			JOIN EXERCISE USING (EX_NO)
-			WHERE WHERE USER_NICKNAME = #{nickname}
+			WHERE USER_NICKNAME = #{nickname}
 			AND STATUS = 'Y'
-		  	AND EXR_DATE > (SYSDATE - 10);
+		  	AND EXR_DATE > (SYSDATE - 10)
  	</select>
 
 </mapper>

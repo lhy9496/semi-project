@@ -94,7 +94,7 @@
 		FROM MEMBER
 		WHERE USER_NICKNAME = #{checkNickname}
 	</select>
-	<select id="searchUserInfo" parameterType="String" resultMap="memberResultSet">
+	<select id="searchUserInfo" resultMap="memberResultSet">
  		SELECT USER_NO,
  				USER_NAME,
  				USER_NICKNAME,
@@ -111,7 +111,7 @@
 		AND STATUS = 'Y'
  	</select>
  	
- 	<select id="searchUserPhysicalInfo" parameterType="String" resultMap="UserPhysicalInfoResultSet">
+ 	<select id="searchUserPhysicalInfo" resultMap="UserPhysicalInfoResultSet">
  		SELECT PINFO_NO,
  				USER_NO,
  				MEM_HEIGHT,
@@ -124,7 +124,7 @@
 		AND STATUS = 'Y'
  	</select>
  	
- 	<select id="searchUserPicture" parameterType="String" resultMap="UserPictureResultSet">
+ 	<select id="searchUserPicture" resultMap="UserPictureResultSet">
  		SELECT PIC_NO,
  				USER_NO,
  				ORIGIN_NAME,

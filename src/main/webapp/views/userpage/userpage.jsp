@@ -312,13 +312,10 @@
                 <div class="box flex-box" style="height: 500px;">
                     <div class="box bodybox">
                         <div class="box titlearea" style="height: 10%;">
-                            <h2>신체정보</h2>
-                            <a>수정버튼</a>
-                            <!--
-                            <a href="${contextPath}">
-                                <img src="/pss/resources/logo/psslogomenubar.png" alt="로고">
+                            <div>신체정보</div>
+                            <a href="pupdateform.me">
+                                <img src="/pss/resources/logo/edit.png" alt="수정버튼" width="20" height="20">
                             </a>
-                            -->
                         </div>
                         <div class="box" style="height: 90%;">
                             <div class="box flex-box" style="height: 25%;">

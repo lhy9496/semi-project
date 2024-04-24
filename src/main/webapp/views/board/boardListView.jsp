@@ -78,8 +78,8 @@
                     font-size: small;
                     display: flex;
                     gap: 3px;
-                    margin: 0px 75px;
-                    background: rgb(189, 186, 186);
+                    margin-left: 20%;
+                    
                     cursor: pointer;
                 }
          
@@ -160,6 +160,9 @@
                                     <c:if test="${pi.currentPage ne pi.maxPage}">
                                         <a href="list.bo?cpage=${pi.currentPage + 1}">다음&gt;</a>
                                     </c:if>
+                                </div>
+                                <div align="right" style="width: 50px; margin-left: 30%;">
+                                    <a href="enrollForm.bo">글쓰기</a>
                                 </div>
                             </div>
                         </form>

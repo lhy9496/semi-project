@@ -32,9 +32,6 @@ public class WorkoutEnrollFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		
 		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
 		ArrayList<Exercise> exList = new ExerciseServiceImpl().selectExerciseList();

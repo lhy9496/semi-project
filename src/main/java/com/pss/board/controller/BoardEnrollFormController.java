@@ -1,7 +1,8 @@
-package com.pss.exercise.Controller;
+package com.pss.board.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale.Category;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pss.exercise.model.vo.ExerciseRecord;
-import com.pss.exercise.service.ExerciseServiceImpl;
-import com.pss.member.model.vo.Member;
+
 
 /**
- * Servlet implementation class WorkoutInfoController
+ * Servlet implementation class BoardEnrollFormController
  */
-@WebServlet("/info.wo")
-public class WorkoutInfoController extends HttpServlet {
+@WebServlet("/enrollForm.bo")
+public class BoardEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WorkoutInfoController() {
+    public BoardEnrollFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +31,8 @@ public class WorkoutInfoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
-		
-		ArrayList<ExerciseRecord> list = new ExerciseServiceImpl().selectExerciseRecordList(userNo);
-		
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/exercise/workoutview.jsp").forward(request, response);
+				
+		request.getRequestDispatcher("views/board/boardEnrollForm.jsp").forward(request, response);
 	}
 
 	/**
@@ -48,4 +42,5 @@ public class WorkoutInfoController extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

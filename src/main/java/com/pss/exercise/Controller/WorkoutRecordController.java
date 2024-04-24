@@ -52,8 +52,11 @@ public class WorkoutRecordController extends HttpServlet {
 		System.out.println(loginUserNo);
 		
 		
+		
 		Gson gson = new Gson();
 		WorkoutRecord[] workoutRecords = gson.fromJson(jsonData, WorkoutRecord[].class);
+		
+		int result = 0;
 		
 		for(WorkoutRecord record : workoutRecords) {
 
@@ -73,12 +76,12 @@ public class WorkoutRecordController extends HttpServlet {
                 map.put("exCount", exCount);
                 map.put("userNo",loginUserNo);
                 
-                int result = new ExerciseServiceImpl().insertExerciseRecord(map);
+                result = new ExerciseServiceImpl().insertExerciseRecord(map);
                        
             }
 		}
 		
-		gson.toJson("", response.getWriter());
+		gson.toJson(result, response.getWriter());
 		
 //		System.out.println(jsonData);
 		

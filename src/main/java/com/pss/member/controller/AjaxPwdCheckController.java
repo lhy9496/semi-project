@@ -1,25 +1,29 @@
 package com.pss.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.pss.member.model.vo.Member;
 import com.pss.member.service.MemberServiceImpl;
 
 /**
- * Servlet implementation class MemberEmailCheckController
+ * Servlet implementation class AjaxPwdCheckController
  */
-@WebServlet("/idCheck.me")
-public class AjaxIdCheckController extends HttpServlet {
+@WebServlet("/pwdCheck.me")
+public class AjaxPwdCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxIdCheckController() {
+    public AjaxPwdCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,14 +32,25 @@ public class AjaxIdCheckController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String checkId = request.getParameter("checkId");
+		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		int count = new MemberServiceImpl().idCheck(checkId);
+		
+		String checkPwd = request.getParameter("checkPwd");
+		String userEmail = loginUser.getUserEmail();
+		
+		Member former = new Member();
+		former.setUserEmail(userEmail);
+		former.setUserPwd(checkPwd);
+		
+		System.out.println(former);
+		
+		int count = new MemberServiceImpl().pwdCheck(former);
 		
 		if (count > 0) {
-			response.getWriter().print("NNNNY");
-		} else {
 			response.getWriter().print("NNNNN");
+		} else {
+			response.getWriter().print("NNNNY");
 		}
 	}
 

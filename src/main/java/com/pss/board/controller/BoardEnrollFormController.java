@@ -1,7 +1,8 @@
-package com.pss.exercise.Controller;
+package com.pss.board.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale.Category;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pss.exercise.model.vo.Exercise;
-import com.pss.exercise.service.ExerciseServiceImpl;
-import com.pss.member.model.vo.Member;
+
 
 /**
- * Servlet implementation class WorkoutEnrollController
+ * Servlet implementation class BoardEnrollFormController
  */
-@WebServlet("/enroll.wo")
-public class WorkoutEnrollFormController extends HttpServlet {
+@WebServlet("/enrollForm.bo")
+public class BoardEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WorkoutEnrollFormController() {
+    public BoardEnrollFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,10 +31,8 @@ public class WorkoutEnrollFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ArrayList<Exercise> exList = new ExerciseServiceImpl().selectExerciseList();
-		request.setAttribute("exList", exList);
-		request.getRequestDispatcher("views/exercise/workoutenrollview.jsp").forward(request, response);
+				
+		request.getRequestDispatcher("views/board/boardEnrollForm.jsp").forward(request, response);
 	}
 
 	/**

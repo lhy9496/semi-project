@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
+import com.pss.board.controller.BoardInsertController;
 import com.pss.board.model.vo.Board;
 import com.pss.board.model.vo.Reply;
 import com.pss.common.vo.PageInfo;
@@ -61,4 +62,36 @@ public class BoardDao {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("boardMapper.insertReply", r);
 	}
+	
+	public int insertBoard(SqlSession sqlSession, Board board) {
+		
+		return sqlSession.insert("boardMapper.insertBoard", board);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

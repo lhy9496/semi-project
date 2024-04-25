@@ -9,6 +9,7 @@ import com.pss.common.mybatis_template.Template;
 import com.pss.exercise.model.dao.ExerciseDao;
 import com.pss.exercise.model.vo.Exercise;
 import com.pss.exercise.model.vo.ExerciseRecord;
+import com.pss.member.model.dao.MemberDao;
 
 public class ExerciseServiceImpl implements ExerciseService{
 
@@ -27,7 +28,6 @@ public class ExerciseServiceImpl implements ExerciseService{
 		SqlSession sqlSession = Template.getSqlSession();
 		int result = exerciseDao.insertExerciseRecord(sqlSession, map);
 		if(result > 0 ) {
-			
 			sqlSession.commit();
 		} else {
 			sqlSession.rollback();

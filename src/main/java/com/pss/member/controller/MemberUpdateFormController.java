@@ -1,29 +1,24 @@
-package com.pss.exercise.Controller;
+package com.pss.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.pss.exercise.model.vo.Exercise;
-import com.pss.exercise.service.ExerciseServiceImpl;
-import com.pss.member.model.vo.Member;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class WorkoutEnrollController
+ * Servlet implementation class MemberUpdateFormController
  */
-@WebServlet("/enroll.wo")
-public class WorkoutEnrollFormController extends HttpServlet {
+@WebServlet("/updateForm.me")
+public class MemberUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WorkoutEnrollFormController() {
+    public MemberUpdateFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,10 +27,11 @@ public class WorkoutEnrollFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ArrayList<Exercise> exList = new ExerciseServiceImpl().selectExerciseList();
-		request.setAttribute("exList", exList);
-		request.getRequestDispatcher("views/exercise/workoutenrollview.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		if((String)session.getAttribute("redirectUrl") == null) {
+			session.setAttribute("redirectUrl", request.getParameter("redirectUrl"));
+		}
+		request.getRequestDispatcher("views/member/userDataUpdate.jsp").forward(request, response);
 	}
 
 	/**

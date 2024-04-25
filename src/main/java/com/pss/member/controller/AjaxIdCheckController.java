@@ -33,9 +33,9 @@ public class AjaxIdCheckController extends HttpServlet {
 		int count = new MemberServiceImpl().idCheck(checkId);
 		
 		if (count > 0) {
-			response.getWriter().print("NNNNN");
-		} else {
 			response.getWriter().print("NNNNY");
+		} else {
+			response.getWriter().print("NNNNN");
 		}
 	}
 

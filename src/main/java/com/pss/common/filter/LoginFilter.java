@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter(urlPatterns = {"/info.wo","/info.mr","/enroll.wo","/enroll.mr"})
+@WebFilter(urlPatterns = {"/info.wo","/info.mr","/enroll.wo","/enroll.mr","/updateform.me","/pupdateform.me"})
 public class LoginFilter implements Filter {
 
     /**
@@ -41,8 +41,8 @@ public class LoginFilter implements Filter {
 		
 		
 		if(httpRequest.getSession().getAttribute("loginUser") == null) {
-			httpRequest.setAttribute("errorMsg", "먼저 로그인을 해주세요.");
-			httpRequest.getRequestDispatcher("views/common/errorPage.jsp").forward(httpRequest, httpResponse);
+			httpRequest.setAttribute("alertMsg", "로그인이 필요한 페이지입니다.");
+			httpResponse.sendRedirect(httpRequest.getContextPath() + "/loginForm.me");
 		} else {
 			chain.doFilter(request, response);
 		}

@@ -29,6 +29,15 @@ public class Member {
 		this.age = age;
 	}
 
+	public Member(String userName, String userEmail, String userPwd, String gender, int age) {
+		super();
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPwd = userPwd;
+		this.gender = gender;
+		this.age = age;
+	}
+
 	public Member(int userNo, String userName, String userNickname, String userEmail, String userPwd, String gender,
 			int age, int userPoint, Date enrollDate, Date modifyDate, String status) {
 		super();

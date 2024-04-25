@@ -163,7 +163,7 @@
                 <c:otherwise>
                     <img src="/pss/resources/logo/person_icon.png" alt="유저 아이콘">${loginUser.userNickname}
                     <button id="logout" onclick="location.href='${contextPath}/logout.me'">로그아웃</button>
-                    <button id="updateform" onclick="location.href='${contextPath}/updateform.me'">회원정보수정</button>
+                    <button id="updateform" onclick="location.href='${contextPath}/updateForm.me?redirectUrl=' + window.location.href">회원정보수정</button>
                 </c:otherwise>
             </c:choose>
             </div>

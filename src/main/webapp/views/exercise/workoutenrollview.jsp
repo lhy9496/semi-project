@@ -75,7 +75,7 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" id="btn-enroll-workout">등록</button>
+          <button type="button" class="btn btn-primary btn-lg" id="btn-enroll-workout">등록</button>
         </div>
       </div>
     </div>
@@ -87,7 +87,7 @@
       $('#enroll-info-btn').off('click').on('click', function () {
         let str = ``;
         $('.workout-list-item').each(function () {
-          if ($(this).find('input[type=checkbox]').prop('checked')) {
+          if ($(this).find('input[type=checkbox]').is(':checked')) {
             let exercise = $(this).find('.w_name').text();
             let bodyPart = $(this).find('.w_bodypart').text();
 			      let exerciseNo = $(this).find('.w_name').data('no');
@@ -124,7 +124,6 @@
 				                    </tr>
                           		  </tbody>
 				                </table>`;
-
           }
         });
 
@@ -195,7 +194,7 @@
           data: JSON.stringify(workoutRecord),
           success: function(res) {
             alert("성공적으로 운동을 기록하셨습니다.");
-            location.href="${contextPath}/info.wo"
+            location.href="${contextPath}/info.wo";
           },
 
           error: function() {

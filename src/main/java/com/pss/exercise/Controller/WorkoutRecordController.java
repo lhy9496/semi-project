@@ -48,10 +48,6 @@ public class WorkoutRecordController extends HttpServlet {
 		String jsonData = sb.toString();
 		
 		int loginUserNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
-
-		System.out.println(loginUserNo);
-		
-		
 		
 		Gson gson = new Gson();
 		WorkoutRecord[] workoutRecords = gson.fromJson(jsonData, WorkoutRecord[].class);
@@ -81,9 +77,7 @@ public class WorkoutRecordController extends HttpServlet {
             }
 		}
 		
-		gson.toJson(result, response.getWriter());
-		
-//		System.out.println(jsonData);
+		gson.toJson(result);
 		
 
 	}

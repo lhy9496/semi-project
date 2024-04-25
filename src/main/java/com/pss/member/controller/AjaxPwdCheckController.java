@@ -1,31 +1,29 @@
-package com.pss.exercise.Controller;
+package com.pss.member.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson; 
-import com.pss.exercise.model.vo.ExerciseRecord;
-import com.pss.exercise.service.ExerciseServiceImpl;
 import com.pss.member.model.vo.Member;
+import com.pss.member.service.MemberServiceImpl;
 
 /**
- * Servlet implementation class ClickedDateWorkoutInfoController
+ * Servlet implementation class AjaxPwdCheckController
  */
-@WebServlet("/cinfo.wo")
-public class ClickedDateWorkoutInfoController extends HttpServlet {
+@WebServlet("/pwdCheck.me")
+public class AjaxPwdCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ClickedDateWorkoutInfoController() {
+    public AjaxPwdCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,19 +32,26 @@ public class ClickedDateWorkoutInfoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String clickedDate = request.getParameter("clickedDate");
-		String userNo = String.valueOf(((Member)request.getSession().getAttribute("loginUser")).getUserNo());
+		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		HashMap<String, String> map = new HashMap<String, String>();
 		
-		map.put("clickedDate", clickedDate);
-		map.put("userNo", userNo);
-		// 이 날짜로 해당 날짜의 운동기록 불러오기
-		ArrayList<ExerciseRecord> list = new ExerciseServiceImpl().selectClickedDateWorkoutList(map);
-
-		response.setContentType("application/json; charset=UTF-8");
-		new Gson().toJson(list,response.getWriter());
+		String checkPwd = request.getParameter("checkPwd");
+		String userEmail = loginUser.getUserEmail();
+		
+		Member former = new Member();
+		former.setUserEmail(userEmail);
+		former.setUserPwd(checkPwd);
+		
+		System.out.println(former);
+		
+		int count = new MemberServiceImpl().pwdCheck(former);
+		
+		if (count > 0) {
+			response.getWriter().print("NNNNN");
+		} else {
+			response.getWriter().print("NNNNY");
+		}
 	}
 
 	/**

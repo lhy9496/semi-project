@@ -2,6 +2,8 @@ package com.pss.member.model.dao;
 
 
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.pss.member.model.vo.Member;
@@ -27,16 +29,12 @@ public class MemberDao {
 	
 	public int idCheck(SqlSession sqlSession, String checkId) {
 		
-		int result = sqlSession.selectOne("memberMapper.idCheck", checkId);
-		
-		return result;
+		return sqlSession.selectOne("memberMapper.idCheck", checkId);
 	}
 	
 	public int nicknameCheck(SqlSession sqlSession, String checkNickname) {
 		
-		int result = sqlSession.selectOne("memberMapper.nicknameCheck", checkNickname);
-		
-		return result;
+		return sqlSession.selectOne("memberMapper.nicknameCheck", checkNickname);
 	}
 	
 	public Member findId(SqlSession sqlSession, Member m) {
@@ -52,5 +50,15 @@ public class MemberDao {
 	public int updatePhysicalInfo(SqlSession sqlSession, UserPhysicalInfo userPInfo) {
 		
 		return sqlSession.update("memberMapper.updatePhysicalInfo", userPInfo);
+	}
+	
+	public int pwdCheck(SqlSession sqlSession, Member former) {
+		
+		return sqlSession.selectOne("memberMapper.pwdCheck", former);
+	}
+	
+	public int updateMember(SqlSession sqlSession, Member update) {
+		
+		return sqlSession.update("memberMapper.updateMember", update);
 	}
 }

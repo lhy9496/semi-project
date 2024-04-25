@@ -94,6 +94,12 @@
 		FROM MEMBER
 		WHERE USER_NICKNAME = #{checkNickname}
 	</select>
+	<select id="pwdCheck" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE USER_EMAIL = #{userEmail}
+		AND USER_PWD = #{userPwd}
+	</select>
 	<select id="searchUserInfo" resultMap="memberResultSet">
  		SELECT USER_NO,
  				USER_NAME,
@@ -159,4 +165,14 @@
  				MEM_BFP = #{memBep}
  		WHERE	USER_NO = #{userNo}
  	</update>
+ 	<update id="updateMember" parameterType="Member">
+ 		UPDATE	MEMBER
+ 		SET		USER_NAME = #{userName},
+				USER_PWD = #{userPwd},
+				GENDER = #{gender},
+				AGE = #{age},
+				MODIFY_DATE = SYSDATE
+		WHERE	USER_EMAIL = #{userEmail}
+ 	</update>
+ 
 </mapper>

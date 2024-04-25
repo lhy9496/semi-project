@@ -130,10 +130,7 @@
               selectable:true,
               dateClick: function(info) {
                 let clickedDate = info.dateStr;
-                let date_div = document.querySelector("#date-div");
-
-                date_div.innerHTML="";
-                date_div.innerHTML=clickedDate;
+                drawDate(clickedDate);
                 $.ajax({
                     url: 'cinfo.mr',
                     data: {
@@ -152,6 +149,13 @@
             });
             calendar.render();
           });
+
+          function drawDate(date) {
+            let date_div = document.querySelector("#date-div");
+
+            date_div.innerHTML="";
+            date_div.innerHTML=date;
+        }
         
           function mealRecordFormat(list) {
             let mealRecordList = {};

@@ -1,5 +1,7 @@
 package com.pss.member.service;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.pss.common.mybatis_template.Template;
@@ -85,6 +87,33 @@ public class MemberServiceImpl implements MemberService{
 		SqlSession sqlSession = Template.getSqlSession();
 		
 		int result = mDao.updatePhysicalInfo(sqlSession, userPInfo);
+		
+		if (result > 0) {
+			sqlSession.commit();
+		} else {
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+	
+	@Override
+	public int pwdCheck(Member former) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = mDao.pwdCheck(sqlSession, former);
+		sqlSession.close();
+		
+		return result;
+	}
+	
+	@Override
+	public int updateMember(Member update) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = mDao.updateMember(sqlSession, update);
 		
 		if (result > 0) {
 			sqlSession.commit();

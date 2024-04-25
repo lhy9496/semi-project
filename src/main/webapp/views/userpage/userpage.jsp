@@ -69,7 +69,6 @@
         
         let transDataList = {};
 
-
         const toDay = new Date();
         toDay.setDate(toDay.getDate() - 9);
 
@@ -101,13 +100,12 @@
             }
         }
 
+        drawRecords(transDataList);
 
         console.log("transDataList", transDataList)
-
-
-
     }
-        
+
+    
 
     </script>
 
@@ -272,6 +270,7 @@
 <body>
     <jsp:include page="../common/menubar.jsp" /> 
 
+    <div style="height: 250px;"></div>
 
     <div class="bodyofbody">
         <div class="top box" style="height: 50px; padding-left: 5px;">
@@ -283,7 +282,9 @@
             <div class="box" style="width: 25%; height: 1800px;">
                 <div class="box flex-box" style="height: 200px;">
                     <div class="box flex-box" style="width: 40%; height: 100%;">
-                        <div class="box profile flex-box">프사</div>
+                        <div class="box profile flex-box">
+                            <img src="/pss/resources/logo/person_icon.png" alt="프로필사진" width="100" height="100">
+                        </div>
                     </div>
                     <div class="box" style="width: 60%; height: 100%;">
                         <div class="box" style="height: 55%; text-align: center; padding-top: 60px; padding-right: 70px;">
@@ -354,53 +355,72 @@
                 </div>
                 
                 <div id="totalUserInfoBox"></div>
-                <script> 
+                <script>
 
-                    const htmls = document.getElementById("totalUserInfoBox");
-                    for (let i = 1; i <= 10; i++) {
-                        htmls.innerHTML += 
-                        `
-                    <div class="wrap" style="height: 150px;">
-                        <div class="box stat row-flex-box">
-                            <div class="box leftro" style="width: 95%; height:100%; background: black;">
-                                <div class="left-flex-box box" style="width: 100%; height: 100%;">
-                                    <div class="box flex-box" style="width: 20%; height: 100%;">
-                                        <div style="color: white;">
-                                            <h1>날짜</h1>
-                                            총 2000Kcal 섭취
+                    function drawRecords(transDataList) {
+                        const htmls = document.getElementById("totalUserInfoBox");
+
+                        for(let date in transDataList) {
+                            let sum = 0;
+                            console.log(transDataList)
+                            if (transDataList[date].dietList.length > 0) {
+                                for(let i in transDataList[date].dietList) {
+                                    sum += transDataList[date].dietList[i].foodKcal;
+                                }
+                            }
+
+                            htmls.innerHTML += 
+                            `
+                        <div class="wrap" style="height: 150px;">
+                            <div class="box stat row-flex-box">
+                                <div class="box leftro" style="width: 95%; height:100%; background: black;">
+                                    <div class="left-flex-box box" style="width: 100%; height: 100%;">
+                                        <div class="box flex-box" style="width: 20%; height: 100%;">
+                                            <div style="color: white;">
+                                                <h1>` + date.substring(5) + `</h1>
+                                                총 ` + sum + `Kcal 섭취
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="box downbox" style="width: 15%; height: 100%;">
-                                        <div style="color: white; width: 80%; height: 80%;">
-                                            <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+
+                                        <div class="box downbox" style="width: 15%; height: 100%;">
+                                            <div style="color: white; width: 80%; height: 80%;">
+                                                <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+                                            </div>
+                                            <div style="color: white; height: 20%;">벤치프레스</div>
                                         </div>
-                                        <div style="color: white; height: 20%;">벤치프레스</div>
-                                    </div>
-                                    <div class="box downbox" style="width: 15%; height: 100%;">
-                                        <div style="color: white; width: 80%; height: 80%;">
-                                            <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+
+                                        <div class="box downbox" style="width: 15%; height: 100%;">
+                                            <div style="color: white; width: 80%; height: 80%;">
+                                                <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+                                            </div>
+                                            <div style="color: white; height: 20%;">벤치프레스</div>
                                         </div>
-                                        <div style="color: white; height: 20%;">벤치프레스</div>
-                                    </div>
-                                    <div class="box downbox" style="width: 15%; height: 100%;">
-                                        <div style="color: white; width: 80%; height: 80%;">
-                                            <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+
+                                        <div class="box downbox" style="width: 15%; height: 100%;">
+                                            <div style="color: white; width: 80%; height: 80%;">
+                                                <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+                                            </div>
+                                            <div style="color: white; height: 20%;">벤치프레스</div>
                                         </div>
-                                        <div style="color: white; height: 20%;">벤치프레스</div>
-                                    </div>
-                                    <div class="box downbox" style="width: 15%; height: 100%;">
-                                        <div style="color: white; width: 80%; height: 80%;">
-                                            <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+
+                                        <div class="box downbox" style="width: 15%; height: 100%;">
+                                            <div style="color: white; width: 80%; height: 80%;">
+                                                <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
+                                            </div>
+                                            <div style="color: white; height: 20%;">벤치프레스</div>
                                         </div>
-                                        <div style="color: white; height: 20%;">벤치프레스</div>
+                                        
                                     </div>
                                 </div>
+                                <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;"><img src="/pss/resources/logo/down.png" alt="더보기" width="20" height="20"></div>
                             </div>
-                            <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;">버튼</div>
                         </div>
-                    </div>
-                    `
-                    }
+                        `
+                        }
+                    };
+
+
+                    
                     
                 </script>
             </div>

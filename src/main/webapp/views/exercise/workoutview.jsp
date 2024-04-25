@@ -45,7 +45,7 @@
 
             <div id="date-div"></div>
 
-            <div id="workout-container">
+            <div id="workout-container" class="overflow-auto">
                 <c:if test="${empty list}">
                     <div class="workout-info" style="background: white;">
                         <div style="font-size: 25px">
@@ -74,7 +74,7 @@
                     </c:if>
                     <tr>
                         <td>${exercise.exRecordSet}</td>
-                        <td>${exercise.exRecordWeight}</td>
+                        <td>${exercise.exRecordWeight}kg</td>
                         <td>${exercise.exRecordCount}</td>
                     </tr>
                     <c:if test="${!exercise.exName.equals(list[loop.index + 1].exName)}">

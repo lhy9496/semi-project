@@ -12,6 +12,7 @@
 	Member member = (Member)(searchUserTotalInfoMap.get("searchUserInfo"));
 	UserPhysicalInfo userPhysicalInfo = (UserPhysicalInfo)(searchUserTotalInfoMap.get("searchUserPhysicalInfo"));
 	UserPicture userPicture = (UserPicture)(searchUserTotalInfoMap.get("searchUserPicture"));
+    String tier = (String)(searchUserTotalInfoMap.get("searchUserTier"));
     String nickname = member.getUserNickname();
 %>
  
@@ -306,10 +307,7 @@
                         <div class="box" style="height: 100%; width: 65%;">
                             <div class="flex-box centeralign" style="height: 100%;">
                                 <div>
-                                    <script>
-                                        console.log($(tier));
-                                    </script>
-                                    <h1><%=member.getTier()%></h1>
+                                    <h1><%= tier %></h1>
                                     <h4><%=member.getUserPoint()%> P</h4>
                                 </div>
                             </div>

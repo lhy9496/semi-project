@@ -41,7 +41,7 @@ public class SearchUserController extends HttpServlet {
 		HashMap<String, Object> searchUserTotalInfoMap = new SearchUserServiceImpl().getSearchUserTotalInfo(nickname);
 
 		if (searchUserTotalInfoMap.get("searchUserInfo") == null) {
-			request.setAttribute("alertMsg", "존재하지 않는 유저입니다.");
+			request.getSession().setAttribute("alertMsg", "존재하지 않는 유저입니다.");
 			response.sendRedirect(request.getContextPath());
 		} else {
 			

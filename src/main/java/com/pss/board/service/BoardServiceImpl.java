@@ -116,5 +116,25 @@ public class BoardServiceImpl implements BoardService{
 		
 		return result;
 	}
+	
+	@Override
+	public int selectCategoryCount (int category) {
+		SqlSession sqlSession = Template.getSqlSession();
+		int listCount = bDao.selectCategoryCount(sqlSession, category);
+		
+		sqlSession.close();
+		
+		return listCount;
+	}
+	
+	@Override
+	public ArrayList<Board> selectCategoryList(PageInfo pi, int category) {
+		SqlSession sqlSession = Template.getSqlSession();
+		ArrayList<Board> list = bDao.selectCategoryList(sqlSession, pi, category);
+		
+		sqlSession.close();
+		
+		return list;
+	}
 
 }

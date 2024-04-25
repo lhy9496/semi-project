@@ -29,9 +29,11 @@
 		SELECT BOARD_NO,
 			   BOARD_TITLE,
 			   USER_NAME,
+			   CATEGORY_NAME,
 			   COUNT,
 			   CREATE_DATE
 		FROM BOARD B
+		JOIN CATEGORY USING(CATEGORY_NO)
 		JOIN MEMBER ON (BOARD_WRITER = USER_NO)
 		WHERE B.STATUS = 'Y'
 		ORDER BY BOARD_NO DESC
@@ -135,6 +137,24 @@
 				
 				
 	</insert>
+	<select id="selectCategoryCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM BOARD
+		WHERE CATEGORY_NO = #{category}
+		AND STATUS = 'Y'
+	</select>
+	<select id="selectCategoryList" resultMap="boardResultSet">
+		SELECT BOARD_NO,
+			   BOARD_TITLE,
+			   USER_NAME,
+			   COUNT,
+			   CREATE_DATE
+		FROM BOARD B
+		JOIN MEMBER ON (BOARD_WRITER = USER_NO)
+		WHERE CATEGORY_NO = #{category}
+		AND B.STATUS = 'Y'
+		ORDER BY BOARD_NO DESC
+	</select>
 </mapper>
 
 

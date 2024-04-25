@@ -26,8 +26,11 @@ public interface BoardService {
 		
 		public int insertBoard(Board board);
 		
+		//카테고리별 게시판리스트 조회
 		public int selectCategoryCount(int category);
-		
 		public ArrayList<Board> selectCategoryList(PageInfo pi, int category);
 		
+		//카테고리별 게시글 검색
+		public int selectSearchCategoryCount(HashMap<String, String> map);
+		public ArrayList<Board> selectSearchCategoryList(HashMap<String, String> map, PageInfo pi);
 }

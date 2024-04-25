@@ -61,7 +61,7 @@
                 <tfoot>
                     <tr>
                         <td colspan="4">
-                            <button type="button" style="margin: auto;" id="btn-meal-enroll">식사등록하기</button>
+                            <button type="button" style="margin: auto;" id="btn-meal-enroll" class="btn btn-primary">식사등록하기</button>
                         </td>
                     </tr>
                 </tfoot>
@@ -75,7 +75,7 @@
             $('#btn-meal-enroll').on('click', function () {
                 let mealRecord = [];
                 $('.food').each(function () {
-                    if ($(this).find('input[type=checkbox]').prop('checked')) {
+                    if ($(this).find('input[type=checkbox]').is(':checked')) {
 
                         let mealTimingNo = $('#meal_select :selected').val();
                         let foodNo = $(this).find('.foodNo').val();

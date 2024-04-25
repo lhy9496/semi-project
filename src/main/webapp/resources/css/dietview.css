@@ -44,10 +44,6 @@ td {
   overflow: scroll;
 }
 
-#meal-container::-webkit-scrollbar{
-  display: none;
-}
-
 .meal-info {
   background-color: rgb(224, 015, 026);
   border-radius: 10px;
@@ -110,4 +106,9 @@ td {
   text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+#sumTotalKcal {
+  font-size: 25px;
+  font-weight: bold;
 }

@@ -70,7 +70,7 @@ public class MealInsertController extends HttpServlet {
             result = new FoodServiceImpl().insertMealRecord(map);                  
 		}
 		
-		new Gson().toJson(result,response.getWriter());
+		gson.toJson(result);
 	}
 
 	/**

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.pss.board.model.vo.Board;
 import com.pss.board.model.vo.Reply;
@@ -20,13 +21,13 @@ import com.pss.common.vo.PageInfo;
  * Servlet implementation class BoardDetailController
  */
 @WebServlet("/boardCategory.bo")
-public class BoardCategoryControllre extends HttpServlet {
+public class BoardCategoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardCategoryControllre() {
+    public BoardCategoryController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,30 +36,24 @@ public class BoardCategoryControllre extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	int category = Integer.parseInt(request.getParameter("category"));
-    	int listCount = 0;
+    	HttpSession session = request.getSession();
     	
-    	if (category > 0) {
-    		listCount = new BoardServiceImpl().selectCategoryCount(category);
-    	} else {
-    		listCount = new BoardServiceImpl().selectListCount();
-    	}
+    	int category = Integer.parseInt(request.getParameter("category"));
+    	session.setAttribute("categoryNo", category);
+    	
+    	int listCount = new BoardServiceImpl().selectCategoryCount(category);
     	
 		System.out.println(listCount);
 		int currentPage = Integer.parseInt(request.getParameter("cpage"));
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
-		ArrayList<Board> list = new ArrayList();
-		
-		if (category > 0) {
-    		list = new BoardServiceImpl().selectCategoryList(pi, category);
-    	} else {
-    		list = new BoardServiceImpl().selectList(pi);
-    	}
-		
+		ArrayList<Board> list = new BoardServiceImpl().selectCategoryList(pi, category);
+    	
 		System.out.println(list);
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
+		
+		request.getRequestDispatcher("views/board/boardCategoryView.jsp").forward(request, response);
 	}
 
 	/**

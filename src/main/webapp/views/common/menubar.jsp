@@ -5,6 +5,7 @@
 <%
     String alertMsg = (String)session.getAttribute("alertMsg");
     String redirectUrl = (String)session.getAttribute("redirectUrl");
+    String contextPath = request.getContextPath();
 %>
    
 <!DOCTYPE html>

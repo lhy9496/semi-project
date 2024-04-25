@@ -136,5 +136,23 @@ public class BoardServiceImpl implements BoardService{
 		
 		return list;
 	}
+	
+	@Override
+	public int selectSearchCategoryCount(HashMap<String, String> map) {
+		SqlSession sqlSession = Template.getSqlSession();
+		int searchCount = bDao.selectSearchCategoryCount(sqlSession, map);
+		
+		sqlSession.close();
+		
+		return searchCount;
+	}
 
+	@Override
+	public ArrayList<Board> selectSearchCategoryList(HashMap<String, String> map, PageInfo pi) {
+		SqlSession sqlSession = Template.getSqlSession();
+		ArrayList<Board> list = bDao.selectSearchCategoryList(sqlSession, map, pi);
+		
+		sqlSession.close();
+		return list;
+	}
 }

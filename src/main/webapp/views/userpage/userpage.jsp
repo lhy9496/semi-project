@@ -12,6 +12,7 @@
 	Member member = (Member)(searchUserTotalInfoMap.get("searchUserInfo"));
 	UserPhysicalInfo userPhysicalInfo = (UserPhysicalInfo)(searchUserTotalInfoMap.get("searchUserPhysicalInfo"));
 	UserPicture userPicture = (UserPicture)(searchUserTotalInfoMap.get("searchUserPicture"));
+    String tier = (String)(searchUserTotalInfoMap.get("searchUserTier"));
     String nickname = member.getUserNickname();
 %>
  
@@ -25,6 +26,7 @@
 
 
     <script>
+
     $(document).ready(function() {
 
         let nickname = '<%= nickname %>';
@@ -154,7 +156,7 @@
     }
     */
 
-    .previousTear{
+    .previousTier{
         height: 30px;
         width: 120px;
         color: black;
@@ -273,11 +275,6 @@
     <div style="height: 250px;"></div>
 
     <div class="bodyofbody">
-        <div class="top box" style="height: 50px; padding-left: 5px;">
-            <div class="previousTear"><b>2023</b>gold</div>
-            <div class="previousTear"><b>2022</b>silver</div>
-            <div class="previousTear"><b>2021</b>bronze</div>
-        </div>
         <div class="flex-box">
             <div class="box" style="width: 25%; height: 1800px;">
                 <div class="box flex-box" style="height: 200px;">
@@ -305,8 +302,8 @@
                         <div class="box" style="height: 100%; width: 65%;">
                             <div class="flex-box centeralign" style="height: 100%;">
                                 <div>
-                                    <h1>Gold 3</h1>
-                                    <h4>46p</h4>
+                                    <h1><%= tier %></h1>
+                                    <h4><%=member.getUserPoint()%> P</h4>
                                 </div>
                             </div>
                         </div>
@@ -324,25 +321,25 @@
                             <div class="box flex-box" style="height: 25%;">
                                 <div class="box spac">
                                     <div class="box flex-box" style="width: 50%; height: 100%;"><b>키</b></div>
-                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemHeight() %></div>
+                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemHeight() %>cm</div>
                                 </div>
                             </div>
                             <div class="box flex-box" style="height: 25%;">
                                 <div class="box spac">
                                     <div class="box flex-box" style="width: 50%; height: 100%;"><b>체중</b></div>
-                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemWeight() %></div>
+                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemWeight() %>kg</div>
                                 </div>
                             </div>
                             <div class="box flex-box" style="height: 25%;">
                                 <div class="box spac">
                                     <div class="box flex-box" style="width: 50%; height: 100%;"><b>체지방률</b></div>
-                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemBep() %></div>
+                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemBep() %>%</div>
                                 </div>
                             </div>
                             <div class="box flex-box" style="height: 25%;">
                                 <div class="box spac">
                                     <div class="box flex-box" style="width: 50%; height: 100%;"><b>골격근량</b></div>
-                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemSmm() %></div>
+                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemSmm() %>kg</div>
                                 </div>
                             </div>
                         </div>
@@ -351,7 +348,7 @@
             </div>
             <div class="box" style="width: 75%; height: 1800px;">
                 <div class="box flex-box" style="height: 200px;">
-                    <div class="box stat">그래프</div>
+                    <div class="box stat">이 자리에 광고해드립니다.</div>
                 </div>
                 
                 <div id="totalUserInfoBox"></div>
@@ -362,11 +359,34 @@
 
                         for(let date in transDataList) {
                             let sum = 0;
-                            console.log(transDataList)
                             if (transDataList[date].dietList.length > 0) {
                                 for(let i in transDataList[date].dietList) {
                                     sum += transDataList[date].dietList[i].foodKcal;
                                 }
+                            }
+                            
+                            let exList = [];
+                            if (transDataList[date].exerciseList.length > 0) {
+                                for(let i in transDataList[date].exerciseList) {
+
+                                    let exName = transDataList[date].exerciseList[i].exName;
+
+                                    if (!exList.includes(exName)) {
+                                        exList.push(exName);
+                                    }
+                                }
+                            }
+                            
+                            let exerciseHtml;
+                            for(let i = 0; i < exList.length; i++){
+                                exerciseHtml +=
+                                `
+                                <div class="box downbox" style="width: 15%; height: 100%;">
+                                    <div style="color: white; width: 80%; height: 80%;">
+                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;  border-radius: 10px;">` + exList[i] + `</div>
+                                    </div>
+                                </div>
+                                `
                             }
 
                             htmls.innerHTML += 
@@ -380,39 +400,11 @@
                                                 <h1>` + date.substring(5) + `</h1>
                                                 총 ` + sum + `Kcal 섭취
                                             </div>
-                                        </div>
-
-                                        <div class="box downbox" style="width: 15%; height: 100%;">
-                                            <div style="color: white; width: 80%; height: 80%;">
-                                                <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                            </div>
-                                            <div style="color: white; height: 20%;">벤치프레스</div>
-                                        </div>
-
-                                        <div class="box downbox" style="width: 15%; height: 100%;">
-                                            <div style="color: white; width: 80%; height: 80%;">
-                                                <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                            </div>
-                                            <div style="color: white; height: 20%;">벤치프레스</div>
-                                        </div>
-
-                                        <div class="box downbox" style="width: 15%; height: 100%;">
-                                            <div style="color: white; width: 80%; height: 80%;">
-                                                <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                            </div>
-                                            <div style="color: white; height: 20%;">벤치프레스</div>
-                                        </div>
-
-                                        <div class="box downbox" style="width: 15%; height: 100%;">
-                                            <div style="color: white; width: 80%; height: 80%;">
-                                                <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                            </div>
-                                            <div style="color: white; height: 20%;">벤치프레스</div>
-                                        </div>
-                                        
-                                    </div>
+                                        </div>`
+                                        + exerciseHtml +
+                                    `</div>
                                 </div>
-                                <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;"><img src="/pss/resources/logo/down.png" alt="더보기" width="20" height="20"></div>
+                                <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;"></div>
                             </div>
                         </div>
                         `

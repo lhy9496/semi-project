@@ -29,6 +29,7 @@
 		SELECT BOARD_NO,
 			   BOARD_TITLE,
 			   USER_NAME,
+			   CATEGORY_NO,
 			   CATEGORY_NAME,
 			   COUNT,
 			   CREATE_DATE
@@ -58,9 +59,12 @@
 		SELECT BOARD_NO,
 				BOARD_TITLE,
 				USER_NAME,
+				CATEGORY_NO,
+			   	CATEGORY_NAME,
 				COUNT,
 				CREATE_DATE
 		FROM BOARD B
+		JOIN CATEGORY USING(CATEGORY_NO)
 		JOIN MEMBER ON (BOARD_WRITER = USER_NO)
 		WHERE B.STATUS = 'Y'
 		<choose>
@@ -134,8 +138,6 @@
 				#{boardTitle},
 				#{boardContent},
 				${boardWriter})
-				
-				
 	</insert>
 	<select id="selectCategoryCount" resultType="_int">
 		SELECT COUNT(*)
@@ -146,13 +148,60 @@
 	<select id="selectCategoryList" resultMap="boardResultSet">
 		SELECT BOARD_NO,
 			   BOARD_TITLE,
+			   CATEGORY_NO,
+			   CATEGORY_NAME,
 			   USER_NAME,
 			   COUNT,
 			   CREATE_DATE
 		FROM BOARD B
+		JOIN CATEGORY USING(CATEGORY_NO)
 		JOIN MEMBER ON (BOARD_WRITER = USER_NO)
 		WHERE CATEGORY_NO = #{category}
 		AND B.STATUS = 'Y'
+		ORDER BY BOARD_NO DESC
+	</select>
+	<select id="selectSearchCategoryCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM BOARD B
+		  JOIN MEMBER ON (BOARD_WRITER = USER_NO)
+		WHERE B.STATUS = 'Y'
+		AND CATEGORY_NO = #{category}
+		<if test="condition == 'writer'">
+		  AND USER_NAME
+		</if>
+		<if test="condition == 'title'">
+		  AND BOARD_TITLE
+		</if>
+		<if test="condition == 'content'">
+		  AND BOARD_CONTENT
+		</if>
+		  LIKE '%' || #{keyword} || '%'
+	</select>
+	<select id="selectSearchCategoryList" resultMap="boardResultSet">
+		SELECT BOARD_NO,
+				BOARD_TITLE,
+				USER_NAME,
+				CATEGORY_NO,
+			   	CATEGORY_NAME,
+				COUNT,
+				CREATE_DATE
+		FROM BOARD B
+		JOIN CATEGORY USING(CATEGORY_NO)
+		JOIN MEMBER ON (BOARD_WRITER = USER_NO)
+		WHERE CATEGORY_NO = #{category}
+		AND B.STATUS = 'Y'
+		<choose>
+			<when test="condition == 'writer'">
+				AND USER_NAME
+			</when>
+			<when test="condition == 'title'">
+				AND BOARD_TITLE
+			</when>
+			<otherwise>
+				AND BOARD_CONTENT
+			</otherwise>
+		</choose>
+		LIKE '%' || #{keyword} || '%'
 		ORDER BY BOARD_NO DESC
 	</select>
 </mapper>

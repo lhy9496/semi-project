@@ -80,6 +80,18 @@ public class BoardDao {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("boardMapper.selectCategoryList", category, rowBounds);
 	}
+	
+	public int selectSearchCategoryCount(SqlSession sqlSession, HashMap<String, String> map) {
+		return sqlSession.selectOne("boardMapper.selectSearchCategoryCount", map);
+	}
+	
+	public ArrayList<Board> selectSearchCategoryList(SqlSession sqlSession, HashMap<String, String> map, PageInfo pi){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("boardMapper.selectSearchCategoryList", map, rowBounds);
+	}
 }
 
 

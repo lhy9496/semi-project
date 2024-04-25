@@ -42,7 +42,7 @@ public class MyPageController extends HttpServlet {
 			request.getSession().setAttribute("alertMsg", "마이페이지를 로드하는데 실패했습니다.");
 			response.sendRedirect(request.getContextPath());
 		} else {
-
+			
 			request.setAttribute("searchUserTotalInfoMap", searchUserTotalInfoMap);
 			request.getSession().setAttribute("physicalInfo", searchUserTotalInfoMap.get("searchUserPhysicalInfo"));
 			

@@ -25,6 +25,7 @@
 
 
     <script>
+
     $(document).ready(function() {
 
         let nickname = '<%= nickname %>';
@@ -154,7 +155,7 @@
     }
     */
 
-    .previousTear{
+    .previousTier{
         height: 30px;
         width: 120px;
         color: black;
@@ -274,9 +275,9 @@
 
     <div class="bodyofbody">
         <div class="top box" style="height: 50px; padding-left: 5px;">
-            <div class="previousTear"><b>2023</b>gold</div>
-            <div class="previousTear"><b>2022</b>silver</div>
-            <div class="previousTear"><b>2021</b>bronze</div>
+            <div class="previousTier"><b>2023</b>gold</div>
+            <div class="previousTier"><b>2022</b>silver</div>
+            <div class="previousTier"><b>2021</b>bronze</div>
         </div>
         <div class="flex-box">
             <div class="box" style="width: 25%; height: 1800px;">
@@ -305,8 +306,11 @@
                         <div class="box" style="height: 100%; width: 65%;">
                             <div class="flex-box centeralign" style="height: 100%;">
                                 <div>
-                                    <h1>Gold 3</h1>
-                                    <h4>46p</h4>
+                                    <script>
+                                        console.log($(tier));
+                                    </script>
+                                    <h1><%=member.getTier()%></h1>
+                                    <h4><%=member.getUserPoint()%> P</h4>
                                 </div>
                             </div>
                         </div>
@@ -371,7 +375,7 @@
                             let exList = [];
                             if (transDataList[date].exerciseList.length > 0) {
                                 for(let i in transDataList[date].exerciseList) {
-                                    
+
                                     let exName = transDataList[date].exerciseList[i].exName;
 
                                     if (!exList.includes(exName)) {

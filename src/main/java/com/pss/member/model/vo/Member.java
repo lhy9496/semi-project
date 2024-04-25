@@ -14,6 +14,7 @@ public class Member {
 	private Date enrollDate;
 	private Date modifyDate;
 	private String status;
+	private String tier = "Bronze";
 	
 	public Member() {
 		super();
@@ -52,6 +53,21 @@ public class Member {
 		this.enrollDate = enrollDate;
 		this.modifyDate = modifyDate;
 		this.status = status;
+		if (userPoint < 100) {
+			this.tier = "Bronze";
+		} else if (userPoint < 200) {
+			this.tier = "Silver";
+		} else if (userPoint < 200) {
+			this.tier = "Gold";
+		} else if (userPoint < 300) {
+			this.tier = "Platinum";
+		} else if (userPoint < 400) {
+			this.tier = "Diamond";
+		} else if (userPoint < 500) {
+			this.tier = "Master";
+		} else {
+			this.tier = "God";
+		}
 	}
 
 	public int getUserNo() {
@@ -140,6 +156,14 @@ public class Member {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public String getTier() {
+		return tier;
+	}
+
+	public void setTier(String status) {
+		this.tier = status;
 	}
 
 	@Override

@@ -275,11 +275,6 @@
     <div style="height: 250px;"></div>
 
     <div class="bodyofbody">
-        <div class="top box" style="height: 50px; padding-left: 5px;">
-            <div class="previousTier"><b>2023</b>gold</div>
-            <div class="previousTier"><b>2022</b>silver</div>
-            <div class="previousTier"><b>2021</b>bronze</div>
-        </div>
         <div class="flex-box">
             <div class="box" style="width: 25%; height: 1800px;">
                 <div class="box flex-box" style="height: 200px;">
@@ -409,7 +404,7 @@
                                         + exerciseHtml +
                                     `</div>
                                 </div>
-                                <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;"><img src="/pss/resources/logo/down.png" alt="더보기" width="20" height="20"></div>
+                                <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;"></div>
                             </div>
                         </div>
                         `

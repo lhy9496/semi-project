@@ -367,15 +367,25 @@
                                     sum += transDataList[date].dietList[i].foodKcal;
                                 }
                             }
-
-                            let exerciseHtml = 
-                            `
-                            <div class="box downbox" style="width: 15%; height: 100%;">
-                                <div style="color: white; width: 80%; height: 80%;">
-                                    <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;  border-radius: 10px;">운동이름</div>
+                            
+                            let exList = [];
+                            if (transDataList[date].exerciseList.length > 0) {
+                                for(let i in transDataList[date].exerciseList) {
+                                    exList.push(transDataList[date].exerciseList[i].exName);
+                                }
+                            }
+                            
+                            let exerciseHtml;
+                            for(let i = 0; i < exList.length; i++){
+                                exerciseHtml +=
+                                `
+                                <div class="box downbox" style="width: 15%; height: 100%;">
+                                    <div style="color: white; width: 80%; height: 80%;">
+                                        <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;  border-radius: 10px;">` + exList[i] + `</div>
+                                    </div>
                                 </div>
-                            </div>
-                            `
+                                `
+                            }
 
                             htmls.innerHTML += 
                             `
@@ -389,9 +399,7 @@
                                                 총 ` + sum + `Kcal 섭취
                                             </div>
                                         </div>`
-                                        
                                         + exerciseHtml +
-
                                     `</div>
                                 </div>
                                 <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;"><img src="/pss/resources/logo/down.png" alt="더보기" width="20" height="20"></div>

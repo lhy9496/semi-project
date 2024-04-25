@@ -324,25 +324,25 @@
                             <div class="box flex-box" style="height: 25%;">
                                 <div class="box spac">
                                     <div class="box flex-box" style="width: 50%; height: 100%;"><b>키</b></div>
-                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemHeight() %></div>
+                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemHeight() %>cm</div>
                                 </div>
                             </div>
                             <div class="box flex-box" style="height: 25%;">
                                 <div class="box spac">
                                     <div class="box flex-box" style="width: 50%; height: 100%;"><b>체중</b></div>
-                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemWeight() %></div>
+                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemWeight() %>kg</div>
                                 </div>
                             </div>
                             <div class="box flex-box" style="height: 25%;">
                                 <div class="box spac">
                                     <div class="box flex-box" style="width: 50%; height: 100%;"><b>체지방률</b></div>
-                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemBep() %></div>
+                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemBep() %>%</div>
                                 </div>
                             </div>
                             <div class="box flex-box" style="height: 25%;">
                                 <div class="box spac">
                                     <div class="box flex-box" style="width: 50%; height: 100%;"><b>골격근량</b></div>
-                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemSmm() %></div>
+                                    <div class="box flex-box" style="width: 50%; height: 100%;"><%=userPhysicalInfo.getMemSmm() %>kg</div>
                                 </div>
                             </div>
                         </div>
@@ -351,7 +351,7 @@
             </div>
             <div class="box" style="width: 75%; height: 1800px;">
                 <div class="box flex-box" style="height: 200px;">
-                    <div class="box stat">그래프</div>
+                    <div class="box stat">광고</div>
                 </div>
                 
                 <div id="totalUserInfoBox"></div>
@@ -362,12 +362,20 @@
 
                         for(let date in transDataList) {
                             let sum = 0;
-                            console.log(transDataList)
                             if (transDataList[date].dietList.length > 0) {
                                 for(let i in transDataList[date].dietList) {
                                     sum += transDataList[date].dietList[i].foodKcal;
                                 }
                             }
+
+                            let exerciseHtml = 
+                            `
+                            <div class="box downbox" style="width: 15%; height: 100%;">
+                                <div style="color: white; width: 80%; height: 80%;">
+                                    <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;  border-radius: 10px;">운동이름</div>
+                                </div>
+                            </div>
+                            `
 
                             htmls.innerHTML += 
                             `
@@ -380,37 +388,11 @@
                                                 <h1>` + date.substring(5) + `</h1>
                                                 총 ` + sum + `Kcal 섭취
                                             </div>
-                                        </div>
-
-                                        <div class="box downbox" style="width: 15%; height: 100%;">
-                                            <div style="color: white; width: 80%; height: 80%;">
-                                                <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                            </div>
-                                            <div style="color: white; height: 20%;">벤치프레스</div>
-                                        </div>
-
-                                        <div class="box downbox" style="width: 15%; height: 100%;">
-                                            <div style="color: white; width: 80%; height: 80%;">
-                                                <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                            </div>
-                                            <div style="color: white; height: 20%;">벤치프레스</div>
-                                        </div>
-
-                                        <div class="box downbox" style="width: 15%; height: 100%;">
-                                            <div style="color: white; width: 80%; height: 80%;">
-                                                <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                            </div>
-                                            <div style="color: white; height: 20%;">벤치프레스</div>
-                                        </div>
-
-                                        <div class="box downbox" style="width: 15%; height: 100%;">
-                                            <div style="color: white; width: 80%; height: 80%;">
-                                                <div class="flex-box" style="background: white; color: black; width: 100%; height: 100%;">사진</div>
-                                            </div>
-                                            <div style="color: white; height: 20%;">벤치프레스</div>
-                                        </div>
+                                        </div>`
                                         
-                                    </div>
+                                        + exerciseHtml +
+
+                                    `</div>
                                 </div>
                                 <div class="box rightro end" style="width: 5%; height:100%; background: #464646; color: white;"><img src="/pss/resources/logo/down.png" alt="더보기" width="20" height="20"></div>
                             </div>

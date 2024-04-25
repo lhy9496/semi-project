@@ -174,4 +174,5 @@
 				MODIFY_DATE = SYSDATE
 		WHERE	USER_EMAIL = #{userEmail}
  	</update>
+ 
 </mapper>

@@ -26,6 +26,8 @@ public interface BoardService {
 		
 		public int insertBoard(Board board);
 		
+		public int selectCategoryCount(int category);
 		
+		public ArrayList<Board> selectCategoryList(PageInfo pi, int category);
 		
 }

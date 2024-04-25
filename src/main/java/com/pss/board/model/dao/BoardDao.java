@@ -67,6 +67,19 @@ public class BoardDao {
 		
 		return sqlSession.insert("boardMapper.insertBoard", board);
 	}
+	
+	public int selectCategoryCount(SqlSession sqlSession, int category) {
+		
+		return sqlSession.selectOne("boardMapper.selectCategoryCount", category);
+	}
+	
+	public ArrayList<Board> selectCategoryList(SqlSession sqlSession, PageInfo pi, int category){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("boardMapper.selectCategoryList", category, rowBounds);
+	}
 }
 
 

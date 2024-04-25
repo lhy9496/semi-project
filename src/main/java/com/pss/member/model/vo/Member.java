@@ -53,21 +53,6 @@ public class Member {
 		this.enrollDate = enrollDate;
 		this.modifyDate = modifyDate;
 		this.status = status;
-		if (userPoint < 100) {
-			this.tier = "Bronze";
-		} else if (userPoint < 200) {
-			this.tier = "Silver";
-		} else if (userPoint < 200) {
-			this.tier = "Gold";
-		} else if (userPoint < 300) {
-			this.tier = "Platinum";
-		} else if (userPoint < 400) {
-			this.tier = "Diamond";
-		} else if (userPoint < 500) {
-			this.tier = "Master";
-		} else {
-			this.tier = "God";
-		}
 	}
 
 	public int getUserNo() {

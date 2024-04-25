@@ -351,7 +351,7 @@
             </div>
             <div class="box" style="width: 75%; height: 1800px;">
                 <div class="box flex-box" style="height: 200px;">
-                    <div class="box stat">광고</div>
+                    <div class="box stat">이 자리에 광고해드립니다.</div>
                 </div>
                 
                 <div id="totalUserInfoBox"></div>

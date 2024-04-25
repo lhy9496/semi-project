@@ -371,7 +371,12 @@
                             let exList = [];
                             if (transDataList[date].exerciseList.length > 0) {
                                 for(let i in transDataList[date].exerciseList) {
-                                    exList.push(transDataList[date].exerciseList[i].exName);
+                                    
+                                    let exName = transDataList[date].exerciseList[i].exName;
+
+                                    if (!exList.includes(exName)) {
+                                        exList.push(exName);
+                                    }
                                 }
                             }
                             

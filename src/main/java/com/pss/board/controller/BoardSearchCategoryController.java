@@ -20,14 +20,14 @@ import com.pss.common.vo.PageInfo;
 /**
  * Servlet implementation class BoardSearchController
  */
-@WebServlet("/search.bo")
-public class BoardSearchController extends HttpServlet {
+@WebServlet("/searchCategory.bo")
+public class BoardSearchCategoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardSearchController() {
+    public BoardSearchCategoryController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,24 +38,26 @@ public class BoardSearchController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String condition = request.getParameter("condition"); // writer || title || content
 		String keyword = request.getParameter("keyword"); //사용자가 입력한 키워드값
+		String category = request.getParameter("category");
 		
 		HashMap<String, String> map = new HashMap<>();
 		map.put("condition", condition);
 		map.put("keyword", keyword);
+		map.put("category", category);
 		
 		BoardService bService = new BoardServiceImpl();
-		int searchCount = bService.selectSearchCount(map);
+		int searchCount = bService.selectSearchCategoryCount(map);
 		int currentPage = Integer.parseInt(request.getParameter("cpage")); //페이지정보
 		
 		PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, 10 , 10);
-		ArrayList<Board> list = bService.selectSearchList(map, pi);
+		ArrayList<Board> list = bService.selectSearchCategoryList(map, pi);
 		
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
 		request.setAttribute("condition", condition);
 		request.setAttribute("keyword", keyword);
 		
-		request.getRequestDispatcher("views/board/boardListView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/board/boardCategoryView.jsp").forward(request, response);
 	}
 
 	/**

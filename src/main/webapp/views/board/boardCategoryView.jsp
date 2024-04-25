@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    int categoryNo = (int)session.getAttribute("categoryNo");
+%>
 <!DOCTYPE html>
 <html>
 
@@ -87,7 +90,7 @@
             box-sizing: border-box;
         }
 
-        .paging-area a, .paging-area b{
+        .paging-area a{
             color: rgb(100, 87, 87);
         }
     
@@ -102,8 +105,9 @@
     <body>
         <jsp:include page="../common/menubar.jsp" />
             <div id="menubar-space">
-                <form action="search.bo" id="bdList">
+                <form action="searchCategory.bo" id="bdList">
                     <input type="hidden" name="cpage" value="1">
+                    <input type="hidden" name="category" value="${categoryNo}">
                     <div id="nav" class="bo">
                         <ul>
                             <li><button type="button" onclick="boCategory(0)" id="category" data-category="all" value="0">전체</button></li>
@@ -114,7 +118,8 @@
                         </ul>
                     </div>
                     <script>
-                                                        
+                        
+                        
                         function boCategory(category){
                             if(category === 0){ // 카테고리 번호 0 = 전체 버튼 누름
                                 location.href = "list.bo?cpage=1"; // 기존의 커뮤니티 페이지로 이동
@@ -171,8 +176,8 @@
                                 </script>
                             </c:if>
                             <input type="text" name="keyword" value="${keyword}"
-                                style="height: 25px; border-radius: 5px; border: 0px; margin-left: 10px; width: 120px;"
-                                placeholder="검색어 입력">
+                                style="height: 25px; border-radius: 5px; border: 0px; margin-left: 20px; width: 120px;"
+                                placeholder="제목">
                             <button type="submit"
                                 style="border-radius: 4px; border: 1px solid rgb(102, 98, 98); height: 25px; width: 60px; margin-left: 10px; background: rgb(214, 212, 212);">검색</button>
                         </div>
@@ -181,12 +186,12 @@
                             <c:choose>
                                 <c:when test="${empty condition }">
                                     <c:if test="${pi.currentPage ne 1}">
-                                        <a href="list.bo?cpage=${pi.currentPage - 1}">&lt;이전</a>
+                                        <a href="boardCategory.bo?cpage=${pi.currentPage - 1}&category=${categoryNo}">&lt;이전</a>
                                     </c:if>
                                 </c:when>
                                 <c:otherwise>
                                     <c:if test="${pi.currentPage ne 1}">
-                                        <a href="search.bo?cpage=${pi.currentPage - 1}&condition=${condition}&keyword=${keyword}">&lt;이전</a>
+                                        <a href="searchCategory.bo?cpage=${pi.currentPage - 1}&category=${categoryNo}&condition=${condition}&keyword=${keyword}">&lt;이전</a>
                                     </c:if>
                                 </c:otherwise>
                             </c:choose>
@@ -196,7 +201,7 @@
                                     <c:when test="${empty condition }">
                                         <c:choose>    
                                             <c:when test="${pi.currentPage ne i}">
-                                                <a href="list.bo?cpage=${i}">${i}</a>
+                                                <a href="boardCategory.bo?cpage=${i}&category=${categoryNo}">${i}</a>
                                             </c:when>
                                             <c:otherwise>
                                                 <b>${i}</b>
@@ -206,7 +211,7 @@
                                     <c:otherwise>
                                         <c:choose>    
                                             <c:when test="${pi.currentPage ne i}">
-                                                <a href="search.bo?cpage=${i}&condition=${condition}&keyword=${keyword}">${i}</a>
+                                                <a href="searchCategory.bo?cpage=${i}&category=${categoryNo}&condition=${condition}&keyword=${keyword}">${i}</a>
                                             </c:when>
                                             <c:otherwise>
                                                 <b>${i}</b>
@@ -215,17 +220,16 @@
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>
-                            
-                            
+
                             <c:choose>
                                 <c:when test="${empty condition }">
                                     <c:if test="${pi.currentPage ne pi.maxPage}">
-                                        <a href="list.bo?cpage=${pi.currentPage + 1}">다음&gt;</a>
+                                        <a href="boardCategory.bo?cpage=${pi.currentPage + 1}&category=${categoryNo}">다음&gt;</a>
                                     </c:if>
                                 </c:when>
                                 <c:otherwise>
                                     <c:if test="${pi.currentPage ne pi.maxPage}">
-                                        <a href="search.bo?cpage=${pi.currentPage + 1}&condition=${condition}&keyword=${keyword}">다음&gt;</a>
+                                        <a href="searchCategory.bo?cpage=${pi.currentPage + 1}&category=${categoryNo}&condition=${condition}&keyword=${keyword}">&lt;다음</a>
                                     </c:if>
                                 </c:otherwise>
                             </c:choose>

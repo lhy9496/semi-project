@@ -14,6 +14,7 @@ public class Member {
 	private Date enrollDate;
 	private Date modifyDate;
 	private String status;
+	private String tier = "Bronze";
 	
 	public Member() {
 		super();
@@ -140,6 +141,14 @@ public class Member {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public String getTier() {
+		return tier;
+	}
+
+	public void setTier(String status) {
+		this.tier = status;
 	}
 
 	@Override

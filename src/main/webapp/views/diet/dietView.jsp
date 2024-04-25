@@ -41,9 +41,9 @@
                 </div>
             </div>
 
-            <div id="date-div"></div>
+            <span id="date-div"></span><span style="margin-left: 25px;" id="sumTotalKcal">총 섭취칼로리: </span>
 
-            <div id="meal-container">
+            <div id="meal-container" class="overflow-auto">
                 <!-- 식사기록이 없을 경우 -->
                 <c:choose>
                 	<c:when test="${empty mealRecordList }">
@@ -56,6 +56,7 @@
                 	<c:otherwise>
                 		<!-- 식사기록이 있을 경우 -->
                 		<c:set var="totalKcal" value="0"/>
+                        <c:set var="sumTotalKcal" value="0" />
                 		
                 		<c:forEach var="meal" items="${mealRecordList }" varStatus="loop">
                 			<c:if test="${!meal.mealTimingName.equals(mealRecordList[loop.index-1].mealTimingName)}">
@@ -80,7 +81,7 @@
                                                 <c:set var="foodKcal" value="${meal.foodKcal * meal.amount }"/>
                                                 <td><c:out value="${foodKcal }" /></td>
                                                 <c:set var="totalKcal" value="${totalKcal + foodKcal}"></c:set>
-                                                
+                                                <c:set var="sumTotalKcal" value="${sumTotalKcal + totalKcal}"></c:set>
                                             </tr>
                 			<c:if test="${!meal.mealTimingName.equals(mealRecordList[loop.index+1].mealTimingName)}">
                                 <tr>
@@ -104,7 +105,14 @@
     </div>
 
     <script>
+        function getSumTotalKcal(sumTotalKcal) {
+            let sumTotalKcalSpan = document.querySelector('#sumTotalKcal');
+            sumTotalKcalSpan.innerHTML = "";
+            sumTotalKcalSpan.innerHTML = "총 섭취 칼로리: " + sumTotalKcal + "(kcal)";
+        }
+
         $(function () {
+            getSumTotalKcal(${sumTotalKcal});
             getTodayDate();
             $("#addMeal").on("click", function () {
                 location.href = "${contextPath}/enroll.mr";
@@ -181,11 +189,13 @@
                 $('#meal-container').append(str);
             }
 
+            let sumTotalKcal = 0;
             for (let key in list ){
                 let str = `<div class="meal-info">`;
                 
                 let recordList = list[key];
                 let totalKcal = 0;
+                
                 recordList.forEach(function(meal, index) {
                     if(index === 0) {
                         str += `<div class="meal">
@@ -205,10 +215,11 @@
                             <tr>
                                 <td>`+meal.foodName+`</td>
                                 <td>`+meal.amount +`</td>`
-                    let foodKcal = meal.foodKcal * meal.amount;            
+                    let foodKcal = meal.foodKcal * meal.amount;        
                     str += `    
                             <td>`+foodKcal+`</td>`
                     totalKcal += foodKcal;
+                    
                     str += `</tr>
                             </tbody>`;
                     if(index === recordList.length - 1) {
@@ -218,11 +229,16 @@
                                     <c:set var="totalKcal" value="0"></c:set>
                                 </tr>
                                 </tbody>`;
+                    sumTotalKcal += totalKcal;
                     }
+                    
                 })
+                
                 str += `</div>`;
                 $('#meal-container').append(str);
+                
             }
+            getSumTotalKcal(sumTotalKcal);
           }
     </script>
 

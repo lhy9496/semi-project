@@ -39,10 +39,10 @@ public class MyPageController extends HttpServlet {
 		HashMap<String, Object> searchUserTotalInfoMap = new SearchUserServiceImpl().getSearchUserTotalInfo(nickname);
 		
 		if (searchUserTotalInfoMap.get("searchUserInfo") == null) {
-			request.setAttribute("alertMsg", "존재하지 않는 유저입니다.");
+			request.getSession().setAttribute("alertMsg", "마이페이지를 로드하는데 실패했습니다.");
 			response.sendRedirect(request.getContextPath());
 		} else {
-
+			
 			request.setAttribute("searchUserTotalInfoMap", searchUserTotalInfoMap);
 			request.getSession().setAttribute("physicalInfo", searchUserTotalInfoMap.get("searchUserPhysicalInfo"));
 			

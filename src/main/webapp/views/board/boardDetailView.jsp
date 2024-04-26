@@ -132,7 +132,7 @@
                                 <table class="date1">
                                     <tr>
                                         <th>
-                                            <p style="font-size: xx-small; margin: 30px; text-align: left;">
+                                            <p style="font-size: medium; margin: 30px; text-align: left;">
                                                 ${ b.boardContent }
                                             </p>
                                         </th>

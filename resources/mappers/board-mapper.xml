@@ -8,7 +8,7 @@
 		<result column="board_no" property="boardNo"/>
 		<result column="category_no" property="categoryNo"/>
 		<result column="board_title" property="boardTitle"/>
-		<result column="USER_NAME" property="boardWriter"/>
+		<result column="USER_NICKNAME" property="boardWriter"/>
 		<result column="count" property="count"/>
 		<result column="category_name" property="categoryName"/>
 		<result column="CREATE_DATE" property="createDate"/>
@@ -28,7 +28,7 @@
 	<select id="selectList" resultMap="boardResultSet">
 		SELECT BOARD_NO,
 			   BOARD_TITLE,
-			   USER_NAME,
+			   USER_NICKNAME,
 			   CATEGORY_NO,
 			   CATEGORY_NAME,
 			   COUNT,
@@ -45,7 +45,7 @@
 		  JOIN MEMBER ON (BOARD_WRITER = USER_NO)
 		WHERE B.STATUS = 'Y'
 		<if test="condition == 'writer'">
-		  AND USER_NAME
+		  AND USER_NICKNAME
 		</if>
 		<if test="condition == 'title'">
 		  AND BOARD_TITLE
@@ -58,7 +58,7 @@
 	<select id="selectSearchList" resultMap="boardResultSet">
 		SELECT BOARD_NO,
 				BOARD_TITLE,
-				USER_NAME,
+				USER_NICKNAME,
 				CATEGORY_NO,
 			   	CATEGORY_NAME,
 				COUNT,
@@ -69,7 +69,7 @@
 		WHERE B.STATUS = 'Y'
 		<choose>
 			<when test="condition == 'writer'">
-				AND USER_NAME
+				AND USER_NICKNAME
 			</when>
 			<when test="condition == 'title'">
 				AND BOARD_TITLE
@@ -90,7 +90,7 @@
 	<select id="selectBoard" parameterType="_int" resultMap="boardResultSet">
 		SELECT BOARD_NO,
 				BOARD_TITLE,
-				USER_NAME,
+				USER_NICKNAME,
 				CATEGORY_NAME,
 				COUNT,
 				CREATE_DATE,
@@ -150,7 +150,7 @@
 			   BOARD_TITLE,
 			   CATEGORY_NO,
 			   CATEGORY_NAME,
-			   USER_NAME,
+			   USER_NICKNAME,
 			   COUNT,
 			   CREATE_DATE
 		FROM BOARD B
@@ -167,7 +167,7 @@
 		WHERE B.STATUS = 'Y'
 		AND CATEGORY_NO = #{category}
 		<if test="condition == 'writer'">
-		  AND USER_NAME
+		  AND USER_NICKNAME
 		</if>
 		<if test="condition == 'title'">
 		  AND BOARD_TITLE
@@ -180,7 +180,7 @@
 	<select id="selectSearchCategoryList" resultMap="boardResultSet">
 		SELECT BOARD_NO,
 				BOARD_TITLE,
-				USER_NAME,
+				USER_NICKNAME,
 				CATEGORY_NO,
 			   	CATEGORY_NAME,
 				COUNT,
@@ -192,7 +192,7 @@
 		AND B.STATUS = 'Y'
 		<choose>
 			<when test="condition == 'writer'">
-				AND USER_NAME
+				AND USER_NICKNAME
 			</when>
 			<when test="condition == 'title'">
 				AND BOARD_TITLE

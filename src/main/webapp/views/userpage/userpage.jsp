@@ -266,6 +266,9 @@
         align-items: flex-end;
         padding-bottom: 10px;
     }
+    #totalUserInfoBox{
+        user-select: none;
+    }
 
 </style>
 </head>

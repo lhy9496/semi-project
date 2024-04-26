@@ -234,9 +234,18 @@
                                 </c:otherwise>
                             </c:choose>
                         </div>
-                        <div style=" margin-left: 150px; margin-right: 30px; display: flex; box-sizing: border-box;">
-                            <a href="enrollForm.bo" style="color: black;">글쓰기</a>
-                        </div>
+                        <c:choose>
+                            <c:when test="${empty loginUser}">
+                                <div style=" margin-left: 150px; margin-right: 30px; display: flex; box-sizing: border-box; user-select: none">
+                                    <a style="color: rgb(235, 235, 235);">글쓰기</a>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div style=" margin-left: 150px; margin-right: 30px; display: flex; box-sizing: border-box;">
+                                    <a href="enrollForm.bo" style="color: black;">글쓰기</a>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </form>
             </div>

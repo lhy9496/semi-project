@@ -88,6 +88,12 @@
                     padding: 30px;
                     border: 0px;
                 }
+                #com td{
+                    padding-left: 30px;
+                }
+                #reply-content{
+                    width: 500px;
+                }
             </style>
         </head>
 
@@ -135,17 +141,9 @@
 
                                 <div id="area1" style="padding: 10px;">&lt;댓글&gt;(${list.size()})</div>
                                 <div class="date1" style="padding: 30px;">
-                                    <table id="com" style="padding: 30px;">
+                                    <table id="com" style="padding: 40px;">
                                     <c:forEach var="reply" items="${rlist }">
-                                        <tr>
-                                            <th id="user1">&lt;${reply.replyWriter }&gt;${reply.createDate }</th>
-                                        </tr>
-                                        <tr>
-                                            <!--<td colspan="3">(${list.size()})</td>  -->
-                                 
-                                            <th>${reply.replyContent }</th>
-                                            
-                                        </tr>
+                                       
                                      </c:forEach>
                                      <tbody>
                                      	
@@ -185,6 +183,7 @@
 			
 			function selectReplyList() {
 				$.ajax({
+                    type: "POST",
 					url: "rlist.bo",
 					data : {
 						bno : ${b.boardNo}
@@ -195,7 +194,7 @@
                         for(let reply of res){
                             str += ("<tr>"+
                                     "<td>" + reply.replyWriter + "</td>" +
-                                    "<td>" + reply.replyContent + "</td>" +
+                                    "<td id='reply-content'>" + reply.replyContent + "</td>" +
                                     "<td>" + reply.createDate + "</td>" +
                                     "</tr>")
                         }
@@ -229,6 +228,7 @@
                         }, 
                         error : function(){
                             console.log("댓글 작성중 ajax통신 실패")
+                            alert("글자수 제한을 초과하였습니다.")
                         }
                     })	
             }

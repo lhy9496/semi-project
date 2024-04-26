@@ -81,12 +81,13 @@
                                                 <c:set var="foodKcal" value="${meal.foodKcal * meal.amount }"/>
                                                 <td><c:out value="${foodKcal }" /></td>
                                                 <c:set var="totalKcal" value="${totalKcal + foodKcal}"></c:set>
-                                                <c:set var="sumTotalKcal" value="${sumTotalKcal + totalKcal}"></c:set>
+                                                
                                             </tr>
                 			<c:if test="${!meal.mealTimingName.equals(mealRecordList[loop.index+1].mealTimingName)}">
                                 <tr>
                                     <td style="background-color: aliceblue; font-weight: bold;">총 칼로리</td>
                                     <td colspan="3" style="background-color: aliceblue; font-weight: bold;"><c:out value="${totalKcal}" /> kcal</td>
+                                    <c:set var="sumTotalKcal" value="${sumTotalKcal + totalKcal}"></c:set>
                                     <c:set var="totalKcal" value="0"></c:set>
                                 </tr>
                 				</tbody>
@@ -106,9 +107,14 @@
 
     <script>
         function getSumTotalKcal(sumTotalKcal) {
+
             let sumTotalKcalSpan = document.querySelector('#sumTotalKcal');
-            sumTotalKcalSpan.innerHTML = "";
-            sumTotalKcalSpan.innerHTML = "총 섭취 칼로리: " + sumTotalKcal + "(kcal)";
+            if(sumTotalKcal == undefined) {
+                sumTotalKcalSpan.innerHTML = "총 섭취 칼로리: 0(kcal)";
+            } else {
+                sumTotalKcalSpan.innerHTML = "총 섭취 칼로리: " + sumTotalKcal + "(kcal)";
+            }
+            
         }
 
         $(function () {
@@ -229,7 +235,7 @@
                                     <c:set var="totalKcal" value="0"></c:set>
                                 </tr>
                                 </tbody>`;
-                    sumTotalKcal += totalKcal;
+                        sumTotalKcal += totalKcal;
                     }
                     
                 })

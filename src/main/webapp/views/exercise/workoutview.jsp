@@ -164,7 +164,7 @@
                     str += `<tbody>
                                                 <tr>
                                                     <td>`+ exercise.exRecordSet + `</td>
-                                                    <td>`+ exercise.exRecordWeight + `</td>
+                                                    <td>`+ exercise.exRecordWeight + `kg</td>
                                                     <td>`+ exercise.exRecordCount + `</td>
                                                 </tr>
                                             </tbody>`

@@ -18,6 +18,9 @@ public class SearchUserServiceImpl implements SearchUserService {
 		SqlSession sqlSession = Template.getSqlSession();
 		HashMap<String, Object> SearchUserTotalInfoMap = new HashMap<String, Object>();
 		SearchUserDao searchUserDao = new SearchUserDao();
+		if (searchUserDao.getSearchUserInfo(sqlSession, nickname) == null) {
+			return SearchUserTotalInfoMap;
+		}
 		
 		SearchUserTotalInfoMap.put("searchUserInfo", searchUserDao.getSearchUserInfo(sqlSession, nickname));
 		SearchUserTotalInfoMap.put("searchUserPhysicalInfo", searchUserDao.getSearchUserPhysicalInfo(sqlSession, nickname));

@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
+<%
+    String alertMsg = (String)session.getAttribute("alertMsg");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,6 +83,12 @@
 </style>
 </head>
 <body>
+    <% if(alertMsg != null){ %>
+		<script>
+			alert("<%=alertMsg%>")
+		</script>
+		<% session.removeAttribute("alertMsg"); %>
+	<% } %>
     <div class="signup-frame">
         <div class="logo-space">
             <a href="${contextPath}"><img src="/pss/resources/logo/psslogoenroll.png"  alt="로고 이미지"></a>

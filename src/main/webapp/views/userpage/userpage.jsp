@@ -288,7 +288,7 @@
                     </div>
                     <div class="box" style="width: 60%; height: 100%;">
                         <div class="box" style="height: 55%; text-align: center; padding-top: 60px; padding-right: 70px;">
-                            <h1><%=member.getUserNickname() %></h1>
+                            <h2><%=member.getUserNickname() %></h2>
                         </div>
                         <div class="box" style="height: 45%; text-align: center; padding-right: 70px;">
                             <h3><%=member.getAge() %> / <%=member.getGender() %></h3>
